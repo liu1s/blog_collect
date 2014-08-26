@@ -6,8 +6,9 @@
  * @author 疯牛 liu1s0404@outlook.com
  * @package: blog_collect
  */
-$nginxUser = 'wallace';
-$blogDirPath = dirname(__DIR__); //上层目录
+
+$rootPath = dirname(__DIR__); //上层目录
+$blogDirPath = $rootPath . '/blog_source';
 
 if (!is_dir($blogDirPath)) {
     die('the path' . $blogDirPath . 'is not a dir');
@@ -35,8 +36,8 @@ while ($path = $dir->read()) {
     array_push($tmpHtmlArray, $path);
 
     //todo 需要考虑是否放在别的位置会更好 修改权限
-    $result = chown(preg_replace('/\.html$/', '_files' , $blogDirPath . '/' . $path), $nginxUser);
-    var_dump($result);
+    //$result = chown(preg_replace('/\.html$/', '_files' , $blogDirPath . '/' . $path), $nginxUser);
+    //var_dump($result);
 }
 $dir->close();
 

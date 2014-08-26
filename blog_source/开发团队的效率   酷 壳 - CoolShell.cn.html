@@ -1,0 +1,1066 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!-- saved from url=(0039)http://coolshell.cn/articles/11656.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head profile="http://gmpg.org/xfn/11"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+	<title>开发团队的效率 | 酷 壳 - CoolShell.cn</title>
+	<link rel="alternate" type="application/rss+xml" title="RSS 2.0 - 所有文章" href="http://coolshell.cn/feed">
+	<link rel="alternate" type="application/rss+xml" title="RSS 2.0 - 所有评论" href="http://coolshell.cn/comments/feed">
+	<link rel="pingback" href="http://coolshell.cn/xmlrpc.php">
+
+	<!-- style START -->
+	<!-- default style -->
+	<style type="text/css" media="screen">@import url( http://coolshell.cn/wp-content/themes/inove/style.css );</style>
+	<link rel="stylesheet" id="open-sans-css" href="./开发团队的效率   酷 壳 - CoolShell.cn_files/google-font.css" type="text/css" media="all">
+	<!-- for translations -->
+			<link rel="stylesheet" href="./开发团队的效率   酷 壳 - CoolShell.cn_files/chinese.css" type="text/css" media="screen">
+		<!--[if IE]>
+		<link rel="stylesheet" href="http://coolshell.cn//wp-content/themes/inove/ie.css" type="text/css" media="screen" />
+	<![endif]-->
+	<!-- style END -->
+
+	<!-- script START -->
+	<script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script><script type="text/javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/base.js"></script>
+	<script type="text/javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/menu.js"></script>
+	<!-- script END -->
+
+	<link rel="alternate" type="application/rss+xml" title="酷 壳 - CoolShell.cn » 开发团队的效率评论Feed" href="http://coolshell.cn/articles/11656.html/feed">
+<script>var killIE6ImgUrl = "http://coolshell.cn//wp-content/plugins/lets-kill-ie6/img";</script><link rel="stylesheet" id="wp-postratings-css" href="./开发团队的效率   酷 壳 - CoolShell.cn_files/postratings-css.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-pagenavi-css" href="./开发团队的效率   酷 壳 - CoolShell.cn_files/pagenavi-css.css" type="text/css" media="all">
+<script type="text/javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/jquery.js"></script>
+<script type="text/javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/lets-kill-ie6.js"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://coolshell.cn/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://coolshell.cn//wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="TCP 的那些事儿（下）" href="http://coolshell.cn/articles/11609.html">
+<link rel="next" title="【活动】解迷题送礼物" href="http://coolshell.cn/articles/11832.html">
+<meta name="generator" content="WordPress 3.9.2">
+<link rel="shortlink" href="http://coolshell.cn/?p=11656">
+	<link href="./开发团队的效率   酷 壳 - CoolShell.cn_files/SyntaxHighlighter.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript">
+	window._wp_rp_static_base_url = 'https://wprp.zemanta.com/static/';
+	window._wp_rp_wp_ajax_url = "http://coolshell.cn/wp-admin/admin-ajax.php";
+	window._wp_rp_plugin_version = '3.5.1';
+	window._wp_rp_post_id = '11656';
+	window._wp_rp_num_rel_posts = '8';
+	window._wp_rp_thumbnails = false;
+	window._wp_rp_post_title = '%E5%BC%80%E5%8F%91%E5%9B%A2%E9%98%9F%E7%9A%84%E6%95%88%E7%8E%87';
+	window._wp_rp_post_tags = ['programming', 'project', '%3F%3F', '%3F%3F%3F', '%3F%3F%3F%3F', 'gt', 'alt', 'cc', 'titl', 'failur', 'a', 'review'];
+	window._wp_rp_promoted_content = true;
+</script>
+<script type="text/javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/loader.js" async=""></script>
+<style type="text/css">
+.related_post_title {
+}
+ul.related_post {
+}
+ul.related_post li {
+}
+ul.related_post li a {
+}
+ul.related_post li img {
+}</style>
+
+<!-- All in One SEO Pack 2.2.2 by Michael Torbert of Semper Fi Web Design[326,373] -->
+<meta name="description" content="软件开发的效率是一个值得大家去关注的话题。本文通过几个非常典型的开发方式——软件开发中的“锁”，接力棒式软件开发，保姆式软件开发，WatchDog软件开发，故障驱动式软件开发，来论述工程师式的小团队的重要性。">
+
+<meta name="keywords" content="programming,project,效率,程序员,技术管理,流程方法">
+
+<link rel="canonical" href="./开发团队的效率   酷 壳 - CoolShell.cn_files/开发团队的效率   酷 壳 - CoolShell.cn.html">
+<meta property="og:title" content="开发团队的效率 | 酷 壳 - CoolShell.cn">
+<meta property="og:type" content="activity">
+<meta property="og:url" content="http://coolshell.cn/articles/11656.html">
+<meta property="og:image" content="http://coolshell.cn//wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png">
+<meta property="og:site_name" content="酷 壳 - CoolShell.cn">
+<meta property="og:description" content="软件开发的效率是一个值得大家去关注的话题。本文通过几个非常典型的开发方式——软件开发中的“锁”，接力棒式软件开发，保姆式软件开发，WatchDog软件开发，故障驱动式软件开发，来论述工程师式的小团队的重要性。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="软件开发的效率是一个值得大家去关注的话题。本文通过几个非常典型的开发方式——软件开发中的“锁”，接力棒式软件开发，保姆式软件开发，WatchDog软件开发，故障驱动式软件开发，来论述工程师式的小团队的重要性。">
+<!-- /all in one seo pack -->
+<style type="text/css" id="syntaxhighlighteranchor"></style>
+</head>
+
+
+<body style="zoom: 1;"><link href="./开发团队的效率   酷 壳 - CoolShell.cn_files/jiathis_counter.css" rel="stylesheet" type="text/css"><script src="./开发团队的效率   酷 壳 - CoolShell.cn_files/jiathis.php" charset="utf-8"></script><link href="./开发团队的效率   酷 壳 - CoolShell.cn_files/jiathis_share.css" rel="stylesheet" type="text/css"><iframe frameborder="0" style="position: absolute; display: none; opacity: 0;"></iframe><div class="jiathis_style" style="position: absolute; z-index: 1000000000; display: none; top: 50%; left: 50%; overflow: auto;"></div><div class="jiathis_style" style="position: absolute; z-index: 1000000000; display: none; overflow: auto;"></div><iframe frameborder="0" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/jiathis_utility.html" style="display: none;"></iframe>
+<!-- wrap START -->
+<div id="wrap">
+
+<!-- container START -->
+<div id="container">
+
+<!-- header START -->
+<div id="header">
+
+	<!-- banner START -->
+			<div class="banner">
+			<a title="把这个链接拖到你的Chrome收藏夹工具栏中" href="javascript:(function(){function c(){var e=document.createElement("link");e.setAttribute("type","text/css");e.setAttribute("rel","stylesheet");e.setAttribute("href",f);e.setAttribute("class",l);document.body.appendChild(e)}function h(){var e=document.getElementsByClassName(l);for(var t=0;t<e.length;t++){document.body.removeChild(e[t])}}function p(){var e=document.createElement("div");e.setAttribute("class",a);document.body.appendChild(e);setTimeout(function(){document.body.removeChild(e)},100)}function d(e){return{height:e.offsetHeight,width:e.offsetWidth}}function v(i){var s=d(i);return s.height>e&&s.height<n&&s.width>t&&s.width<r}function m(e){var t=e;var n=0;while(!!t){n+=t.offsetTop;t=t.offsetParent}return n}function g(){var e=document.documentElement;if(!!window.innerWidth){return window.innerHeight}else if(e&&!isNaN(e.clientHeight)){return e.clientHeight}return 0}function y(){if(window.pageYOffset){return window.pageYOffset}return Math.max(document.documentElement.scrollTop,document.body.scrollTop)}function E(e){var t=m(e);return t>=w&&t<=b+w}function S(){var e=document.createElement("audio");e.setAttribute("class",l);e.src=i;e.loop=false;e.addEventListener("canplay",function(){setTimeout(function(){x(k)},500);setTimeout(function(){N();p();for(var e=0;e<O.length;e++){T(O[e])}},15500)},true);e.addEventListener("ended",function(){N();h()},true);e.innerHTML=" <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";document.body.appendChild(e);e.play()}function x(e){e.className+=" "+s+" "+o}function T(e){e.className+=" "+s+" "+u[Math.floor(Math.random()*u.length)]}function N(){var e=document.getElementsByClassName(s);var t=new RegExp("\\b"+s+"\\b");for(var n=0;n<e.length;){e[n].className=e[n].className.replace(t,"")}}var e=30;var t=30;var n=350;var r=350;var i="//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";var s="mw-harlem_shake_me";var o="im_first";var u=["im_drunk","im_baked","im_trippin","im_blown"];var a="mw-strobe_light";var f="//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";var l="mw_added_css";var b=g();var w=y();var C=document.getElementsByTagName("*");var k=null;for(var L=0;L<C.length;L++){var A=C[L];if(v(A)){if(E(A)){k=A;break}}}if(A===null){console.warn("Could not find a node of the right size. Please try a different page.");return}c();S();var O=[];for(var L=0;L<C.length;L++){var A=C[L];if(v(A)){O.push(A)}}})()    ">High一下!</a>		</div>
+		<!-- banner END -->
+
+	<div id="caption">
+		<h1 id="title"><a href="http://coolshell.cn/">酷 壳 – CoolShell.cn</a></h1>
+		<div id="tagline">享受编程和技术所带来的快乐 – http://coolshell.cn</div>
+	</div>
+
+	<div class="fixed"></div>
+</div>
+<!-- header END -->
+
+<!-- navigation START -->
+<div id="navigation">
+	<!-- menus START -->
+	<ul id="menus">
+		<li class="page_item"><a class="home" title="首页" href="http://coolshell.cn/">首页</a></li>
+		<li class="page_item page-item-4194"><a href="http://coolshell.cn/featured_posts">推荐文章</a></li>
+<li class="page_item page-item-3839"><a href="http://coolshell.cn/plugins">本站插件</a></li>
+<li class="page_item page-item-2"><a href="http://coolshell.cn/guestbook">留言小本</a></li>
+<li class="page_item page-item-368"><a href="http://coolshell.cn/about">关于酷壳</a></li>
+<li class="page_item page-item-4470"><a href="http://coolshell.cn/haoel">关于陈皓</a></li>
+		<li><a class="lastmenu" href="javascript:void(0);"></a></li>
+	</ul>
+	<!-- menus END -->
+
+	<!-- searchbox START -->
+	<div id="searchbox">
+					<form action="http://coolshell.cn/" method="get">
+				<div class="content">
+					<input type="text" class="textfield searchtip" name="s" size="24" value="">
+					<input type="submit" class="button" value="">
+				</div>
+			</form>
+			</div>
+<script type="text/javascript">
+//<![CDATA[
+	var searchbox = MGJS.$("searchbox");
+	var searchtxt = MGJS.getElementsByClassName("textfield", "input", searchbox)[0];
+	var searchbtn = MGJS.getElementsByClassName("button", "input", searchbox)[0];
+	var tiptext = "请输入关键字...";
+	if(searchtxt.value == "" || searchtxt.value == tiptext) {
+		searchtxt.className += " searchtip";
+		searchtxt.value = tiptext;
+	}
+	searchtxt.onfocus = function(e) {
+		if(searchtxt.value == tiptext) {
+			searchtxt.value = "";
+			searchtxt.className = searchtxt.className.replace(" searchtip", "");
+		}
+	}
+	searchtxt.onblur = function(e) {
+		if(searchtxt.value == "") {
+			searchtxt.className += " searchtip";
+			searchtxt.value = tiptext;
+		}
+	}
+	searchbtn.onclick = function(e) {
+		if(searchtxt.value == "" || searchtxt.value == tiptext) {
+			return false;
+		}
+	}
+//]]>
+</script>
+	<!-- searchbox END -->
+
+	<div class="fixed"></div>
+</div>
+<!-- navigation END -->
+
+<!-- content START -->
+<div id="content">
+
+	<!-- main START -->
+	<div id="main">
+
+
+	<div id="postpath">
+		<a title="转到首页" href="http://coolshell.cn/">首页</a>
+		 &gt; <a href="http://coolshell.cn/category/%e6%8a%80%e6%9c%af%e7%ae%a1%e7%90%86" title="查看技术管理中的全部文章" rel="category tag">技术管理</a>, <a href="http://coolshell.cn/category/process" title="查看流程方法中的全部文章" rel="category tag">流程方法</a>		 &gt; 开发团队的效率	</div>
+
+	<div class="post" id="post-11656">
+		<h2>开发团队的效率</h2>
+		<div class="info">
+			<span class="date">2014年6月9日</span>
+			<span class="author"><a href="http://coolshell.cn/articles/author/haoel" title="由陈皓发布" rel="author">陈皓</a></span>										<span class="addcomment"><a href="http://coolshell.cn/articles/11656.html#respond">发表评论</a></span>
+				<span class="comments"><a href="http://coolshell.cn/articles/11656.html#comments">阅读评论</a></span>
+						<span class="comments"> 32,282 人阅读  &nbsp;  &nbsp;</span>
+			<div class="fixed"></div>
+		</div>
+		<div class="content">
+			<p><img class="alignright size-full wp-image-11700" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/software_development.png" alt="" width="230" height="231">我之前写过一篇叫《<a title="加班与效率" href="http://coolshell.cn/articles/10217.html" target="_blank">加班与效率</a>》的文章，从概念上说了一些我对“效率”的认识，但是那篇文章趋于概念化，对于一些没有经历过这样的环境的同学来说，可能会觉得太抽象了。很早以前就想写一篇更具体一点的，可执行的文章与《<a title="加班与效率" href="http://coolshell.cn/articles/10217.html" target="_blank">加班与效率</a>》这篇文章相辉映，并再把我两年前在杭州QCon上的那个<a href="http://vdisk.weibo.com/s/gN-sQ/1351485199" target="_blank">“<strong>鼓吹工程师文化”的《建一支强大的小团队》</strong></a>（新浪微盘）的观点再加强一下。</p>
+<p><strong>但是我遇到了一些思维方式上的麻烦——我讲的总是从我的经历背景出发，没有从其它人的经历背景来讲</strong>。这就好像，我在酷壳里说了很多东西（比如：<a title="我们需要专职的QA吗？" href="http://coolshell.cn/articles/6994.html" target="_blank">专职的QA</a>，<a title="从Code Review 谈如何做技术" href="http://coolshell.cn/articles/11432.html" target="_blank">Code Review很重要</a>，<a title="编程能力与编程年龄" href="http://coolshell.cn/articles/10688.html" target="_blank">编程年龄</a>，<a title="来信， 创业 和 移动互联网" href="http://coolshell.cn/articles/5815.html" target="_blank">创业的</a>，<a title="《Rework》摘录及感想" href="http://coolshell.cn/articles/9156.html" target="_blank">Rework</a>的……），有好些人觉得是不可能甚至太理想，其实我说的那些东西都是实实在在存在的，也是我所经历过的。于是，不同的经历，不同的环境，不同的眼界，造成了——有些人不理解我说的，而我也不能理解他们所说的。</p>
+<p>所以，过去的这段时间我一有机会就找一些人交流并观察一些身边的事情，并去试着跟从和理解那些我不能理解的东西。现在觉得差不多了，所以，写下了这篇文章。（但越是去理解对方，我就越坚持我的观点，所以这篇文章可能还是会出现鸡同鸭讲的情形，无所谓了）</p>
+<p>本文不讨论任何业务上的效率问题，只讨论软件开发或是软件工程中的效率问题。虽然产品和业务上的效率问题是根本，但是因为本文不是拉仇恨的，我也不想混在一起谈，所以请原谅我在这里先说开发团队的，以后重新开篇文章专门谈产品和业务的。</p>
+<p>我下面会罗列几个非常典型的开发方式——<strong>软件开发中的“锁”</strong>，<strong>接力棒式软件开发</strong>，<strong>保姆式软件开发</strong>，<strong>WatchDog软件开发</strong>，<strong>故障驱动式软件开发</strong>。</p>
+<p><span id="more-11656"></span></p>
+<h4>软件开发中的“锁”</h4>
+<p>如果你搞过并发编程，你一定知道什么是“锁”，锁就是用来同步和互斥。我发现有好些开发部门里的各个开发团队间存在很多锁。比如：</p>
+<ul>
+<li><strong>技术能力上的锁</strong>。有一个项目需要在不同的地方做开发，这些模块用到不同的技术，比如：Java, C/C++, Python，Javascript，但是，这个团队里的每一个开发人员就只懂一门语言，于是，需要配合，需要任务排期，同步互斥锁就很多，于是，一个本来只需要2个人干3周的的工作变成了8个人干两个月。</li>
+</ul>
+<ul>
+<li><strong>负责模块上的锁</strong>。同理，不同的人负责不同的模块，于是一个项目要动好多模块，那么你就需要把这些模块的人找过来，和上面一样。每个人都有自己的时间安排，人越多，锁越多。于是，一个来来只需要2个人干2两周的事，变成了7、8个人干一个多月。</li>
+</ul>
+<p>我上面并非瞎扯，这都是事实。我们可以看到，</p>
+<ul>
+<li><strong>时间锁、进度锁</strong>。这堆有不同技能或是负责不同模块的开发人员有锁，有锁你就要等，他们有自己的安排，所以，要协作起来，你就需要排期，去同步。而参与的人越多，你的锁就越多。你协调他们的时间就更复杂。</li>
+</ul>
+<ul>
+<li><strong>沟通锁、利益锁</strong>。而且，最恐怖的事情是，他们之间的沟通成本巨大。他们会花大量的时间在讨论，一个功能是实现在你那边，还是我这边，每个人都有自己的利益和算盘。无形中增加了很多推诿、官僚和政治上的东西。</li>
+</ul>
+<p>有时候，我们会觉得分工和分模块是产生效率的前提，但是实际情况并不是这样。我们也可以看到，<strong>所谓的“分工”被彻彻底底的滥用了</strong>。他们把“分工”当成了永远只干一件事的借口。</p>
+<h5>【解决方案】</h5>
+<p><strong>一个程序员应该能够掌握多个语言，也能够负责多个模块甚至不同的职责。如果一个程序员觉得多学习一门语言，多掌握一个模块是件很困难的事，那么这个程序员本质上是不合格的</strong>。</p>
+<h4>“接力棒式”软件开发</h4>
+<p><strong>在有各种“工作锁”的软件开发团队里，一般都无法避免“接力棒式”的开发</strong>。也就是说，底层的C程序员干完了，交给上层的Java程序员，然后再交给更上层的前端程序员，最后再交给运维人员。这就是接力棒式的开发。</p>
+<p>而且，更糟糕的是，如果在引入了软件流程下，这种“接力棒的方式”真是会把你搞崩溃的。比如下游团队开发一个月，交给QA测试一个月，再交给运维分步上线一个月，然后，上游团队拿到下游开发的API后开发一个月，再交给自己的QA测试一个月，然后再交给自己的运维上线一个月，于是，半年就这样过去了。<strong>这是一个由一个一个小瀑布叠出来的一个大瀑布</strong>。</p>
+<p>哦，你会说，这个好办啊，上下游不会先商定好接口么？然后做并行开发么？是的，这是其中的一个优化方式，但是需要很好的接口设计。但是，在实际过程中，你会发现（这时我并非信口开河，我说的都是事实），</p>
+<ul>
+<li>如果这两个上下游团队在一起还好办，要是不在一起，那么，实际情况是，后面的团队会等到前面的团队提测了，才开始开发，本质上就是串行开发的。</li>
+</ul>
+<ul>
+<li>如果有更多的团队呢？比如：A团队 -&gt; B团队 -&gt; C团队 -&gt;D团队呢。接口就变得非常地关键了。而在实际情况下，因为没有好的接口设计人员，所以，在开发过程经常性地修改接口，或者是因为接口不好用也只得忍着。</li>
+</ul>
+<h5>【解决方案】</h5>
+<p>我以前写过一篇叫《<a title="IoC/DIP其实是一种管理思想" href="http://coolshell.cn/articles/9949.html" target="_blank" rel="bookmark">IoC/DIP其实是一种管理思想</a>》，对于这种接力棒的方式，应该反过来，<strong>如果业务应用团队是A团队，那B/C/D团队应该把自己的做成一个开发框架也好，服务化也好，让应用团队自己来接入</strong>。比如：前端做好一个前端开发框架，PE做好一个运维开发框架、各种工具，共享模块团队做好开发框架，让应用团队自己来接入，而不是帮他做。<strong>你会发现，在这么多团队各自P2P勾兑出来的很随意的接口的所带来的成本已经远超过一个统一标准的协议</strong>。</p>
+<h4>“保姆式”软件开发</h4>
+<p>所谓“保姆式”软件开发就是——我只管吃饭，不管做菜洗碗，就像——衣来伸手，饭来张口的“小皇帝”一样，身边有一堆太监或宫女，不然生活不能自理。这种情况经常见于开发和测试，开发和运维间的关系。很多公司，测试和运维都成了开发的保姆。</p>
+<p>我就能看到，很多开发快速写完代码后基本上都不怎么测试就交给QA去测试了，QA一测，我草，各种问题，而只会做黑盒的QA并不能马上就能确定是代码的问题还是环境的问题，所以还要花大量时间排除不是环境问题，才给开发报BUG。很多问题，可能只需要做个Code Review，做个单测就可以发现了，硬要交给QA。运维也是一样的，开发出来的软件根本就没有考虑什么运维的东西，因为有运维人员，所以我才不考虑呢。</p>
+<p><strong>这和我们带孩子的道理是一样的，对于孩子来说，如果父母帮孩子做得越多，孩子就越觉得理所应当，就越不会去做</strong>。</p>
+<p><strong>“保姆式”开发一般会进化成“保安式”开发</strong>。</p>
+<ul>
+<li>因为你的团队开发人员的能力不行，设计不行，Code Reivew/UT不做，你就只能找堆QA看着他。</li>
+<li>因为Dev/QA只管功能不管运维，所以，还得找堆运维人员看着他们。</li>
+<li>因为你的技术人员不懂业务，不懂需求，需要再找个BA，找个产品经理来指挥他。</li>
+<li>因为你的技术人员不会管理项目，所以，再搞个项目经理，找个敏捷教练、以及SQA来管着他。</li>
+</ul>
+<p><strong>就这样，你不行，我找人来看着你，看你的人不行，我再找人来看着看你的人……层层保姆，层层保安。</strong>于是，你就会发现，团队或部门里的人员越来越多，你整天都在开会，整天都在互相解释，互相争吵，会扯淡的人越来越多。那还有个屁的效率。</p>
+<p style="text-align: center;"><img class="aligncenter size-full wp-image-11702" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/worker.jpg" alt="" width="523" height="499">网络上一个非常经典的图片，来源不详，程序员在挖坑，其它人站在当监工</p>
+<h5>【解决方案】</h5>
+<p style="padding-left: 30px;">1）<strong>不要招只会写代码的“码农”，要招懂“需求”，注重“软件工程”和“软件质量”和“软件维护”的“工程师”</strong>。</p>
+<p style="padding-left: 30px;">2）<strong>最好的管理，不是找人来管人，而是自己管自己</strong>。</p>
+<p style="padding-left: 30px;">3）<strong>组织和团队中支持性工作的人越少越好，最好不要</strong>。</p>
+<p style="padding-left: 30px;">4）<strong>服务化。我服务于你并不代表我要帮你干活，而是代表——我要让你干活干得更爽</strong>。</p>
+<p>我在<a href="http://weibo.com/1401880315/B6hC7elDb" target="_blank">微博</a>上说过下面的话，（大家可以体会一下保姆和服务的差别）</p>
+<p style="padding-left: 30px;">运维要用“云服务”的思路去做。如果一个公司内的运维团队开发出一堆工具，让做应用开发团队可以很容易地申请机器、存储、网络、中间件、安全等资源，并很容易管理、监控和部署应用，并提供运维资询。而不是帮应用开发团队干活擦屁股当保姆。那么，这个公司就会不经意地做出一个云计算平台来了。</p>
+<p>&nbsp;</p>
+<h4>“WatchDog式”软件开发</h4>
+<p>什么是WatchDog？就是说——<strong>为了解决某个系统的问题，我要用一个新的系统去看着它</strong>。</p>
+<ul>
+<li>我的系统架构太复杂，出了问题不好查找。咋办？那就搞个专门的特殊的监控系统吧……</li>
+</ul>
+<ul>
+<li>我的系统配置太复杂，容易配错了。咋办？那就加一个配置校验系统吧……</li>
+</ul>
+<ul>
+<li>我的系统配置和真实的情况有时候可能会不一性。咋办？那就加一个巡检系统吧……</li>
+</ul>
+<ul>
+<li>我的系统测试环境和线上环境有时候会搞混了。咋办？那就为线上环境加一个权限控制系统吧……</li>
+</ul>
+<ul>
+<li>我的系统有单点，那就加个负载均衡器吧，负载均衡器的单点呢？那就再加个等价路由器吧……</li>
+</ul>
+<p><strong>做加法谁不会？就不想去简化一样系统吗？就不能不拆东墙补西墙么？</strong>这些了系统加的越来越多，我看你以后怎么运维。</p>
+<p>一开始没有想清楚就放到线上，然后，出了故障后，也无法重新设计和重新架构，只能以打补丁地方式往上打，这就好像一个本来就有缺陷的楼没有盖好，你要拆了重盖是不可能的，也只能不停地打补丁了。字是一只狗，越描越丑。</p>
+<h5>【解决方案】</h5>
+<p style="padding-left: 30px;"><strong>1）设计想好了再做，多评估几个设计没坏处，简化，简化，简化。</strong></p>
+<p style="padding-left: 30px;"><strong>2）残酷无情地还债，就算是CEO来了，也无法阻止我还债的脚步。</strong></p>
+<p>&nbsp;</p>
+<h4>“故障驱动式”软件开发</h4>
+<p>WatchDog式的软件开发通常来说都是“故障驱动式”软件开发的产物。这种开发方式其实就是在表明自己智力和能力的不足。以上线为目的，上了线再说，有什么问题出了再改。</p>
+<p>上面的老大或是业务方基本上会说，没关系，我们不一开始并不需要一个完美的系统，你先上了再说，先解业务的渴，我们后面有时间再重构再完善。而有的技术人员也会用“架构和设计是逐步演化出来的”这句话来证明“故障驱动”开发是值得的。</p>
+<p>我同意逐步迭代以及架构演化论，但是，我觉得<strong>“系统迭代说”和“架构演化论”被彻彻底底地成为那些能力有限甚至不学无术的人的超级借口</strong>。</p>
+<p>你们有没有搞错啊？你们知道什么叫迭代，什么叫演化吗？你们知道，要定位一个线上的故障需要花多大的力气吗？（<a href="http://blog.aliyun.com/341" target="_blank">看看这篇文章</a>你就知道了）你们知道，随随便便去应付局部上你会快，但总体上来说你会慢。</p>
+<p>虽然，我看到那些系统在一个又一个的故障后得到一点又一点的改善，但是我想说，为什么一开始不认真不严谨一点呢？我从来就没有见过一个精良的系统是靠一个一个的故障和失败案例给堆出来的，就算是Windows 95/98这样史上最烂的操作系统，如果没有设计精良Windows NT的补位，Windows也早玩完了（看看IE的下场就知道了）。</p>
+<h5>【解决方案】</h5>
+<p style="padding-left: 30px;"><strong>1）基础知识和理论知识非常重要</strong>。多多使用已有的成熟的方案是关键。</p>
+<p style="padding-left: 30px;"><strong>2）对技术要有一颗严谨和敬畏的心。想清楚了再干，坚持高标准，Design for failure! </strong>很多事情都急不得。</p>
+<p>&nbsp;</p>
+<h4>其它开发方式</h4>
+<p>其实，这样的事情还有很多。比如：</p>
+<p><strong>1）配置管理上的问题</strong>。对于源代码的配置管理，其实并不是一件简单的事情。配置管理和软件和团队的组构的结构非常有关系。我看到过两种非常没有效率的配置管理，一种是以开项目分支的方式来做项目，同时开很多分支，分支开的时间还很长，导致merge回主干要花大量的时间去解决各种冲突，另一种是N多的团队都在一个代码库中做修改，导致出现很多复杂的问题，比如某团队的改动出现了一个bug，要么所有的团队的功能都得等这个bug被修复才能被发布，要么就是把所有的改动回滚到上一个版本，包括其它团队开发的功能。很明显，软件模块的结构，软件的架构，以及团队的组织形式都会严重影响开发效率。</p>
+<p><strong>2）人肉式的软件开发</strong>。大多数的软件团队和主管都会用“人手不够”做为自己开发效率不够的借口，而大多数故障发生的时候，都会使用更重的“人肉流程”来弥补自己能力的不足。他们从来没有想过使用“技术”，使用更“聪明”的方式来解决问题。</p>
+<p><strong>3）会议驱动式开发</strong>。人多了，团队多了，想法也就多了，沟通也就多了，于是需要不停得开会开会开会。</p>
+<p>&nbsp;</p>
+<h4>总结一下</h4>
+<p>综上所述，我有如下总结：</p>
+<p style="padding-left: 30px;">1）<strong>软件工程师分工分得越细这个团队就越没效率，团队间的服务化是关键的关键</strong>。不管是从语言上还是从软件模块上的人员分工，越细越糟糕。服务化不是我要帮你做事，而是我让你做起事来更容易。</p>
+<p style="padding-left: 30px;">2）<strong>你总需要在一个环节上认真，这个环节越往前就越有效率，越往后你就越没效率</strong>。要么你设计和编码认真点，不然，你就得在测试上认真点。要是你设计、编码、测试都不认真，那你就得在运维上认真，就得在处理故障上认真。你总需要在一个地方认真。另外一篇文章你可以看一下——《<a title="多些时间能少写些代码" href="http://coolshell.cn/articles/5686.html" target="_blank">多些时间少写些代码</a>》</p>
+<p style="padding-left: 30px;">3）<strong>“小而精的团队”+“条件和资源受限”是效率的根本</strong>。只有团队小，内耗才会小，只有条件或资源受限，才会逼着你去用最经济的手段做最有价值的事，才会逼着你喜欢简单和简化。</p>
+<p style="padding-left: 30px;">4）<strong>技术债是不能欠的，要残酷无情地还债</strong>。很多事情，一开始不会有，那么就永远不会有。一旦一个事情烂了，后面只能跟着一起烂，烂得越多，就越没有人敢去还债。</p>
+<p style="padding-left: 30px;">5）<strong>软件架构上要松耦合，团队组织上要紧耦合</strong>。</p>
+<p style="padding-left: 30px;">6）<strong>工程师文化是关键，重视过程就是重视结果</strong>。只重视结果的KPI等同于“竭泽而渔”和“饮鸩止渴”。</p>
+<p>（全文完）
+</p><div style="margin-top: 15px; font-size: 11px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="http://coolshell.cn/">酷 壳 – CoolShell.cn</a> ，请勿用于任何商业用途）</strong></p></div>
+<div style="text-align:center;padding:0px;font-size: 14px;margin-bottom: 50px;">——=== <b>访问 <a href="http://coolshell.cn/404/" target="_blank">酷壳404页面</a> 寻找遗失儿童。</b> ===——</div>
+<div style="clear:both; margin-top:5px; margin-bottom:5px;"></div><div style="float:left"><!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<a class="jiathis_button_tsina" title="分享到新浪微博"><span class="jiathis_txt jtico jtico_tsina"></span></a>
+<a class="jiathis_button_tqq" title="分享到腾讯微博"><span class="jiathis_txt jtico jtico_tqq"></span></a>
+<a class="jiathis_button_tsohu" title="分享到搜狐微博"><span class="jiathis_txt jtico jtico_tsohu"></span></a>
+<a class="jiathis_button_t163" title="分享到网易微博"><span class="jiathis_txt jtico jtico_t163"></span></a>
+<a class="jiathis_button_douban" title="分享到豆瓣"><span class="jiathis_txt jtico jtico_douban"></span></a>
+<a class="jiathis_button_renren" title="分享到人人网"><span class="jiathis_txt jtico jtico_renren"></span></a>
+<a class="jiathis_button_zhuaxia"></a>
+<a class="jiathis_button_fanfou" title="分享到饭否"><span class="jiathis_txt jtico jtico_fanfou"></span></a>
+<a class="jiathis_button_twitter" title="分享到Twitter"><span class="jiathis_txt jtico jtico_twitter"></span></a>
+<a class="jiathis_button_fb" title="分享到Facebook"><span class="jiathis_txt jtico jtico_fb"></span></a>
+<a class="jiathis_button_gmail" title="分享到Gmail邮箱"><span class="jiathis_txt jtico jtico_gmail"></span></a>
+<a class="jiathis_button_linkedin" title="分享到LinkedIn"><span class="jiathis_txt jtico jtico_linkedin"></span></a>
+<a class="jiathis_button_friendfeed" title="分享到FriendFeed"><span class="jiathis_txt jtico jtico_friendfeed"></span></a>
+<a class="jiathis_button_digg" title="分享到Digg"><span class="jiathis_txt jtico jtico_digg"></span></a>
+<a href="http://www.jiathis.com/share?uid=1541368" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"><span class="jiathis_button_expanded jiathis_counter jiathis_bubble_style" id="jiathis_counter_45" title="累计分享201次">201</span></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/jia.js" charset="utf-8"></script><script type="text/javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/plugin.client.js" charset="utf-8"></script><div style="position:absolute;width:0px;height:0px;"><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="0" height="0" id="JIATHISSWF" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab"><param name="allowScriptAccess" value="always"><param name="swLiveConnect" value="true"><param name="movie" value="http://www.jiathis.com/code/swf/m.swf"><param name="FlashVars" value="z=a"><embed name="JIATHISSWF" src="http://www.jiathis.com/code/swf/m.swf" flashvars="z=a" width="0" height="0" allowscriptaccess="always" swliveconnect="true" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"></object></div>
+<!-- JiaThis Button END --></div><div style="clear:both; margin-top:5px; margin-bottom:5px;"></div>			<div class="fixed"></div>
+		</div>
+		<div class="under">
+			<span class="categories">分类: </span><span><a href="http://coolshell.cn/category/%e6%8a%80%e6%9c%af%e7%ae%a1%e7%90%86" title="查看技术管理中的全部文章" rel="category tag">技术管理</a>, <a href="http://coolshell.cn/category/process" title="查看流程方法中的全部文章" rel="category tag">流程方法</a></span>			<span class="tags">标签: </span><span><a href="http://coolshell.cn/tag/programming" rel="tag">Programming</a>, <a href="http://coolshell.cn/tag/project" rel="tag">Project</a>, <a href="http://coolshell.cn/tag/%e6%95%88%e7%8e%87" rel="tag">效率</a>, <a href="http://coolshell.cn/tag/%e7%a8%8b%e5%ba%8f%e5%91%98" rel="tag">程序员</a></span>		</div>
+<div id="post-ratings-11656" class="post-ratings" itemscope="" itemtype="http://schema.org/Article" data-nonce="48466e63a7"><img id="rating_11656_1" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/rating_on.gif" alt="好烂啊" title="好烂啊" onmouseover="current_rating(11656, 1, &#39;好烂啊&#39;);" onmouseout="ratings_off(4.9, 5, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;"><img id="rating_11656_2" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/rating_on.gif" alt="有点差" title="有点差" onmouseover="current_rating(11656, 2, &#39;有点差&#39;);" onmouseout="ratings_off(4.9, 5, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;"><img id="rating_11656_3" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/rating_on.gif" alt="凑合看看" title="凑合看看" onmouseover="current_rating(11656, 3, &#39;凑合看看&#39;);" onmouseout="ratings_off(4.9, 5, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;"><img id="rating_11656_4" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/rating_on.gif" alt="还不错" title="还不错" onmouseover="current_rating(11656, 4, &#39;还不错&#39;);" onmouseout="ratings_off(4.9, 5, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;"><img id="rating_11656_5" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/rating_half.gif" alt="很精彩" title="很精彩" onmouseover="current_rating(11656, 5, &#39;很精彩&#39;);" onmouseout="ratings_off(4.9, 5, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;"> (<strong>79</strong> 人打了分，平均分： <strong>4.89</strong> )<br><span class="post-ratings-text" id="ratings_11656_text"></span><meta itemprop="name" content="开发团队的效率"><meta itemprop="description" content="我之前写过一篇叫《加班与效率》的文章，从概念上说了一些我对“效率”的认识，但是那篇文章趋于概念化，对于一些没有经历过这样的环境的同学来说，可能会觉得太抽象了。很早以前就想写一篇更具体一点的，可执行的文章与《加班与效率》这篇文章相辉映，并再把我两年前在杭州QCon上的那个“鼓吹工程师文化”的《建一支强大的小团队》（新浪微盘）的观点再加强一下。
+
+但是我遇到了一些思维方式上的麻烦——我讲的总是从我..."><meta itemprop="url" content="http://coolshell.cn/articles/11656.html"><div style="display: none;" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating"><meta itemprop="bestRating" content="5"><meta itemprop="ratingValue" content="4.89"><meta itemprop="ratingCount" content="79"></div></div>
+<div id="post-ratings-11656-loading" class="post-ratings-loading"><img src="./开发团队的效率   酷 壳 - CoolShell.cn_files/loading.gif" width="16" height="16" alt="Loading ..." title="Loading ..." class="post-ratings-image">&nbsp;Loading ...</div>
+ 
+	</div>
+
+	<!-- related posts START -->
+	<div id="related_posts">
+<div class="wp_rp_wrap  wp_rp_plain" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-8638" data-post-type="none"><small class="wp_rp_publish_date">2012年11月22日</small> <a href="http://coolshell.cn/articles/8638.html" class="wp_rp_title">为什么不能用微信或米聊这类的软件</a></li><li data-position="1" data-poid="in-8387" data-post-type="none"><small class="wp_rp_publish_date">2012年10月14日</small> <a href="http://coolshell.cn/articles/8387.html" class="wp_rp_title">Bret Victor – Learnable Programming</a></li><li data-position="2" data-poid="in-8138" data-post-type="none"><small class="wp_rp_publish_date">2012年08月22日</small> <a href="http://coolshell.cn/articles/8138.html" class="wp_rp_title">为什么我反对纯算法面试题</a></li><li data-position="3" data-poid="in-10217" data-post-type="none"><small class="wp_rp_publish_date">2013年07月24日</small> <a href="http://coolshell.cn/articles/10217.html" class="wp_rp_title">加班与效率</a></li><li data-position="4" data-poid="in-6994" data-post-type="none"><small class="wp_rp_publish_date">2012年04月11日</small> <a href="http://coolshell.cn/articles/6994.html" class="wp_rp_title">我们需要专职的QA吗？</a></li><li data-position="5" data-poid="in-11265" data-post-type="none"><small class="wp_rp_publish_date">2014年03月20日</small> <a href="http://coolshell.cn/articles/11265.html" class="wp_rp_title">Python修饰器的函数式编程</a></li><li data-position="6" data-poid="in-3218" data-post-type="none"><small class="wp_rp_publish_date">2010年10月25日</small> <a href="http://coolshell.cn/articles/3218.html" class="wp_rp_title">开发时间估计</a></li><li data-position="7" data-poid="in-4951" data-post-type="none"><small class="wp_rp_publish_date">2011年07月06日</small> <a href="http://coolshell.cn/articles/4951.html" class="wp_rp_title">软件公司的两种管理方式</a></li></ul></div></div>
+</div><div class="fixed"></div>	<!-- related posts END -->
+
+	<script type="text/javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/comment.js"></script>
+
+
+
+<div id="comments">
+
+<div id="cmtswitcher">
+			<a id="commenttab" class="curtab" href="javascript:void(0);" onclick="MGJS.switchTab(&#39;thecomments,commentnavi&#39;, &#39;thetrackbacks&#39;, &#39;commenttab&#39;, &#39;curtab&#39;, &#39;trackbacktab&#39;, &#39;tab&#39;);">评论 (106)</a>
+		<a id="trackbacktab" class="tab" href="javascript:void(0);" onclick="MGJS.switchTab(&#39;thetrackbacks&#39;, &#39;thecomments,commentnavi&#39;, &#39;trackbacktab&#39;, &#39;curtab&#39;, &#39;commenttab&#39;, &#39;tab&#39;);">Trackbacks (3)</a>
+				<span class="addcomment"><a href="http://coolshell.cn/articles/11656.html#respond">发表评论</a></span>
+				<span class="addtrackback"><a href="http://coolshell.cn/articles/11656.html/trackback">Trackback</a></span>
+		<div class="fixed"></div>
+</div>
+
+<div id="commentlist">
+	<!-- comments START -->
+	<ol id="thecomments">
+		<li class="comment regularcomment" id="comment-1509434">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/1c7becbf5211accb5c6e605b1a185666" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1509434">
+				
+				zgy
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年8月8日15:24					 | <a href="http://coolshell.cn/articles/11656.html#comment-1509434">#1</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1509434&#39;, &#39;comment-1509434&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1509434&#39;, &#39;comment-1509434&#39;, &#39;commentbody-1509434&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1509434">
+					<p>深有感受啊。作者描述的问题都很有代表性。不过优秀的工程师不好找。</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1512422">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/31538025fbd3471cedcfd2cac91c7349" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1512422">
+				
+				会飞的猪
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年8月14日11:55					 | <a href="http://coolshell.cn/articles/11656.html#comment-1512422">#2</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1512422&#39;, &#39;comment-1512422&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1512422&#39;, &#39;comment-1512422&#39;, &#39;commentbody-1512422&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1512422">
+					<p>非常同意这句话(你总需要在一个环节上认真，这个环节越往前就越有效率，越往后你就越没效率),能做到的人不多.<br>
+ 至于(“小而精的团队”+“条件和资源受限”是效率的根本)这句话本身是对的,但是有工期的压力前提下,如果让这一个个的小团队组合起来是一个大学问. 沟通成本可能会是无限大的.</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1514558">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/c58dc97643c5b6fd2822fb94bff94822" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<a id="commentauthor-1514558" class="url" href="http://www.codingyun.com/" rel="external nofollow">
+				
+				coding云
+									</a>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年8月18日10:56					 | <a href="http://coolshell.cn/articles/11656.html#comment-1514558">#3</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1514558&#39;, &#39;comment-1514558&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1514558&#39;, &#39;comment-1514558&#39;, &#39;commentbody-1514558&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1514558">
+					<p>从大项目中解脱，回到小项目后才能真正体会到这个效率问题，大项目中两个月时间我只做了一个模块，小项目里我用了一个半月时间做完了一个项目。</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	</ol>
+	<!-- comments END -->
+
+		<div id="commentnavi">
+			<span class="pages">评论分页</span>
+			<div id="commentpager">
+				<a class="prev page-numbers" href="http://coolshell.cn/articles/11656.html/comment-page-2#comments">« 上一页</a>
+<a class="page-numbers" href="http://coolshell.cn/articles/11656.html/comment-page-1#comments">1</a>
+<a class="page-numbers" href="http://coolshell.cn/articles/11656.html/comment-page-2#comments">2</a>
+<span class="page-numbers current">3</span>				<span id="cp_post_id">11656</span>
+			</div>
+			<div class="fixed"></div>
+		</div>
+
+	<!-- trackbacks START -->
+			<ol id="thetrackbacks">
+												<li class="trackback">
+						<div class="date">
+							2014年6月15日18:44							 | <a href="http://coolshell.cn/articles/11656.html#comment-1481776">#1</a>
+						</div>
+						<div class="act">
+													</div>
+						<div class="fixed"></div>
+						<div class="title">
+							<a href="http://www.imbahom.com/wordpress/2014/06/15/%e5%bc%80%e5%8f%91%e5%9b%a2%e9%98%9f%e7%9a%84%e6%95%88%e7%8e%87/">
+								开发团队的效率 | a game programmer							</a>
+						</div>
+					</li>
+									<li class="trackback">
+						<div class="date">
+							2014年6月18日23:27							 | <a href="http://coolshell.cn/articles/11656.html#comment-1483530">#2</a>
+						</div>
+						<div class="act">
+													</div>
+						<div class="fixed"></div>
+						<div class="title">
+							<a href="http://blog.chedushi.com/archives/7688">
+								开发团队的效率 | 岭南六少 – 一朵在LAMP架构下挣扎的云							</a>
+						</div>
+					</li>
+									<li class="trackback">
+						<div class="date">
+							2014年6月22日23:58							 | <a href="http://coolshell.cn/articles/11656.html#comment-1485384">#3</a>
+						</div>
+						<div class="act">
+													</div>
+						<div class="fixed"></div>
+						<div class="title">
+							<a href="http://www.akay99.com/?p=134">
+								Akay 读书笔记 » 酷壳——《开发团队的效率 开发团队的效率》笔记							</a>
+						</div>
+					</li>
+				
+					</ol>
+		<div class="fixed"></div>
+	<!-- trackbacks END -->
+</div>
+
+</div>
+
+	<form action="http://coolshell.cn/wp-comments-post.php" method="post" id="commentform">
+	<div id="respond">
+
+					
+			<div id="author_info">
+				<div class="row">
+					<input type="text" name="author" id="author" class="textfield" value="" size="24" tabindex="1">
+					<label for="author" class="small">昵称 (必填)</label>
+				</div>
+				<div class="row">
+					<input type="text" name="email" id="email" class="textfield" value="" size="24" tabindex="2">
+					<label for="email" class="small">电子邮箱 (我们会为您保密) (必填)</label>
+				</div>
+				<div class="row">
+					<input type="text" name="url" id="url" class="textfield" value="" size="24" tabindex="3">
+					<label for="url" class="small">网址</label>
+				</div>
+			</div>
+
+			
+		
+		<!-- comment input -->
+		<div class="row">
+			<textarea name="comment" id="comment" tabindex="4" rows="8" cols="50"></textarea>
+		</div>
+
+		<!-- comment submit and rss -->
+		<div id="submitbox">
+			<a class="feed" href="http://coolshell.cn/comments/feed">订阅评论</a>
+			<div class="submitbutton">
+				<input name="submit" type="submit" id="submit" class="button" tabindex="5" value="提交评论">
+			</div>
+						<input type="hidden" name="comment_post_ID" value="11656">
+			<div class="fixed"></div>
+		</div>
+
+	</div>
+	<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="21218080aa"></p><p style="display: none;"></p>	<input type="hidden" id="ak_js" name="ak_js" value="1409021588834"></form>
+
+	
+
+	<div id="postnavi">
+		<span class="prev"><a href="http://coolshell.cn/articles/11832.html" rel="next">【活动】解迷题送礼物</a></span>
+		<span class="next"><a href="http://coolshell.cn/articles/11609.html" rel="prev">TCP 的那些事儿（下）</a></span>
+		<div class="fixed"></div>
+	</div>
+
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-7486123-1']);
+_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+	</div>
+	<!-- main END -->
+
+	
+<!-- sidebar START -->
+<div id="sidebar">
+
+<!-- sidebar north START -->
+<div id="northsidebar" class="sidebar">
+
+	<!-- feeds -->
+	<div class="widget widget_feeds">
+		<div class="content">
+			<div id="subscribe"><a rel="external nofollow" id="feedrss" title="订阅这个博客的文章" href="http://coolshell.cn/feed" class=" ">订阅</a><ul id="feed_readers" style="visibility: hidden; display: block; left: 1185px; top: 231px;"><li id="google_reader"><a rel="external nofollow" class="reader" title="订阅到 Google" href="http://fusion.google.com/add?feedurl=http://coolshell.cn/feed"><span> Google</span></a></li><li id="youdao_reader"><a rel="external nofollow" class="reader" title="订阅到有道" href="http://reader.youdao.com/#url=http://coolshell.cn/feed"><span>有道</span></a></li><li id="xianguo_reader"><a rel="external nofollow" class="reader" title="订阅到鲜果" href="http://www.xianguo.com/subscribe.php?url=http://coolshell.cn/feed"><span>鲜果</span></a></li><li id="zhuaxia_reader"><a rel="external nofollow" class="reader" title="订阅到抓虾" href="http://www.zhuaxia.com/add_channel.php?url=http://coolshell.cn/feed"><span>抓虾</span></a></li><li id="yahoo_reader"><a rel="external nofollow" class="reader" title="订阅到 My Yahoo!" href="http://add.my.yahoo.com/rss?url=http://coolshell.cn/feed"><span> My Yahoo!</span></a></li><li id="newsgator_reader"><a rel="external nofollow" class="reader" title="订阅到 newsgator" href="http://www.newsgator.com/ngs/subscriber/subfext.aspx?url=http://coolshell.cn/feed"><span> newsgator</span></a></li><li id="bloglines_reader"><a rel="external nofollow" class="reader" title="订阅到 Bloglines" href="http://www.bloglines.com/sub/http://coolshell.cn/feed"><span> Bloglines</span></a></li><li id="inezha_reader"><a rel="external nofollow" class="reader" title="订阅到哪吒" href="http://inezha.com/add?url=http://coolshell.cn/feed"><span>哪吒</span></a></li><li id="qq_reader"><a class="reader" title="订阅到QQ Mail" onclick="window.open(this.href);return false;" rel="external nofollow" href="http://mail.qq.com/cgi-bin/feed?u=http://coolshell.cn/feed"><span>
+			QQ Mail            </span></a></li><li id="douban_reader"><a class="reader" title="订阅到Douban" onclick="window.open(this.href);return false;" rel="external nofollow" href="http://9.douban.com/reader/subscribe?url=http://coolshell.cn/feed"><span>
+			Douban            </span></a></li><li id="rojo_reader"><a class="reader" title="订阅到Rojo" onclick="window.open(this.href);return false;" rel="external nofollow" href="http://www.rojo.com/add-subscription?resource=http://coolshell.cn/feed"><span>
+            Rojo            </span></a></li><li id="pageflakes_reader"><a class="reader last" title="订阅到Pageflakes" onclick="window.open(this.href);return false;" rel="external nofollow" href="http://www.pageflakes.com/subscribe.aspx?url=http://coolshell.cn/feed"><span>
+            Pageflakes            </span></a></li></ul></div>
+							<a id="followme" title="Follow me!" href="http://twitter.com/haoel/">Twitter</a>
+						<div class="fixed"></div>
+		</div>
+	</div>
+
+	<!-- showcase -->
+			<div class="widget">
+							<h3>本站公告</h3>
+						<div class="content">
+				<p align="center" style="background-color: #777;padding: 5px;color: white;font-weight: bold;border: solid 1px black;text-shadow: 0px 0px 3px black;">访问 <a href="http://coolshell.cn/404/" target="_blank" style="color: #FFE249;">酷壳404页面</a> 寻找遗失儿童！</p>
+
+<p>酷壳建议大家多使用RSS访问阅读（本站已经是全文输出，推荐使用cloud.feedly.com 或 digg.com）。有相关事宜欢迎电邮：haoel(at)hotmail.com。最后，感谢大家对酷壳的支持和体谅！</p>
+
+<p align="center"><b>感谢 <a href="http://42qu.com/" title="42区 找到给你答案的人" target="_blank">42qu.com</a> 为本站提供 <a href="http://vps.42qu.com/" target="_blank" title="42区虚拟主机，卖给创业的你">VPS</a> </b></p>
+
+<!--<div style="background-color: #DA2D03;color: white;text-align: center;padding: 5px;border: solid 1px black;text-shadow: 0px 0px 3px black;"><b>感谢 <a href=http://42qu.com/ title="42区 找到给你答案的人" target=_blank style="color: #E9F300;">42qu.com</a> 为本站提供 <a href="http://vps.42qu.com/" target=_blank style="color: #E9F300;" title="42区虚拟主机，卖给创业的你">VPS</a> </b></div>-->			</div>
+		</div>
+	
+		<div id="recent-posts-2" class="widget widget_recent_entries">		<h3>最新文章</h3>		<ul>
+					<li>
+				<a href="http://coolshell.cn/articles/11847.html">谜题的答案和活动的心得体会</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11832.html">【活动】解迷题送礼物</a>
+						</li>
+					<li>
+				<a href="./开发团队的效率   酷 壳 - CoolShell.cn_files/开发团队的效率   酷 壳 - CoolShell.cn.html">开发团队的效率</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11609.html">TCP 的那些事儿（下）</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11564.html">TCP 的那些事儿（上）</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11629.html">「我只是认真」聊聊工匠情怀</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11541.html">面向GC的Java编程</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11466.html">C语言的整型溢出问题</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11454.html">从LongAdder看更高效的无锁实现</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11432.html">从Code Review 谈如何做技术</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11377.html">C语言结构体里的成员数组和指针</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11312.html">无插件Vim编程技巧</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11265.html">Python修饰器的函数式编程</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11235.html">一个浮点数跨平台产生的问题</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11175.html">Java中的CopyOnWrite容器</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11170.html">如何用最有创造力的方式输出42</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11112.html">由苹果的低级Bug想到的</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11094.html">可视化编程</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11021.html">从“黑掉Github”学Web安全开发</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/10975.html">一个“蝇量级” C 语言协程库</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/10910.html">分布式系统的事务处理</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/10822.html">函数式编程</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/10804.html">X-Y Problem</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/10739.html">Lua简明教程</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/10688.html">编程能力与编程年龄</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/10652.html">程序的本质复杂性和元语言抽象</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/10590.html">二维码的生成细节和原理</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/10427.html">伙伴分配器的一个极简实现</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/10476.html">C++11的Lambda使用一例：华容道求解</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/10478.html">C++面试中string类的一种正确写法</a>
+						</li>
+				</ul>
+		</div><div id="views-4" class="widget widget_views"><h3>全站热门</h3><ul>
+<li><a href="http://coolshell.cn/articles/4990.html" title="程序员技术练级攻略 - 464,136 人阅读">程序员技术练级攻略</a></li><li><a href="http://coolshell.cn/articles/5426.html" title="简明 Vim 练级攻略 - 377,013 人阅读">简明 Vim 练级攻略</a></li><li><a href="http://coolshell.cn/articles/7186.html" title="做个环保主义的程序员 - 179,544 人阅读">做个环保主义的程序员</a></li><li><a href="http://coolshell.cn/articles/4102.html" title="如何学好C语言 - 163,889 人阅读">如何学好C语言</a></li><li><a href="http://coolshell.cn/articles/914.html" title="6个变态的C语言Hello World程序 - 137,962 人阅读">6个变态的C语言Hello World程序</a></li><li><a href="http://coolshell.cn/articles/8883.html" title="应该知道的Linux技巧 - 132,622 人阅读">应该知道的Linux技巧</a></li><li><a href="http://coolshell.cn/articles/2250.html" title="“21天教你学会C++” - 130,347 人阅读">“21天教你学会C++”</a></li><li><a href="http://coolshell.cn/articles/6470.html" title="由12306.cn谈谈网站性能技术 - 126,968 人阅读">由12306.cn谈谈网站性能技术</a></li><li><a href="http://coolshell.cn/articles/9308.html" title="“作环保的程序员，从不用百度开始” - 118,904 人阅读">“作环保的程序员，从不用百度开始”</a></li><li><a href="http://coolshell.cn/articles/1870.html" title="我是怎么招聘程序员的 - 113,115 人阅读">我是怎么招聘程序员的</a></li><li><a href="http://coolshell.cn/articles/10688.html" title="编程能力与编程年龄 - 109,648 人阅读">编程能力与编程年龄</a></li><li><a href="http://coolshell.cn/articles/7829.html" title="28个Unix/Linux的命令行神器 - 108,309 人阅读">28个Unix/Linux的命令行神器</a></li><li><a href="http://coolshell.cn/articles/3549.html" title="Android将允许纯C/C++开发应用 - 105,453 人阅读">Android将允许纯C/C++开发应用</a></li><li><a href="http://coolshell.cn/articles/6043.html" title="Web开发中需要了解的东西 - 101,546 人阅读">Web开发中需要了解的东西</a></li><li><a href="http://coolshell.cn/articles/9070.html" title="AWK 简明教程 - 96,903 人阅读">AWK 简明教程</a></li><li><a href="http://coolshell.cn/articles/2287.html" title="C++ 程序员自信心曲线图 - 94,439 人阅读">C++ 程序员自信心曲线图</a></li><li><a href="http://coolshell.cn/articles/4119.html" title="如何学好C++语言 - 88,662 人阅读">如何学好C++语言</a></li><li><a href="http://coolshell.cn/articles/1391.html" title="编程真难啊 - 88,192 人阅读">编程真难啊</a></li><li><a href="http://coolshell.cn/articles/355.html" title="20本最好的Linux免费书籍 - 87,982 人阅读">20本最好的Linux免费书籍</a></li><li><a href="http://coolshell.cn/articles/3008.html" title="Windows编程革命简史 - 83,615 人阅读">Windows编程革命简史</a></li><li><a href="http://coolshell.cn/articles/4758.html" title="如何写出无法维护的代码 - 83,509 人阅读">如何写出无法维护的代码</a></li><li><a href="http://coolshell.cn/articles/5701.html" title="SteveY对Amazon和Google平台的吐槽 - 83,347 人阅读">SteveY对Amazon和Google平台的吐槽</a></li><li><a href="http://coolshell.cn/articles/5761.html" title="深入理解C语言 - 82,165 人阅读">深入理解C语言</a></li><li><a href="http://coolshell.cn/articles/7490.html" title="性能调优攻略 - 80,224 人阅读">性能调优攻略</a></li><li><a href="http://coolshell.cn/articles/2058.html" title="各种流行的编程风格 - 78,450 人阅读">各种流行的编程风格</a></li><li><a href="http://coolshell.cn/articles/8790.html" title="程序算法与人生选择 - 78,167 人阅读">程序算法与人生选择</a></li><li><a href="http://coolshell.cn/articles/10217.html" title="加班与效率 - 77,194 人阅读">加班与效率</a></li><li><a href="http://coolshell.cn/articles/4429.html" title="面试题：火车运煤问题 - 76,419 人阅读">面试题：火车运煤问题</a></li><li><a href="http://coolshell.cn/articles/1695.html" title="别的程序员是怎么读你的简历的 - 75,403 人阅读">别的程序员是怎么读你的简历的</a></li><li><a href="http://coolshell.cn/articles/945.html" title="C语言的谜题 - 75,345 人阅读">C语言的谜题</a></li></ul>
+</div><div id="text-400151743" class="widget widget_text"><h3>新浪微博</h3>			<div class="textwidget"><iframe width="100%" height="120" class="share_self" frameborder="0" scrolling="no" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/index.html"></iframe></div>
+		</div><div id="tag_cloud-2" class="widget widget_tag_cloud"><h3>标签</h3><div class="tagcloud"><a href="http://coolshell.cn/tag/agile" class="tag-link-17" title="15个话题" style="font-size: 11.8888888889pt;">agile</a>
+<a href="http://coolshell.cn/tag/ajax" class="tag-link-34" title="11个话题" style="font-size: 10.3333333333pt;">AJAX</a>
+<a href="http://coolshell.cn/tag/algorithm" class="tag-link-76" title="24个话题" style="font-size: 14.4814814815pt;">Algorithm</a>
+<a href="http://coolshell.cn/tag/android" class="tag-link-145" title="8个话题" style="font-size: 8.64814814815pt;">Android</a>
+<a href="http://coolshell.cn/tag/bash" class="tag-link-190" title="8个话题" style="font-size: 8.64814814815pt;">Bash</a>
+<a href="http://coolshell.cn/tag/c" class="tag-link-59" title="84个话题" style="font-size: 21.3518518519pt;">C++</a>
+<a href="http://coolshell.cn/tag/coding" class="tag-link-135" title="25个话题" style="font-size: 14.6111111111pt;">Coding</a>
+<a href="http://coolshell.cn/tag/css" class="tag-link-96" title="21个话题" style="font-size: 13.7037037037pt;">CSS</a>
+<a href="http://coolshell.cn/tag/database" class="tag-link-109" title="7个话题" style="font-size: 8pt;">Database</a>
+<a href="http://coolshell.cn/tag/design" class="tag-link-71" title="18个话题" style="font-size: 12.9259259259pt;">Design</a>
+<a href="http://coolshell.cn/tag/design-pattern" class="tag-link-25" title="8个话题" style="font-size: 8.64814814815pt;">design pattern</a>
+<a href="http://coolshell.cn/tag/ebook" class="tag-link-101" title="15个话题" style="font-size: 11.8888888889pt;">ebook</a>
+<a href="http://coolshell.cn/tag/flash" class="tag-link-98" title="7个话题" style="font-size: 8pt;">Flash</a>
+<a href="http://coolshell.cn/tag/game" class="tag-link-125" title="9个话题" style="font-size: 9.2962962963pt;">Game</a>
+<a href="http://coolshell.cn/tag/go" class="tag-link-238" title="9个话题" style="font-size: 9.2962962963pt;">Go</a>
+<a href="http://coolshell.cn/tag/google" class="tag-link-32" title="31个话题" style="font-size: 15.9074074074pt;">Google</a>
+<a href="http://coolshell.cn/tag/html" class="tag-link-38" title="32个话题" style="font-size: 16.037037037pt;">HTML</a>
+<a href="http://coolshell.cn/tag/ie" class="tag-link-175" title="10个话题" style="font-size: 9.81481481481pt;">IE</a>
+<a href="http://coolshell.cn/tag/java" class="tag-link-13" title="48个话题" style="font-size: 18.2407407407pt;">Java</a>
+<a href="http://coolshell.cn/tag/javascript" class="tag-link-114" title="51个话题" style="font-size: 18.6296296296pt;">Javascript</a>
+<a href="http://coolshell.cn/tag/jquery" class="tag-link-191" title="11个话题" style="font-size: 10.3333333333pt;">jQuery</a>
+<a href="http://coolshell.cn/tag/linux" class="tag-link-37" title="59个话题" style="font-size: 19.4074074074pt;">Linux</a>
+<a href="http://coolshell.cn/tag/mysql" class="tag-link-106" title="7个话题" style="font-size: 8pt;">MySQL</a>
+<a href="http://coolshell.cn/tag/oop" class="tag-link-245" title="8个话题" style="font-size: 8.64814814815pt;">OOP</a>
+<a href="http://coolshell.cn/tag/password" class="tag-link-319" title="8个话题" style="font-size: 8.64814814815pt;">password</a>
+<a href="http://coolshell.cn/tag/performance" class="tag-link-120" title="15个话题" style="font-size: 11.8888888889pt;">Performance</a>
+<a href="http://coolshell.cn/tag/php" class="tag-link-35" title="25个话题" style="font-size: 14.6111111111pt;">PHP</a>
+<a href="http://coolshell.cn/tag/programmer" class="tag-link-70" title="92个话题" style="font-size: 21.8703703704pt;">Programmer</a>
+<a href="http://coolshell.cn/tag/programming-language" class="tag-link-115" title="12个话题" style="font-size: 10.7222222222pt;">programming language</a>
+<a href="http://coolshell.cn/tag/puzzle" class="tag-link-514" title="11个话题" style="font-size: 10.3333333333pt;">Puzzle</a>
+<a href="http://coolshell.cn/tag/pythondev" class="tag-link-33" title="29个话题" style="font-size: 15.5185185185pt;">Python</a>
+<a href="http://coolshell.cn/tag/ruby" class="tag-link-69" title="10个话题" style="font-size: 9.81481481481pt;">Ruby</a>
+<a href="http://coolshell.cn/tag/sql" class="tag-link-131" title="10个话题" style="font-size: 9.81481481481pt;">SQL</a>
+<a href="http://coolshell.cn/tag/tdd" class="tag-link-485" title="8个话题" style="font-size: 8.64814814815pt;">TDD</a>
+<a href="http://coolshell.cn/tag/ui" class="tag-link-47" title="12个话题" style="font-size: 10.7222222222pt;">UI</a>
+<a href="http://coolshell.cn/tag/unix" class="tag-link-21" title="32个话题" style="font-size: 16.037037037pt;">Unix</a>
+<a href="http://coolshell.cn/tag/vim" class="tag-link-50" title="19个话题" style="font-size: 13.1851851852pt;">vim</a>
+<a href="http://coolshell.cn/tag/web" class="tag-link-30" title="36个话题" style="font-size: 16.6851851852pt;">Web</a>
+<a href="http://coolshell.cn/tag/windows" class="tag-link-49" title="17个话题" style="font-size: 12.6666666667pt;">Windows</a>
+<a href="http://coolshell.cn/tag/xml" class="tag-link-104" title="8个话题" style="font-size: 8.64814814815pt;">XML</a>
+<a href="http://coolshell.cn/tag/%e5%8f%a3%e4%bb%a4" class="tag-link-320" title="7个话题" style="font-size: 8pt;">口令</a>
+<a href="http://coolshell.cn/tag/%e5%ae%89%e5%85%a8" class="tag-link-318" title="18个话题" style="font-size: 12.9259259259pt;">安全</a>
+<a href="http://coolshell.cn/tag/%e7%a8%8b%e5%ba%8f%e5%91%98" class="tag-link-58" title="94个话题" style="font-size: 22pt;">程序员</a>
+<a href="http://coolshell.cn/tag/%e7%ae%97%e6%b3%95" class="tag-link-77" title="9个话题" style="font-size: 9.2962962963pt;">算法</a>
+<a href="http://coolshell.cn/tag/interview" class="tag-link-164" title="15个话题" style="font-size: 11.8888888889pt;">面试</a></div>
+</div></div>
+<!-- sidebar north END -->
+
+<div id="centersidebar">
+
+	<!-- sidebar east START -->
+	<div id="eastsidebar" class="sidebar">
+	<div id="categories-367921423" class="widget widget_categories"><h3>分类目录</h3>		<ul>
+	<li class="cat-item cat-item-189"><a href="http://coolshell.cn/category/proglanguage/dotnet" title="查看.NET编程下的所有文章">.NET编程</a> (3)
+</li>
+	<li class="cat-item cat-item-8"><a href="http://coolshell.cn/category/proglanguage/ajaxdev" title="查看Ajax开发下的所有文章">Ajax开发</a> (9)
+</li>
+	<li class="cat-item cat-item-5"><a href="http://coolshell.cn/category/proglanguage/cplusplus" title="查看C/C++语言下的所有文章">C/C++语言</a> (63)
+</li>
+	<li class="cat-item cat-item-186"><a href="http://coolshell.cn/category/proglanguage/erlang" title="查看Erlang下的所有文章">Erlang</a> (1)
+</li>
+	<li class="cat-item cat-item-4"><a href="http://coolshell.cn/category/proglanguage/javadev" title="查看Java语言下的所有文章">Java语言</a> (32)
+</li>
+	<li class="cat-item cat-item-11"><a href="http://coolshell.cn/category/proglanguage/phpdev" title="查看PHP脚本下的所有文章">PHP脚本</a> (11)
+</li>
+	<li class="cat-item cat-item-33"><a href="http://coolshell.cn/category/proglanguage/pythondev" title="查看Python下的所有文章">Python</a> (23)
+</li>
+	<li class="cat-item cat-item-100"><a href="http://coolshell.cn/category/proglanguage/rubydev" title="查看Ruby下的所有文章">Ruby</a> (5)
+</li>
+	<li class="cat-item cat-item-20"><a href="http://coolshell.cn/category/operatingsystem/unixlinux" title="查看Unix/Linux下的所有文章">Unix/Linux</a> (66)
+</li>
+	<li class="cat-item cat-item-7"><a href="http://coolshell.cn/category/proglanguage/webdev" title="查看Web开发下的所有文章">Web开发</a> (100)
+</li>
+	<li class="cat-item cat-item-19"><a href="http://coolshell.cn/category/operatingsystem/mswindows" title="查看Windows下的所有文章">Windows</a> (12)
+</li>
+	<li class="cat-item cat-item-195"><a href="http://coolshell.cn/category/itnews" title="查看业界新闻下的所有文章">业界新闻</a> (26)
+</li>
+	<li class="cat-item cat-item-509"><a href="http://coolshell.cn/category/%e4%bc%81%e4%b8%9a%e5%ba%94%e7%94%a8" title="查看企业应用下的所有文章">企业应用</a> (2)
+</li>
+	<li class="cat-item cat-item-9"><a href="http://coolshell.cn/category/technews" title="查看技术新闻下的所有文章">技术新闻</a> (32)
+</li>
+	<li class="cat-item cat-item-550"><a href="http://coolshell.cn/category/%e6%8a%80%e6%9c%af%e7%ae%a1%e7%90%86" title="查看技术管理下的所有文章">技术管理</a> (12)
+</li>
+	<li class="cat-item cat-item-12"><a href="http://coolshell.cn/category/techarticle" title="查看技术读物下的所有文章">技术读物</a> (114)
+</li>
+	<li class="cat-item cat-item-18"><a href="http://coolshell.cn/category/operatingsystem" title="查看操作系统下的所有文章">操作系统</a> (43)
+</li>
+	<li class="cat-item cat-item-105"><a href="http://coolshell.cn/category/datebase" title="查看数据库下的所有文章">数据库</a> (10)
+</li>
+	<li class="cat-item cat-item-10"><a href="http://coolshell.cn/category/misc" title="查看杂项资源下的所有文章">杂项资源</a> (260)
+</li>
+	<li class="cat-item cat-item-15"><a href="http://coolshell.cn/category/process" title="查看流程方法下的所有文章">流程方法</a> (46)
+</li>
+	<li class="cat-item cat-item-23"><a href="http://coolshell.cn/category/progdesign" title="查看程序设计下的所有文章">程序设计</a> (80)
+</li>
+	<li class="cat-item cat-item-602"><a href="http://coolshell.cn/category/%e7%b3%bb%e7%bb%9f%e6%9e%b6%e6%9e%84" title="查看系统架构下的所有文章">系统架构</a> (8)
+</li>
+	<li class="cat-item cat-item-1"><a href="http://coolshell.cn/category/tools" title="查看编程工具下的所有文章">编程工具</a> (64)
+</li>
+	<li class="cat-item cat-item-3"><a href="http://coolshell.cn/category/proglanguage" title="查看编程语言下的所有文章">编程语言</a> (168)
+</li>
+	<li class="cat-item cat-item-6"><a href="http://coolshell.cn/category/netsecurity" title="查看网络安全下的所有文章">网络安全</a> (25)
+</li>
+	<li class="cat-item cat-item-39"><a href="http://coolshell.cn/category/career" title="查看职场生涯下的所有文章">职场生涯</a> (33)
+</li>
+	<li class="cat-item cat-item-271"><a href="http://coolshell.cn/category/funny" title="查看趣味问题下的所有文章">趣味问题</a> (18)
+</li>
+	<li class="cat-item cat-item-52"><a href="http://coolshell.cn/category/story" title="查看轶事趣闻下的所有文章">轶事趣闻</a> (146)
+</li>
+		</ul>
+</div>	</div>
+	<!-- sidebar east END -->
+
+	<!-- sidebar west START -->
+	<div id="westsidebar" class="sidebar">
+	<div id="archives-2" class="widget widget_archive"><h3>归档</h3>		<ul>
+	<li><a href="http://coolshell.cn/articles/date/2014/08">2014年八月</a>&nbsp;(2)</li>
+	<li><a href="http://coolshell.cn/articles/date/2014/06">2014年六月</a>&nbsp;(1)</li>
+	<li><a href="http://coolshell.cn/articles/date/2014/05">2014年五月</a>&nbsp;(4)</li>
+	<li><a href="http://coolshell.cn/articles/date/2014/04">2014年四月</a>&nbsp;(4)</li>
+	<li><a href="http://coolshell.cn/articles/date/2014/03">2014年三月</a>&nbsp;(5)</li>
+	<li><a href="http://coolshell.cn/articles/date/2014/02">2014年二月</a>&nbsp;(3)</li>
+	<li><a href="http://coolshell.cn/articles/date/2014/01">2014年一月</a>&nbsp;(2)</li>
+	<li><a href="http://coolshell.cn/articles/date/2013/12">2013年十二月</a>&nbsp;(3)</li>
+	<li><a href="http://coolshell.cn/articles/date/2013/11">2013年十一月</a>&nbsp;(1)</li>
+	<li><a href="http://coolshell.cn/articles/date/2013/10">2013年十月</a>&nbsp;(6)</li>
+	<li><a href="http://coolshell.cn/articles/date/2013/08">2013年八月</a>&nbsp;(1)</li>
+	<li><a href="http://coolshell.cn/articles/date/2013/07">2013年七月</a>&nbsp;(8)</li>
+	<li><a href="http://coolshell.cn/articles/date/2013/06">2013年六月</a>&nbsp;(2)</li>
+	<li><a href="http://coolshell.cn/articles/date/2013/05">2013年五月</a>&nbsp;(3)</li>
+	<li><a href="http://coolshell.cn/articles/date/2013/04">2013年四月</a>&nbsp;(3)</li>
+	<li><a href="http://coolshell.cn/articles/date/2013/03">2013年三月</a>&nbsp;(3)</li>
+	<li><a href="http://coolshell.cn/articles/date/2013/02">2013年二月</a>&nbsp;(5)</li>
+	<li><a href="http://coolshell.cn/articles/date/2013/01">2013年一月</a>&nbsp;(1)</li>
+	<li><a href="http://coolshell.cn/articles/date/2012/12">2012年十二月</a>&nbsp;(4)</li>
+	<li><a href="http://coolshell.cn/articles/date/2012/11">2012年十一月</a>&nbsp;(5)</li>
+	<li><a href="http://coolshell.cn/articles/date/2012/10">2012年十月</a>&nbsp;(3)</li>
+	<li><a href="http://coolshell.cn/articles/date/2012/09">2012年九月</a>&nbsp;(4)</li>
+	<li><a href="http://coolshell.cn/articles/date/2012/08">2012年八月</a>&nbsp;(8)</li>
+	<li><a href="http://coolshell.cn/articles/date/2012/07">2012年七月</a>&nbsp;(4)</li>
+	<li><a href="http://coolshell.cn/articles/date/2012/06">2012年六月</a>&nbsp;(7)</li>
+	<li><a href="http://coolshell.cn/articles/date/2012/05">2012年五月</a>&nbsp;(6)</li>
+	<li><a href="http://coolshell.cn/articles/date/2012/04">2012年四月</a>&nbsp;(6)</li>
+	<li><a href="http://coolshell.cn/articles/date/2012/03">2012年三月</a>&nbsp;(6)</li>
+	<li><a href="http://coolshell.cn/articles/date/2012/02">2012年二月</a>&nbsp;(3)</li>
+	<li><a href="http://coolshell.cn/articles/date/2012/01">2012年一月</a>&nbsp;(6)</li>
+	<li><a href="http://coolshell.cn/articles/date/2011/12">2011年十二月</a>&nbsp;(5)</li>
+	<li><a href="http://coolshell.cn/articles/date/2011/11">2011年十一月</a>&nbsp;(9)</li>
+	<li><a href="http://coolshell.cn/articles/date/2011/10">2011年十月</a>&nbsp;(6)</li>
+	<li><a href="http://coolshell.cn/articles/date/2011/09">2011年九月</a>&nbsp;(5)</li>
+	<li><a href="http://coolshell.cn/articles/date/2011/08">2011年八月</a>&nbsp;(14)</li>
+	<li><a href="http://coolshell.cn/articles/date/2011/07">2011年七月</a>&nbsp;(6)</li>
+	<li><a href="http://coolshell.cn/articles/date/2011/06">2011年六月</a>&nbsp;(12)</li>
+	<li><a href="http://coolshell.cn/articles/date/2011/05">2011年五月</a>&nbsp;(5)</li>
+	<li><a href="http://coolshell.cn/articles/date/2011/04">2011年四月</a>&nbsp;(18)</li>
+	<li><a href="http://coolshell.cn/articles/date/2011/03">2011年三月</a>&nbsp;(16)</li>
+	<li><a href="http://coolshell.cn/articles/date/2011/02">2011年二月</a>&nbsp;(16)</li>
+	<li><a href="http://coolshell.cn/articles/date/2011/01">2011年一月</a>&nbsp;(18)</li>
+	<li><a href="http://coolshell.cn/articles/date/2010/12">2010年十二月</a>&nbsp;(11)</li>
+	<li><a href="http://coolshell.cn/articles/date/2010/11">2010年十一月</a>&nbsp;(11)</li>
+	<li><a href="http://coolshell.cn/articles/date/2010/10">2010年十月</a>&nbsp;(19)</li>
+	<li><a href="http://coolshell.cn/articles/date/2010/09">2010年九月</a>&nbsp;(15)</li>
+	<li><a href="http://coolshell.cn/articles/date/2010/08">2010年八月</a>&nbsp;(10)</li>
+	<li><a href="http://coolshell.cn/articles/date/2010/07">2010年七月</a>&nbsp;(20)</li>
+	<li><a href="http://coolshell.cn/articles/date/2010/06">2010年六月</a>&nbsp;(9)</li>
+	<li><a href="http://coolshell.cn/articles/date/2010/05">2010年五月</a>&nbsp;(13)</li>
+	<li><a href="http://coolshell.cn/articles/date/2010/04">2010年四月</a>&nbsp;(12)</li>
+	<li><a href="http://coolshell.cn/articles/date/2010/03">2010年三月</a>&nbsp;(11)</li>
+	<li><a href="http://coolshell.cn/articles/date/2010/02">2010年二月</a>&nbsp;(7)</li>
+	<li><a href="http://coolshell.cn/articles/date/2010/01">2010年一月</a>&nbsp;(9)</li>
+	<li><a href="http://coolshell.cn/articles/date/2009/12">2009年十二月</a>&nbsp;(22)</li>
+	<li><a href="http://coolshell.cn/articles/date/2009/11">2009年十一月</a>&nbsp;(27)</li>
+	<li><a href="http://coolshell.cn/articles/date/2009/10">2009年十月</a>&nbsp;(17)</li>
+	<li><a href="http://coolshell.cn/articles/date/2009/09">2009年九月</a>&nbsp;(14)</li>
+	<li><a href="http://coolshell.cn/articles/date/2009/08">2009年八月</a>&nbsp;(21)</li>
+	<li><a href="http://coolshell.cn/articles/date/2009/07">2009年七月</a>&nbsp;(18)</li>
+	<li><a href="http://coolshell.cn/articles/date/2009/06">2009年六月</a>&nbsp;(19)</li>
+	<li><a href="http://coolshell.cn/articles/date/2009/05">2009年五月</a>&nbsp;(27)</li>
+	<li><a href="http://coolshell.cn/articles/date/2009/04">2009年四月</a>&nbsp;(53)</li>
+	<li><a href="http://coolshell.cn/articles/date/2009/03">2009年三月</a>&nbsp;(43)</li>
+		</ul>
+</div>	</div>
+	<!-- sidebar west END -->
+	<div class="fixed"></div>
+</div>
+
+<!-- sidebar south START -->
+<div id="southsidebar" class="sidebar">
+<div id="get-recent-comments" class="widget widget_get_recent_comments"><h3>最新评论</h3><div id="get_recent_comments_wrap"><ul>	<li><a href="http://coolshell.cn/articles/11656.html#comment-1514558" title="开发团队的效率, 2014年06月09日">coding云</a>: 从大项目中解脱，回到小项目后才能真正体会到这个效率问题，大项 目中两个月时间我只做了一个模块，小项目里我用了一个半月时间做 完了一个项目。</li>
+	<li><a href="http://coolshell.cn/articles/11832.html#comment-1514521" title="【活动】解迷题送礼物, 2014年08月03日">QuintusZhou</a>: 赞一个先</li>
+	<li><a href="http://coolshell.cn/articles/4990.html#comment-1514517" title="程序员技术练级攻略, 2011年07月18日">coding云</a>: 工作3年了，最近正在做自己的网站，用的就是你文章提到的htm l5 + js + java web + spring mvc + mysql + ngnix + 阿里云，看来我自己摸索的经验和皓哥有交集，真心欢喜...</li>
+	<li><a href="http://coolshell.cn/articles/2250.html#comment-1514451" title="“21天教你学会C++”, 2010年03月30日">核米</a>: 其实那些书都只是为了给人入门打个基础而已，学过的人都会知道， 仅靠这些东西是不可能用于实践的</li>
+	<li><a href="http://coolshell.cn/articles/11021.html#comment-1514379" title="从“黑掉Github”学Web安全开发, 2014年02月10日">shepherds</a>: good！</li>
+	<li><a href="http://coolshell.cn/articles/5132.html#comment-1514257" title="疯狂的 Web 应用开源项目, 2011年08月11日">wholesale MiuMiu sunglasses sale</a>: Trust what your body tells you. one and all that suffers from arthritis is...</li>
+	<li><a href="http://coolshell.cn/articles/5132.html#comment-1514250" title="疯狂的 Web 应用开源项目, 2011年08月11日">Cheap miumiu sunglasses</a>: to find the inexpensiveest car coverage cover, it can be better should you spotk...</li>
+	<li><a href="http://coolshell.cn/articles/11312.html#comment-1514246" title="无插件Vim编程技巧, 2014年03月24日">libo26</a>: @shuiren 同感。。。</li>
+	<li><a href="http://coolshell.cn/articles/7186.html#comment-1514223" title="做个环保主义的程序员, 2012年04月27日">Dox</a>: 说的太好了，已成作者脑残粉</li>
+	<li><a href="http://coolshell.cn/articles/11466.html#comment-1514202" title="C语言的整型溢出问题, 2014年04月21日">开飞机的小蜗牛</a>: 博主，示例五：size_t 的溢出，对于这个我的疑问是 strlen(s) – 1 被不会被强转为 int 然后赋值给 i 吗？ 我写了如下的代码，但是并没有溢出： #include #include...</li>
+	<li><a href="http://coolshell.cn/articles/7992.html#comment-1514057" title="C++的坑真的多吗？, 2012年08月06日">hermes kelly 22cm handbag cheap replica AAA+ for sale</a>: love this shoe its huge very fast shipping</li>
+	<li><a href="http://coolshell.cn/articles/1870.html#comment-1513983" title="我是怎么招聘程序员的, 2009年12月02日">athree</a>: 希望碰上这样的面试官、、、</li>
+	<li><a href="http://coolshell.cn/articles/10688.html#comment-1513970" title="编程能力与编程年龄, 2013年11月13日">Lynn</a>: 说得好，技术才是最根本的，没有一批技术专家，技术难题以后靠谁 解决。希望国内越来越多的公司重视技术专家，给于相应的待遇与尊 重。也希望技术专家们敢于去研究与挑战一些更底层的技术与问题。 为中国的IT技术做出些贡献。...</li>
+	<li><a href="http://coolshell.cn/articles/11466.html#comment-1513647" title="C语言的整型溢出问题, 2014年04月21日">球球</a>: 我觉得示例5中的for()改为下面的更合适些： for (unsigned int s = strlen(s) – 1; s &gt;= 0; –s) for (unsigned int v =...</li>
+	<li><a href="http://coolshell.cn/articles/9308.html#comment-1513541" title="“作环保的程序员，从不用百度开始”, 2013年03月23日">killbaidu</a>: 百度这种垃圾公司早点死掉就是对中国的贡献</li>
+</ul></div></div><div id="text-2" class="widget widget_text"><h3>友情链接</h3>			<div class="textwidget"><ul class="blogroll">
+<li><a href="http://blog.csdn.net/haoel" target="_blank" onclick="pageTracker._trackPageview(&#39;/outgoing/blog.csdn.net/haoel?referer=http://coolshell.cn&#39;);">陈皓的博客</a></li>
+
+<li><a href="http://ifeve.com/" target="_blank" title="促进并发编程的研究和推广" onclick="pageTracker._trackPageview(&#39;/outgoing/ifeve.com/?referer=http://coolshell.cn&#39;);">并发编程</a></li>
+
+
+<li><a href="http://www.raychase.net/" target="_blank" title="一个啰嗦的程序员" onclick="pageTracker._trackPageview(&#39;/outgoing/www.raychase.net/?referer=http://coolshell.cn&#39;);">四火的唠叨</a></li>
+
+
+
+<li><a href="http://www.hellogcc.org/" target="_blank" title="致力于讨论和学习GNU Toolchain方面的工作组" onclick="pageTracker._trackPageview(&#39;/outgoing/www.hellogcc.org//?referer=http://coolshell.cn/&#39;);">HelloGcc Working Group</a></li>
+
+<li><a href="http://http//blog.lvscar.info/" target="_blank" title="Just for Fun" onclick="pageTracker._trackPageview(&#39;/outgoing/http://blog.lvscar.info/?referer=http://coolshell.cn/&#39;);">吕毅的Blog</a></li>
+
+<li><a href="http://www.cnblogs.com/weidagang2046/" target="_blank" title="Just for Fun" onclick="pageTracker._trackPageview(&#39;/outgoing/http://www.cnblogs.com/weidagang2046/?referer=http://coolshell.cn/&#39;);">Todd Wei的Blog</a></li>
+
+<li><a href="http://www.cppfans.org/" target="_blank" title="记录我们点滴学习工作生活" onclick="pageTracker._trackPageview(&#39;/outgoing/http://www.cppfans.org/?referer=http://coolshell.cn/&#39;);">C++爱好者博客</a></li>
+
+<li><a href="http://www.mhtml5.com/" target="_blank" title="致力于HTML5在中国的发展与应用" onclick="pageTracker._trackPageview(&#39;/outgoing/http://www.mhtml5.com/?referer=http://coolshell.cn/&#39;);">HTML5研究小组</a></li>
+
+
+<li><a href="http://zhuwenhao.com/" target="_blank" title="朱文昊的中文博客－－专注技术，向往自由" onclick="pageTracker._trackPageview(&#39;/outgoing/http://zhuwenhao.com/?referer=http://coolshell.cn/&#39;);">朱文昊Albert Zhu</a></li>
+
+
+<li><a href="http://www.cguage.com/" target="_blank" title="某VC++软件开发爱好者" onclick="pageTracker._trackPageview(&#39;/outgoing/http://www.cguage.com/?referer=http://coolshell.cn/&#39;);">C瓜哥的博客</a></li>
+
+
+<li><a href="http://www.kaiyuanba.cn/" target="_blank" title="汇聚各种开源项目的中英文混合介绍并分类排列，致力于软件项目的开源事业" onclick="pageTracker._trackPageview(&#39;/outgoing/http://www.kaiyuanba.cn/?referer=http://coolshell.cn/&#39;);">开源吧</a></li>
+
+
+
+<li><a href="http://helloacm.com/" target="_blank" title="Smart Ideas, Smart Algorithms" onclick="pageTracker._trackPageview(&#39;/outgoing/http://HelloACM.com/?referer=http://coolshell.cn/&#39;);">ACMer</a></li>
+
+<li><a href="http://chenpeng.info/" target="_blank" title="优秀的开源软件让生活更简单" onclick="pageTracker._trackPageview(&#39;/outgoing/http://chenpeng.info/?referer=http://coolshell.cn/&#39;);">陈鹏个人博客</a></li>
+
+<li><a href="http://www.coderli.com/" target="_blank" title="一个普通的coder，coding为了生活，coding因为消遣:-) Just a coder" onclick="pageTracker._trackPageview(&#39;/outgoing/http://www.coderli.com/?referer=http://coolshell.cn/&#39;);">OneCoder</a></li>
+
+<li><a href="http://www.crazyshell.org/" target="_blank" title="专注于底层基础, TCP/IP, 存储, (高性能.高可用.分布式.高并发系统) 研究" onclick="pageTracker._trackPageview(&#39;/outgoing/http://www.crazyshell.org/?referer=http://coolshell.cn/&#39;);">狂Shell – Happy Hacking</a></li>
+
+<li><a href="http://www.tektea.com/" target="_blank" title="关注IT技术 | 分享 | 交流 | 记录" onclick="pageTracker._trackPageview(&#39;/outgoing/http://www.tektea.com/?referer=http://coolshell.cn/&#39;);">TekTea's Blog </a></li>
+
+<li><a href="http://shellblog.sinaapp.com/" target="_blank" title="我有一颗百度的心。" onclick="pageTracker._trackPageview(&#39;/outgoing/http://blog.tektea.comshellblog.sinaapp.com/?referer=http://coolshell.cn/&#39;);">夕水溪下 </a></li>
+</ul></div>
+		</div><div id="meta-3" class="widget widget_meta"><h3>功能</h3>			<ul>
+			<li><a href="http://coolshell.cn/wp-login.php?action=register">注册</a></li>			<li><a href="http://coolshell.cn/wp-login.php">登录</a></li>
+			<li><a href="http://coolshell.cn/feed" title="使用RSS 2.0订阅本站点内容">文章<abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://coolshell.cn/comments/feed" title="使用RSS订阅本站点的所有文章的近期评论">评论<abbr title="Really Simple Syndication">RSS</abbr></a></li>
+<li><a href="https://cn.wordpress.org/" title="基于WordPress，一个优美、先进的个人信息发布平台。">WordPress.org</a></li>			</ul>
+</div><div id="text-400151742" class="widget widget_text">			<div class="textwidget"><script src="./开发团队的效率   酷 壳 - CoolShell.cn_files/stat.php" language="JavaScript" charset="gb2312"></script><script src="./开发团队的效率   酷 壳 - CoolShell.cn_files/core.php" charset="utf-8" type="text/javascript"></script><a href="http://www.cnzz.com/stat/website.php?web_id=1785679" target="_blank" title="站长统计"><img border="0" hspace="0" vspace="0" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/pic1.gif"></a>
+
+
+
+</div>
+		</div></div>
+<!-- sidebar south END -->
+
+</div>
+<!-- sidebar END -->
+	<div class="fixed"></div>
+</div>
+<!-- content END -->
+
+<!-- footer START -->
+<div id="footer">
+	<a id="gotop" href="http://coolshell.cn/articles/11656.html#" onclick="MGJS.goTop();return false;">回到顶部</a>
+	<a id="powered" href="http://wordpress.org/">WordPress</a>
+	<div id="copyright">
+		版权所有 © 2009-2014 酷 壳 – CoolShell.cn	</div>
+	<div id="themeinfo">
+		主题由 <a href="http://www.neoease.com/">NeoEase</a> 提供, 通过 <a href="http://validator.w3.org/check?uri=referer">XHTML 1.1</a> 和 <a href="http://jigsaw.w3.org/css-validator/check/referer?profile=css3">CSS 3</a> 验证.	</div>
+</div>
+<!-- footer END -->
+
+</div>
+<!-- container END -->
+</div>
+<!-- wrap END -->
+
+<script class="javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/shCore.js"></script>
+<script class="javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/shBrushCSharp.js"></script>
+<script class="javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/shBrushPhp.js"></script>
+<script class="javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/shBrushJScript.js"></script>
+<script class="javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/shBrushJava.js"></script>
+<script class="javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/shBrushVb.js"></script>
+<script class="javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/shBrushSql.js"></script>
+<script class="javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/shBrushXml.js"></script>
+<script class="javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/shBrushDelphi.js"></script>
+<script class="javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/shBrushPython.js"></script>
+<script class="javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/shBrushRuby.js"></script>
+<script class="javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/shBrushCss.js"></script>
+<script class="javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/shBrushCpp.js"></script>
+<script class="javascript">
+dp.SyntaxHighlighter.ClipboardSwf = 'http://coolshell.cn//wp-content/plugins/google-syntax-highlighter/Scripts/clipboard.swf';
+dp.SyntaxHighlighter.HighlightAll('code');
+</script>
+	<!-- Start of StatCounter Code -->
+	<script type="text/javascript">
+	<!-- 
+		var sc_project=8326668; 
+		var sc_security="cccb27f2"; 
+		var sc_invisible=1;
+	//-->
+	</script>
+	<script type="text/javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/counter_xhtml.js"></script>
+<noscript>&lt;div class="statcounter"&gt;&lt;a title="web analytics" href="http://statcounter.com/"&gt;&lt;img class="statcounter" src="http://c.statcounter.com/8326668/0/cccb27f2/1/" alt="web analytics" /&gt;&lt;/a&gt;&lt;/div&gt;</noscript>	
+	<!-- End of StatCounter Code -->
+<!-- Powered by WPtouch: 3.4.4 --><script type="text/javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/form.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var ratingsL10n = {"plugin_url":"http:\/\/coolshell.cn\/wp-content\/plugins\/wp-postratings","ajax_url":"http:\/\/coolshell.cn\/wp-admin\/admin-ajax.php","text_wait":"Please rate only 1 post at a time.","image":"stars_crystal","image_ext":"gif","max":"5","show_loading":"1","show_fading":"1","custom":"0"};
+var ratings_mouseover_image=new Image();ratings_mouseover_image.src=ratingsL10n.plugin_url+"/images/"+ratingsL10n.image+"/rating_over."+ratingsL10n.image_ext;;
+/* ]]> */
+</script>
+<script type="text/javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/postratings-js.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var viewsCacheL10n = {"admin_ajax_url":"http:\/\/coolshell.cn\/wp-admin\/admin-ajax.php","post_id":"11656"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/postviews-cache.js"></script>
+<script src="./开发团队的效率   酷 壳 - CoolShell.cn_files/stat.php" language="JavaScript" charset="gb2312"></script><script src="./开发团队的效率   酷 壳 - CoolShell.cn_files/core.php" charset="utf-8" type="text/javascript"></script><a href="http://www.cnzz.com/stat/website.php?web_id=1785679" target="_blank" title="站长统计"><img border="0" hspace="0" vspace="0" src="./开发团队的效率   酷 壳 - CoolShell.cn_files/pic1.gif"></a>
+
+
+
+
+
+
+<script src="./开发团队的效率   酷 壳 - CoolShell.cn_files/jquery.min.js"></script>
+<script src="./开发团队的效率   酷 壳 - CoolShell.cn_files/jquery.bpopup-0.8.0.min.js"></script>
+
+<script type="text/javascript">
+;(function($) {
+    $(function() {
+        var url=document.referrer;
+        if ( url && url.search("http://")>-1) {
+            var refurl =  url.match(/:\/\/(.[^/]+)/)[1];
+            if(refurl.indexOf("baidu.com")>-1){
+                $('#nobaidu_dlg').bPopup();
+            }
+        }
+    });
+
+})(jQuery);
+</script>
+
+
+
+<div id="nobaidu_dlg" style="background-color:#fff; border-radius:15px;color:#000;display:none;padding:20px;min-width:450px;min-height:180px;">
+    <!--<span class="bClose" style="cursor:pointer; position:absolute; right:10px;top:5px;">x<span/>-->
+    <img src="./开发团队的效率   酷 壳 - CoolShell.cn_files/nobaidu.jpg" align="left">
+     <p style="margin-left:200px;margin-top: 20px; line-height: 30px;">
+     检测到你还在使用百度这个搜索引擎，<br>
+     作为一个程序员，这是一种自暴自弃！<br>
+     <br>
+     </p>
+     <p align="center" style="margin-top:20px;">
+     <b><a href="http://coolshell.cn/articles/7186.html">做环保的程序员，从不用百度开始！</a></b>
+     </p>
+</div>
+
+
+<!-- Dynamic page generated in 0.521 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2014-08-18 10:58:15 -->
+
+<!-- Compression = gzip --></body></html>

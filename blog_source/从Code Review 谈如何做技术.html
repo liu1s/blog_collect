@@ -1,0 +1,2457 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!-- saved from url=(0039)http://coolshell.cn/articles/11432.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head profile="http://gmpg.org/xfn/11"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./从Code Review 谈如何做技术_files/shares.php" charset="utf-8"></script>
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+	<title>从Code Review 谈如何做技术 | 酷 壳 - CoolShell.cn</title>
+	<link rel="alternate" type="application/rss+xml" title="RSS 2.0 - 所有文章" href="http://coolshell.cn/feed">
+	<link rel="alternate" type="application/rss+xml" title="RSS 2.0 - 所有评论" href="http://coolshell.cn/comments/feed">
+	<link rel="pingback" href="http://coolshell.cn/xmlrpc.php">
+
+	<!-- style START -->
+	<!-- default style -->
+	<style type="text/css" media="screen">@import url( http://coolshell.cn/wp-content/themes/inove/style.css );</style>
+	<link rel="stylesheet" id="open-sans-css" href="./从Code Review 谈如何做技术_files/google-font.css" type="text/css" media="all">
+	<!-- for translations -->
+			<link rel="stylesheet" href="./从Code Review 谈如何做技术_files/chinese.css" type="text/css" media="screen">
+		<!--[if IE]>
+		<link rel="stylesheet" href="http://coolshell.cn//wp-content/themes/inove/ie.css" type="text/css" media="screen" />
+	<![endif]-->
+	<!-- style END -->
+
+	<!-- script START -->
+	<script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script><script type="text/javascript" src="./从Code Review 谈如何做技术_files/base.js"></script>
+	<script type="text/javascript" src="./从Code Review 谈如何做技术_files/menu.js"></script>
+	<!-- script END -->
+
+	<link rel="alternate" type="application/rss+xml" title="酷 壳 - CoolShell.cn » 从Code Review 谈如何做技术评论Feed" href="http://coolshell.cn/articles/11432.html/feed">
+<script>var killIE6ImgUrl = "http://coolshell.cn//wp-content/plugins/lets-kill-ie6/img";</script><link rel="stylesheet" id="wp-postratings-css" href="./从Code Review 谈如何做技术_files/postratings-css.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-pagenavi-css" href="./从Code Review 谈如何做技术_files/pagenavi-css.css" type="text/css" media="all">
+<script type="text/javascript" src="./从Code Review 谈如何做技术_files/jquery.js"></script>
+<script type="text/javascript" src="./从Code Review 谈如何做技术_files/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="./从Code Review 谈如何做技术_files/lets-kill-ie6.js"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://coolshell.cn/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://coolshell.cn//wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="C语言结构体里的成员数组和指针" href="http://coolshell.cn/articles/11377.html">
+<link rel="next" title="从LongAdder看更高效的无锁实现" href="http://coolshell.cn/articles/11454.html">
+<meta name="generator" content="WordPress 3.9.2">
+<link rel="shortlink" href="http://coolshell.cn/?p=11432">
+	<link href="./从Code Review 谈如何做技术_files/SyntaxHighlighter.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript">
+	window._wp_rp_static_base_url = 'https://wprp.zemanta.com/static/';
+	window._wp_rp_wp_ajax_url = "http://coolshell.cn/wp-admin/admin-ajax.php";
+	window._wp_rp_plugin_version = '3.5.1';
+	window._wp_rp_post_id = '11432';
+	window._wp_rp_num_rel_posts = '8';
+	window._wp_rp_thumbnails = false;
+	window._wp_rp_post_title = '%E4%BB%8ECode+Review+%E8%B0%88%E5%A6%82%E4%BD%95%E5%81%9A%E6%8A%80%E6%9C%AF';
+	window._wp_rp_post_tags = ['code+review', 'programmer', '%3F%3F%3F', '%3F%3F%3F%3F', 'work', 'review', 'perfect', 'code', 'titl', 'spring', 'iv', 'mvc', 'size', 'alt'];
+	window._wp_rp_promoted_content = true;
+</script>
+<script type="text/javascript" src="./从Code Review 谈如何做技术_files/loader.js" async=""></script>
+<style type="text/css">
+.related_post_title {
+}
+ul.related_post {
+}
+ul.related_post li {
+}
+ul.related_post li a {
+}
+ul.related_post li img {
+}</style>
+
+<!-- All in One SEO Pack 2.2.2 by Michael Torbert of Semper Fi Web Design[326,385] -->
+<meta name="keywords" content="code review,programmer,程序员,技术管理,流程方法">
+
+<link rel="canonical" href="./从Code Review 谈如何做技术_files/从Code Review 谈如何做技术.html">
+<meta property="og:title" content="从Code Review 谈如何做技术 | 酷 壳 - CoolShell.cn">
+<meta property="og:type" content="activity">
+<meta property="og:url" content="http://coolshell.cn/articles/11432.html">
+<meta property="og:image" content="http://coolshell.cn//wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png">
+<meta property="og:site_name" content="酷 壳 - CoolShell.cn">
+<meta property="og:description" content="（这篇文章缘由我的微博，我想多说一些，有些杂乱，想到哪写到哪） 这两天，在微博上表达了一下Code Review的重要性。因为翻看了阿里内部的Review Board上的记录，从上面发现Code Review做得好的是一些比较偏技术的团队，而偏业务的技术团队基本上没有看到Code Review的记录。当然，这并不能说没有记录他们就没有做Code Review，于是，我就问了一下以前在业务团队做过的同事有没有Code Review，他告诉我不但没有Code Review，而且他认为Code Review没用，因为： 1）工期压得太紧，时间连coding都不够，以上线为目的， 2）需求老变，代码的生命周期太短。所以，写好的代码没有任何意义，烂就烂吧，反正与绩效无关。 我心里非常不认同这样的观点，我觉得我是程序员，我是工程师，就像医生一样，不是把病人医好就好了，还要对病人的长期健康负责。对于常见病，要很快地医好病人很简单，下猛药，大量使用抗生素，好得飞快。但大家都知道，这明显是“饮鸩止渴”、“竭泽而渔”的做法。医生需要有责任心和医德，我也觉得程序员工程师也要有相应的责任心和相应的修养。东西交给我我必需要负责，我觉得这种负责和修养不是”做出来“就了事了，而是要到“做漂亮”这个级别，这就是“山寨”和“工业”的差别。而只以“做出来”为目的标准，我只能以为，这样的做法只不过是“按部就班”的堆砌代码罢了，和劳动密集型的“装配生产线”和“砌砖头”没有什么差别，在这种环境里呆着还不如离开。 老实说，因为去年我在业务团队的时候，我的团队也没有做Code Review，原因是多样的。其中一个重要原因是，我刚来阿里，所以，需要做的是在适应阿里的文化，任何公司都有自己的风格和特点，任何公司的做法都有他的理由和成因，对于我这样的一个初来者，首要的是要适应和观察，不要对团队做太多的改动，跟从、理解和信任是融入的关键。（注：在建北京团队和不要专职的测试人员上我都受到了一些阻力），所以跟着团队走没有玩Code Review。干了一年后，觉得我妥协了很多我以前所坚持的东西，觉得自己的标准在降低，想一想后背拔凉拔凉的，所以我决定坚持，而且还要坚持高标准。  对于Code">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="（这篇文章缘由我的微博，我想多说一些，有些杂乱，想到哪写到哪） 这两天，在微博上表达了一下Code Review的重要性。因为翻看了阿里内部的Review Board上的记录，从上面发现Code Review做得好的是一些比较偏技术的团队，而偏业务的技术团队基本上没有看到Code Review的记录。当然，这并不能说没有记录他们就没有做Code Review，于是，我就问了一下以前在业务团队做过的同事有没有Code Review，他告诉我不但没有Code Review，而且他认为Code Review没用，因为： 1）工期压得太紧，时间连coding都不够，以上线为目的， 2）需求老变，代码的生命周期太短。所以，写好的代码没有任何意义，烂就烂吧，反正与绩效无关。 我心里非常不认同这样的观点，我觉得我是程序员，我是工程师，就像医生一样，不是把病人医好就好了，还要对病人的长期健康负责。对于常见病，要很快地医好病人很简单，下猛药，大量使用抗生素，好得飞快。但大家都知道，这明显是“饮鸩止渴”、“竭泽而渔”的做法。医生需要有责任心和医德，我也觉得程序员工程师也要有相应的责任心和相应的修养。东西交给我我必需要负责，我觉得这种负责和修养不是”做出来“就了事了，而是要到“做漂亮”这个级别，这就是“山寨”和“工业”的差别。而只以“做出来”为目的标准，我只能以为，这样的做法只不过是“按部就班”的堆砌代码罢了，和劳动密集型的“装配生产线”和“砌砖头”没有什么差别，在这种环境里呆着还不如离开。 老实说，因为去年我在业务团队的时候，我的团队也没有做Code Review，原因是多样的。其中一个重要原因是，我刚来阿里，所以，需要做的是在适应阿里的文化，任何公司都有自己的风格和特点，任何公司的做法都有他的理由和成因，对于我这样的一个初来者，首要的是要适应和观察，不要对团队做太多的改动，跟从、理解和信任是融入的关键。（注：在建北京团队和不要专职的测试人员上我都受到了一些阻力），所以跟着团队走没有玩Code Review。干了一年后，觉得我妥协了很多我以前所坚持的东西，觉得自己的标准在降低，想一想后背拔凉拔凉的，所以我决定坚持，而且还要坚持高标准。  对于Code">
+<!-- /all in one seo pack -->
+<style type="text/css" id="syntaxhighlighteranchor"></style>
+</head>
+
+
+<body style="zoom: 1;"><link href="./从Code Review 谈如何做技术_files/jiathis_counter.css" rel="stylesheet" type="text/css"><script src="./从Code Review 谈如何做技术_files/jiathis.php" charset="utf-8"></script><link href="./从Code Review 谈如何做技术_files/jiathis_share.css" rel="stylesheet" type="text/css"><iframe frameborder="0" style="position: absolute; display: none; opacity: 0;"></iframe><div class="jiathis_style" style="position: absolute; z-index: 1000000000; display: none; top: 50%; left: 50%; overflow: auto;"></div><div class="jiathis_style" style="position: absolute; z-index: 1000000000; display: none; overflow: auto;"></div><iframe frameborder="0" src="./从Code Review 谈如何做技术_files/jiathis_utility.html" style="display: none;"></iframe>
+<!-- wrap START -->
+<div id="wrap">
+
+<!-- container START -->
+<div id="container">
+
+<!-- header START -->
+<div id="header">
+
+	<!-- banner START -->
+			<div class="banner">
+			<a title="把这个链接拖到你的Chrome收藏夹工具栏中" href="javascript:(function(){function c(){var e=document.createElement("link");e.setAttribute("type","text/css");e.setAttribute("rel","stylesheet");e.setAttribute("href",f);e.setAttribute("class",l);document.body.appendChild(e)}function h(){var e=document.getElementsByClassName(l);for(var t=0;t<e.length;t++){document.body.removeChild(e[t])}}function p(){var e=document.createElement("div");e.setAttribute("class",a);document.body.appendChild(e);setTimeout(function(){document.body.removeChild(e)},100)}function d(e){return{height:e.offsetHeight,width:e.offsetWidth}}function v(i){var s=d(i);return s.height>e&&s.height<n&&s.width>t&&s.width<r}function m(e){var t=e;var n=0;while(!!t){n+=t.offsetTop;t=t.offsetParent}return n}function g(){var e=document.documentElement;if(!!window.innerWidth){return window.innerHeight}else if(e&&!isNaN(e.clientHeight)){return e.clientHeight}return 0}function y(){if(window.pageYOffset){return window.pageYOffset}return Math.max(document.documentElement.scrollTop,document.body.scrollTop)}function E(e){var t=m(e);return t>=w&&t<=b+w}function S(){var e=document.createElement("audio");e.setAttribute("class",l);e.src=i;e.loop=false;e.addEventListener("canplay",function(){setTimeout(function(){x(k)},500);setTimeout(function(){N();p();for(var e=0;e<O.length;e++){T(O[e])}},15500)},true);e.addEventListener("ended",function(){N();h()},true);e.innerHTML=" <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";document.body.appendChild(e);e.play()}function x(e){e.className+=" "+s+" "+o}function T(e){e.className+=" "+s+" "+u[Math.floor(Math.random()*u.length)]}function N(){var e=document.getElementsByClassName(s);var t=new RegExp("\\b"+s+"\\b");for(var n=0;n<e.length;){e[n].className=e[n].className.replace(t,"")}}var e=30;var t=30;var n=350;var r=350;var i="//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";var s="mw-harlem_shake_me";var o="im_first";var u=["im_drunk","im_baked","im_trippin","im_blown"];var a="mw-strobe_light";var f="//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";var l="mw_added_css";var b=g();var w=y();var C=document.getElementsByTagName("*");var k=null;for(var L=0;L<C.length;L++){var A=C[L];if(v(A)){if(E(A)){k=A;break}}}if(A===null){console.warn("Could not find a node of the right size. Please try a different page.");return}c();S();var O=[];for(var L=0;L<C.length;L++){var A=C[L];if(v(A)){O.push(A)}}})()    ">High一下!</a>		</div>
+		<!-- banner END -->
+
+	<div id="caption">
+		<h1 id="title"><a href="http://coolshell.cn/">酷 壳 – CoolShell.cn</a></h1>
+		<div id="tagline">享受编程和技术所带来的快乐 – http://coolshell.cn</div>
+	</div>
+
+	<div class="fixed"></div>
+</div>
+<!-- header END -->
+
+<!-- navigation START -->
+<div id="navigation">
+	<!-- menus START -->
+	<ul id="menus">
+		<li class="page_item"><a class="home" title="首页" href="http://coolshell.cn/">首页</a></li>
+		<li class="page_item page-item-4194"><a href="http://coolshell.cn/featured_posts">推荐文章</a></li>
+<li class="page_item page-item-3839"><a href="http://coolshell.cn/plugins">本站插件</a></li>
+<li class="page_item page-item-2"><a href="http://coolshell.cn/guestbook">留言小本</a></li>
+<li class="page_item page-item-368"><a href="http://coolshell.cn/about">关于酷壳</a></li>
+<li class="page_item page-item-4470"><a href="http://coolshell.cn/haoel">关于陈皓</a></li>
+		<li><a class="lastmenu" href="javascript:void(0);"></a></li>
+	</ul>
+	<!-- menus END -->
+
+	<!-- searchbox START -->
+	<div id="searchbox">
+					<form action="http://coolshell.cn/" method="get">
+				<div class="content">
+					<input type="text" class="textfield searchtip" name="s" size="24" value="">
+					<input type="submit" class="button" value="">
+				</div>
+			</form>
+			</div>
+<script type="text/javascript">
+//<![CDATA[
+	var searchbox = MGJS.$("searchbox");
+	var searchtxt = MGJS.getElementsByClassName("textfield", "input", searchbox)[0];
+	var searchbtn = MGJS.getElementsByClassName("button", "input", searchbox)[0];
+	var tiptext = "请输入关键字...";
+	if(searchtxt.value == "" || searchtxt.value == tiptext) {
+		searchtxt.className += " searchtip";
+		searchtxt.value = tiptext;
+	}
+	searchtxt.onfocus = function(e) {
+		if(searchtxt.value == tiptext) {
+			searchtxt.value = "";
+			searchtxt.className = searchtxt.className.replace(" searchtip", "");
+		}
+	}
+	searchtxt.onblur = function(e) {
+		if(searchtxt.value == "") {
+			searchtxt.className += " searchtip";
+			searchtxt.value = tiptext;
+		}
+	}
+	searchbtn.onclick = function(e) {
+		if(searchtxt.value == "" || searchtxt.value == tiptext) {
+			return false;
+		}
+	}
+//]]>
+</script>
+	<!-- searchbox END -->
+
+	<div class="fixed"></div>
+</div>
+<!-- navigation END -->
+
+<!-- content START -->
+<div id="content">
+
+	<!-- main START -->
+	<div id="main">
+
+
+	<div id="postpath">
+		<a title="转到首页" href="http://coolshell.cn/">首页</a>
+		 &gt; <a href="http://coolshell.cn/category/%e6%8a%80%e6%9c%af%e7%ae%a1%e7%90%86" title="查看技术管理中的全部文章" rel="category tag">技术管理</a>, <a href="http://coolshell.cn/category/process" title="查看流程方法中的全部文章" rel="category tag">流程方法</a>		 &gt; 从Code Review 谈如何做技术	</div>
+
+	<div class="post" id="post-11432">
+		<h2>从Code Review 谈如何做技术</h2>
+		<div class="info">
+			<span class="date">2014年4月12日</span>
+			<span class="author"><a href="http://coolshell.cn/articles/author/haoel" title="由陈皓发布" rel="author">陈皓</a></span>										<span class="addcomment"><a href="http://coolshell.cn/articles/11432.html#respond">发表评论</a></span>
+				<span class="comments"><a href="http://coolshell.cn/articles/11432.html#comments">阅读评论</a></span>
+						<span class="comments"> 41,388 人阅读  &nbsp;  &nbsp;</span>
+			<div class="fixed"></div>
+		</div>
+		<div class="content">
+			<p><img class="alignright size-medium wp-image-11440" alt="" src="./从Code Review 谈如何做技术_files/code_review-225x300.jpg" width="225" height="300">（这篇文章缘由我的微博，我想多说一些，有些杂乱，想到哪写到哪）</p>
+<p>这两天，在微博上表达了一下Code Review的重要性。因为翻看了阿里内部的Review Board上的记录，从上面发现Code Review做得好的是一些比较偏技术的团队，而偏业务的技术团队基本上没有看到Code Review的记录。当然，这并不能说没有记录他们就没有做Code Review，于是，我就问了一下以前在业务团队做过的同事有没有Code Review，他告诉我不但没有Code Review，而且他认为Code Review没用，因为：</p>
+<p style="padding-left: 30px;">1）工期压得太紧，时间连coding都不够，以上线为目的，</p>
+<p style="padding-left: 30px;">2）需求老变，代码的生命周期太短。所以，写好的代码没有任何意义，烂就烂吧，反正与绩效无关。</p>
+<p>我心里非常不认同这样的观点，我觉得我是程序员，我是工程师，就像医生一样，不是把病人医好就好了，还要对病人的长期健康负责。对于常见病，要很快地医好病人很简单，下猛药，大量使用抗生素，好得飞快。但大家都知道，这明显是“饮鸩止渴”、“竭泽而渔”的做法。医生需要有责任心和医德，我也觉得程序员工程师也要有相应的责任心和相应的修养。东西交给我我必需要负责，我觉得这种负责和修养不是”做出来“就了事了，而是要到“做漂亮”这个级别，这就是“山寨”和“工业”的差别。而只以“做出来”为目的标准，我只能以为，这样的做法只不过是“按部就班”的堆砌代码罢了，和劳动密集型的“装配生产线”和“砌砖头”没有什么差别，在这种环境里呆着还不如离开。</p>
+<p>老实说，因为去年我在业务团队的时候，我的团队也没有做Code Review，原因是多样的。其中一个重要原因是，我刚来阿里，所以，需要做的是在适应阿里的文化，任何公司都有自己的风格和特点，任何公司的做法都有他的理由和成因，对于我这样的一个初来者，首要的是要适应和观察，不要对团队做太多的改动，跟从、理解和信任是融入的关键。（注：在建北京团队和不要专职的测试人员上我都受到了一些阻力），所以跟着团队走没有玩Code Review。干了一年后，觉得我妥协了很多我以前所坚持的东西，觉得自己的标准在降低，想一想后背拔凉拔凉的，所以我决定坚持，而且还要坚持高标准。</p>
+<p><span id="more-11432"></span></p>
+<p>对于Code Review很重要的这个观点，在微博上抛出来后，被一些阿里的工程师，架构师/专家，甚至资深架构师批评，我在和他们回复和讨论的过程中，居然发现有个“因为对方用户的设置”我无法回复了（我被拉黑了，还有一些直接就是冷讽和骂人了，微博中我就直接删除了）。这些批评我的阿里工程师/架构师的观点总结一下如下：（<strong>顺便说一下，阿里内还是有很多团队坚持做Code Review的</strong>）</p>
+<p style="padding-left: 30px;">1）到业务团队体会一下，倒逼工期的项目有多少？订好交付日期后再要求提前1个月的有多少？现在是做到已经不容易，更不谈做得漂亮！。</p>
+<p style="padding-left: 30px;">2）Code Review是一种教条，意义不大，有测试，只要不出错，就可以了。</p>
+<p style="padding-left: 30px;">3）目标都是改进质量，有限的投入总希望能有最大的产出，不同沉湎改进质量的方式不一样，业务应用开发忙的跟狗一样，而且业务逻辑变化快，通用性差，codereviw的成本要比底层高。</p>
+<p style="padding-left: 30px;"><span style="line-height: 1.5em;">4）现在的主要矛盾是倒排出来的工期和不靠谱的程序员之间的矛盾，我认为cr不是解决这个问题的银弹。不从实际情况出发光打正义的嘴炮实在太过于自慰了 。</span></p>
+<p><strong>我们可以看到，上面观点其实和Code Review没有太多关系，其实是在抱怨另外的问题</strong>。这些观点其实是技术团队和业务团队的矛盾，但不知道为什么强加给了我的“Code Review很重要”的这个观点，然后这些观点反过来冲击“Code Reivew”，并说“Code Review无用”。这种讨论问题的方式在很常见，你说A，我说B，本来A、B是两件事，但就是要混为一谈，然后似是而非的用B来证明你的A观点是错的。（也许，这些工程师/架构师心存怨气，需要一个发泄的通道）</p>
+<p><strong>我觉得，很多时候，人思考问题思考不清楚，很大一部分原因是因为把很多问题混为一谈</strong>，连我自己有些时候都会这样。引以为戒。</p>
+<p>即然被混为一谈，那我就来拆分一下，也是下面这三个问题：</p>
+<ul>
+<li>Code Review有没有用的问题。</li>
+<li>Code Review做不起来的问题。</li>
+<li>业务变化快，速度快的问题，技术疲于跟命。</li>
+</ul>
+<h4>Code Review</h4>
+<p>你Google一下Code Reivew这个关键词，你就会发现Code Review的好处基本上是不存在争议的，有很多很多的文章和博文都在说Code Review的重要性，怎么做会更好，而且很多公司在面试过程中会加入“Code Review”的问题。打开<a href="http://zh.wikipedia.org/wiki/%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5" target="_blank">Wikipedia的词条</a>你会看到这样的描述——</p>
+<blockquote><p>卡珀斯·琼斯（Capers Jones）分析了超过12,000个软件开发项目，其中使用正式代码审查的项目，发现潜在缺陷率约在60-65%之间，若是非正式的代码审查，发现潜在缺陷率不到50%。大部份的测试，发现的潜在缺陷率会在30%左右。</p>
+<p>对于一些关键的软件（例如安全关键系统的嵌入式软件），一般的代码审查速度约是一小时150行程序码，一小时审查数百行程序码的审查速度太快，可能无法找到程序中的问题。代码审查一般可以找到及移除约65%的错误，最高可以到85%。</p>
+<p>也有研究针对代码审查找到的缺陷类型进行分析。代码审查找到的缺陷中，有75%是和计算机安全隐患有关。对于产品生命周期很长的软件公司而言，代码审查是很有效的工具。</p></blockquote>
+<p><strong>Code Review的好处我觉得不用多说了，主要是让你的代码可以更好的组织起来，有更易读，有更高的维护性，同时可以达到知识共享，找到bug只是其中的副产品</strong>。这个东西已经不新鲜了，你上网可以找到很多文章，我就不多说了。就像你写程序要判断错误一样，Code Review也是最基本的常识性的东西。</p>
+<p>我从2002年开始就浸泡在严格的Code Review中，我的个人成长和Code Review有很大的关系，如果我的成长过程中没有经历过Code Review这个事，我完全不敢想像。</p>
+<p><strong>我个人认为代码有这几种级别：1）可编译，2）可运行，3）可测试，4）可读，5）可维护，6）可重用。通过自动化测试的代码只能达到第3）级，而通过Code Review的代码少会在第4）级甚至更高。</strong>关于Code Review，你可以参看本站的《<a title="Code Review中的几个提示" href="http://coolshell.cn/articles/1302.html" target="_blank">Code Review中的几个提示</a>》</p>
+<p>可见，Code Review直接关系到了你的工程能力！</p>
+<h4>Code Review 的问题</h4>
+<p>有下面几个情况会让你的Code Review没有效果。</p>
+<p>首当其冲的是——“<strong>人员能力不足</strong>”，我经历过这样的情况，Code Review的过程中，大家大眼瞪小眼，没有什么好的想法，不知道什么是好的代码，什么是不好的代码。导致Code Review大多数都在代码风格上。今天，我告诉你，代码风格这种事，是每个程序员自查的事情，不应该浪费大家的时间。对此，我有两个建议：1）你团队的人招错了，该换血了。2）让你团队的人花时候阅读一下《<a href="http://book.douban.com/subject/1477390/" target="_blank">代码大全</a>》这本书（当然，还要读很多基础知识的书）。</p>
+<p>次当其冲的是——“<strong>结果更重要</strong>”，也就是说，做出来更重要，做漂亮不重要。因为我的KPI和年终奖based on how many works I’ve done！而不是How perfect they are ! 这让我想到那些天天在用Spring MVC 做CRUD网页的工程师，我承认，他们很熟练。大量的重复劳动。其实，仔细想一下好多东西是可以框架化，模板化，或是自动生成的。所以，为了堆出这么多网页就停地去堆，做的东西是很多，但是没有任何成长。急功近利，也许，你做得多，拿到了不错的年终奖，但是你失去的也多，失去了成为一个卓越工程师的机会。你本来可以让你的月薪在1-2年后翻1-2倍的，但一年后你只拿到了为数不多的年终奖。</p>
+<p>然后是——“<strong>人员的态度问题</strong>”，一方面就是懒，不想精益求精，只要干完活交差了事。对此，你更要大力开展Code Review了，让这种人写出来的代码曝光在更多人面前，让他为质量不好的代码蒙羞。另一方面，有人会觉得那是别人的模块，我不懂，也没时间 去懂，不懂他的业务怎么做Code Review? 我只想说，如果你的团队里这样的“各个自扫门前雪”的事越多，那么这个团队也就越没主动性，没有主动性也就越不可能是个好团队，做的东西也不可能好。而对于个人来说，也就越不可能有成长。</p>
+<p>接下来是——“<strong>需求变化的问题</strong>”，有人认识，需求变得快，代码的生存周期比较短，不需要好的代码，反正过两天这些代码就会被废弃了。如果是一次性的东西，的确质量不需要太高，反正用了就扔。但是，我觉得多多少少要Review一下这个一次性的烂代码不会影响那些长期在用的代码吧，如果你的项目全部都是临时代码，那么你团队是不是也是一个临时团队？关于如果应对需求变化，你可以看看本站的《<a href="http://coolshell.cn/articles/6950.html" rel="bookmark">需求变化与IoC</a>》《<a href="http://coolshell.cn/articles/7236.html" target="_blank">Unix的设计思想来应对多变的需求</a>》的文章 ，从这些文章中，我相信你可以看到对于需求变化的代码质量需要的更高。</p>
+<p>最后是——“<strong>时间不够问题</strong>”，如果是业务逼得紧，让你疲于奔命，那么这不是Code Review好不好问题，这是需求管理和项目管理的问题以及别的非技术的问题。下面我会说。</p>
+<p>不管怎么样，上述Code Review的问题不应该成为“Code Review无意义”的理由或借口，这就好像“因噎废食”一样。干什么事都会有困难和问题的，有的人就这样退缩了，但有的人看得到利大于弊，还是去坚持，人与人的不同正在这个地方。这就是为什么运动会受伤，但还是会人去运动，而有人因为怕受伤就退缩了一样。</p>
+<h4>被业务逼得太紧</h4>
+<p>被业务逼得太紧，需求乱变，这其实和Code Review没有多大关系了。对此，我想先讲一个我的故事。</p>
+<p>我去年在阿里的聚石塔，刚去的时候，聚石塔正在做一个很大的重构——对架构的大调整。因此压了很多业务需求，等这个项目花了2-3个月做完了后，一下子涌入了30-50个需求，还规定一个月完成，搞得团队疲于奔命。在累了两周后，我仔细分析了一下这些需求，发现很多需求是在重复做阿里云已经做过的东西，还有一些需求是因为聚石塔这个平台不规范没有标准所产生的问题。于是，我做了这么三件事：</p>
+<p style="padding-left: 30px;">1）重新定义聚石塔这个产品主要目标和范围，确定哪些该做，哪些不该做。</p>
+<p style="padding-left: 30px;">2）为聚石塔制定标准 ，让阿里云的API都长得基本一样，并制订云资源的接入标准。</p>
+<p style="padding-left: 30px;">3）推动重构阿里云的Portal系统，不再实现阿里云已经做过的东西，与阿里云紧密结合。</p>
+<p>这些事情推动起来并不容易，聚石塔的业务方一开始也不理解，我和产品一起做业务方的工作，而阿里云也被我逼得很惨（在这里一并感谢，尤其阿里云的同学，老实说，和阿里云跨团队合作中是我这么多年来感觉最好的一次，相当赞）。通过这个事，聚石塔需求一下就有质的下降了。搞得还有几个工程师来和我说，你这么搞，聚石塔就没事可干了。姑且不说工程师对聚石塔的理解是怎么样的。 我只想说，我大量地减少了需求，尽最大可能联合了该联合的人，而不是自己闭门造车，并让产品的目标和方向更明确了。做了这些事情后，大家不但不用加班，而且还有时间充电去学技术，并为聚石塔思考未来的方向和发展。去年公司996的时候，我的团队还在965（搞得跟异教徒似的），而且还有很多时间去专研新的东西。</p>
+<p>说这个故事，我不是为了得瑟，而是因为有些人在微博上抨击我是一个道貌岸然的只会谈概念讲道理的装逼犯。所以，我告诉大家我在聚石塔是怎么做的，我公开写在这里，你也可以向相关的同学去求证我说的是不是真的。也向你证明，我可能是个装逼犯，但绝不是只会谈概念讲道理的装逼犯。</p>
+<p>被业务方逼得紧不要抱怨，你没有时间被逼得像牲口一样工作，这个时候，你需要的是暂停一下想一想，为什么会像牲口一样？而这正是让你变得聪明的机会。</p>
+<p>我为你总结一下，</p>
+<p style="padding-left: 30px;">1）你有没有去Review业务部门给你的这么多的需求，哪些是合理的，哪些是不合理的。在Amazon，开发工程师都会被教育拿到需求后一定要问——“为什么要做？业务影响度有多大？有多少用户受益？”，回答不清这个问题，没有数据的支持，就不做。所以，产品经理要做很多数据挖拙和用户调研的工作，而不是拍拍脑袋，听极少数的用户抱怨就要开需求了。</p>
+<p style="padding-left: 30px;">2）产品经理也要管理和教育的。你要告诉你的产品经理：“你是一个好的产品经理，因为你不但对用户把握得很好，也会对软件工艺把握得很好。你不但会开出外在的功能性需求，也同样会开出内在的让软件系统更完善的非功能性需求。你不是在迁就用户，而是引导用户。你不会无限制地加功能，而是把握产品灵魂控制并简化功能。你会为自己要做的和不做东西的感到同样的自豪。”你要告诉你的产品经理：“做一个半成品不如做好半年产品”（更多这样的观点请参看《<a title="《Rework》摘录及感想" href="http://coolshell.cn/articles/9156.html" target="_blank">Rework摘录和感想</a>》）</p>
+<p style="padding-left: 30px;">3）做事情是要讲效率的。Amazon里喜欢使用一种叫T-Shirt Size Estimation的评估方法来优先做投入小产出大的“Happy Case”。关于什么是效率，什么是T-Shirt Size Estimation，你可以看看《<a title="加班与效率" href="http://coolshell.cn/articles/10217.html" target="_blank">加班与效率</a>》一文 。</p>
+<p style="padding-left: 30px;">4）需求总是会变化的，不要抱怨需求变化太快。你应该抱怨的是为什么我们没有把握好方向？老变？这个事就像踢足球一样，你要去的地方是球将要去的地方，而不是球现在的地方。你要知道球要去哪里，你就知道球之前是怎么动的，找到了运动轨迹后，你才知道球要去像何方。如果你都不知道球要去向何方，那你就是一只无头苍蝇一样，东一下西一下。</p>
+<p><strong>当你忙得跟牲口一样，你应该停下来，问一下自己，自己成为牲口的原因，是不是就是因为自己做事时候像就牲口一样思考？</strong></p>
+<h4>其它</h4>
+<p>最后，我在给阿里今年新入职的毕业生的“技塑人生”的分享中，我给他们布置了5、6个Homework，分享几个给大家：</p>
+<p style="padding-left: 30px;">1）重构或写一个模块，把他做成真正的Elegant级别。</p>
+<p style="padding-left: 30px;">2）与大家分享一篇或几篇技术文章 ，并收获10-30个赞。</p>
+<p style="padding-left: 30px;">3）降低现有至少20%的重复工作或维护工作</p>
+<p style="padding-left: 30px;">4）拒绝或简化一个需求（需要项目中所有的Stakeholders都同意）</p>
+<p>部署这些作业的原因，是我希望新入行的同学们对自己的工作坚持高的标准，我知道你们会因为骨感的现实而妥协，但是我希望你们就算在现实中妥协了也要在内心中坚持尽可能高的标准，不要习惯成自然，最后被社会这个大染缸给潜移默化了。因为你至少要对自己负责。<strong>对自己负责就是，用脚投票，如果妥协得受不了了就离开吧</strong>。</p>
+<p>芝兰生于空谷，不以无人而不芳！君子修身养道，不以穷困而改志！</p>
+<p>谢谢听我唠叨。</p>
+<p>（全文完）
+</p><div style="margin-top: 15px; font-size: 11px;color: #cc0000;">
+<p align="center"><strong>（转载本站文章请注明作者和出处 <a href="http://coolshell.cn/">酷 壳 – CoolShell.cn</a> ，请勿用于任何商业用途）</strong></p></div>
+<div style="text-align:center;padding:0px;font-size: 14px;margin-bottom: 50px;">——=== <b>访问 <a href="http://coolshell.cn/404/" target="_blank">酷壳404页面</a> 寻找遗失儿童。</b> ===——</div>
+<div style="clear:both; margin-top:5px; margin-bottom:5px;"></div><div style="float:left"><!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<a class="jiathis_button_tsina" title="分享到新浪微博"><span class="jiathis_txt jtico jtico_tsina"></span></a>
+<a class="jiathis_button_tqq" title="分享到腾讯微博"><span class="jiathis_txt jtico jtico_tqq"></span></a>
+<a class="jiathis_button_tsohu" title="分享到搜狐微博"><span class="jiathis_txt jtico jtico_tsohu"></span></a>
+<a class="jiathis_button_t163" title="分享到网易微博"><span class="jiathis_txt jtico jtico_t163"></span></a>
+<a class="jiathis_button_douban" title="分享到豆瓣"><span class="jiathis_txt jtico jtico_douban"></span></a>
+<a class="jiathis_button_renren" title="分享到人人网"><span class="jiathis_txt jtico jtico_renren"></span></a>
+<a class="jiathis_button_zhuaxia"></a>
+<a class="jiathis_button_fanfou" title="分享到饭否"><span class="jiathis_txt jtico jtico_fanfou"></span></a>
+<a class="jiathis_button_twitter" title="分享到Twitter"><span class="jiathis_txt jtico jtico_twitter"></span></a>
+<a class="jiathis_button_fb" title="分享到Facebook"><span class="jiathis_txt jtico jtico_fb"></span></a>
+<a class="jiathis_button_gmail" title="分享到Gmail邮箱"><span class="jiathis_txt jtico jtico_gmail"></span></a>
+<a class="jiathis_button_linkedin" title="分享到LinkedIn"><span class="jiathis_txt jtico jtico_linkedin"></span></a>
+<a class="jiathis_button_friendfeed" title="分享到FriendFeed"><span class="jiathis_txt jtico jtico_friendfeed"></span></a>
+<a class="jiathis_button_digg" title="分享到Digg"><span class="jiathis_txt jtico jtico_digg"></span></a>
+<a href="http://www.jiathis.com/share?uid=1541368" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"><span class="jiathis_button_expanded jiathis_counter jiathis_bubble_style" id="jiathis_counter_40" title="累计分享197次">197</span></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+	data_track_clickback:true,
+	summary:"",
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="./从Code Review 谈如何做技术_files/jia.js" charset="utf-8"></script><script type="text/javascript" src="./从Code Review 谈如何做技术_files/plugin.client.js" charset="utf-8"></script><div style="position:absolute;width:0px;height:0px;"><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="0" height="0" id="JIATHISSWF" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab"><param name="allowScriptAccess" value="always"><param name="swLiveConnect" value="true"><param name="movie" value="http://www.jiathis.com/code/swf/m.swf"><param name="FlashVars" value="z=a"><embed name="JIATHISSWF" src="http://www.jiathis.com/code/swf/m.swf" flashvars="z=a" width="0" height="0" allowscriptaccess="always" swliveconnect="true" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"></object></div>
+<!-- JiaThis Button END --></div><div style="clear:both; margin-top:5px; margin-bottom:5px;"></div>			<div class="fixed"></div>
+		</div>
+		<div class="under">
+			<span class="categories">分类: </span><span><a href="http://coolshell.cn/category/%e6%8a%80%e6%9c%af%e7%ae%a1%e7%90%86" title="查看技术管理中的全部文章" rel="category tag">技术管理</a>, <a href="http://coolshell.cn/category/process" title="查看流程方法中的全部文章" rel="category tag">流程方法</a></span>			<span class="tags">标签: </span><span><a href="http://coolshell.cn/tag/code-review" rel="tag">Code Review</a>, <a href="http://coolshell.cn/tag/programmer" rel="tag">Programmer</a>, <a href="http://coolshell.cn/tag/%e7%a8%8b%e5%ba%8f%e5%91%98" rel="tag">程序员</a></span>		</div>
+<div id="post-ratings-11432" class="post-ratings" itemscope="" itemtype="http://schema.org/Article" data-nonce="ea6da31ef9"><img id="rating_11432_1" src="./从Code Review 谈如何做技术_files/rating_on.gif" alt="好烂啊" title="好烂啊" onmouseover="current_rating(11432, 1, &#39;好烂啊&#39;);" onmouseout="ratings_off(4.8, 5, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;"><img id="rating_11432_2" src="./从Code Review 谈如何做技术_files/rating_on.gif" alt="有点差" title="有点差" onmouseover="current_rating(11432, 2, &#39;有点差&#39;);" onmouseout="ratings_off(4.8, 5, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;"><img id="rating_11432_3" src="./从Code Review 谈如何做技术_files/rating_on.gif" alt="凑合看看" title="凑合看看" onmouseover="current_rating(11432, 3, &#39;凑合看看&#39;);" onmouseout="ratings_off(4.8, 5, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;"><img id="rating_11432_4" src="./从Code Review 谈如何做技术_files/rating_on.gif" alt="还不错" title="还不错" onmouseover="current_rating(11432, 4, &#39;还不错&#39;);" onmouseout="ratings_off(4.8, 5, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;"><img id="rating_11432_5" src="./从Code Review 谈如何做技术_files/rating_half.gif" alt="很精彩" title="很精彩" onmouseover="current_rating(11432, 5, &#39;很精彩&#39;);" onmouseout="ratings_off(4.8, 5, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;"> (<strong>108</strong> 人打了分，平均分： <strong>4.83</strong> )<br><span class="post-ratings-text" id="ratings_11432_text"></span><meta itemprop="name" content="从Code Review 谈如何做技术"><meta itemprop="description" content="（这篇文章缘由我的微博，我想多说一些，有些杂乱，想到哪写到哪）
+
+这两天，在微博上表达了一下Code Review的重要性。因为翻看了阿里内部的Review Board上的记录，从上面发现Code Review做得好的是一些比较偏技术的团队，而偏业务的技术团队基本上没有看到Code Review的记录。当然，这并不能说没有记录他们就没有做Code Review，于是，我就问了一下以前在业务团队..."><meta itemprop="url" content="http://coolshell.cn/articles/11432.html"><div style="display: none;" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating"><meta itemprop="bestRating" content="5"><meta itemprop="ratingValue" content="4.83"><meta itemprop="ratingCount" content="108"></div></div>
+<div id="post-ratings-11432-loading" class="post-ratings-loading"><img src="./从Code Review 谈如何做技术_files/loading.gif" width="16" height="16" alt="Loading ..." title="Loading ..." class="post-ratings-image">&nbsp;Loading ...</div>
+ 
+	</div>
+
+	<!-- related posts START -->
+	<div id="related_posts">
+<div class="wp_rp_wrap  wp_rp_plain" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp"><li data-position="0" data-poid="in-4875" data-post-type="none"><small class="wp_rp_publish_date">2011年06月20日</small> <a href="http://coolshell.cn/articles/4875.html" class="wp_rp_title">一个空格引发的惨剧</a></li><li data-position="1" data-poid="in-8170" data-post-type="none"><small class="wp_rp_publish_date">2012年08月27日</small> <a href="http://coolshell.cn/articles/8170.html" class="wp_rp_title">一次Ajax查错的经历</a></li><li data-position="2" data-poid="in-8387" data-post-type="none"><small class="wp_rp_publish_date">2012年10月14日</small> <a href="http://coolshell.cn/articles/8387.html" class="wp_rp_title">Bret Victor – Learnable Programming</a></li><li data-position="3" data-poid="in-7048" data-post-type="none"><small class="wp_rp_publish_date">2012年04月17日</small> <a href="http://coolshell.cn/articles/7048.html" class="wp_rp_title">挑战无处不在</a></li><li data-position="4" data-poid="in-8138" data-post-type="none"><small class="wp_rp_publish_date">2012年08月22日</small> <a href="http://coolshell.cn/articles/8138.html" class="wp_rp_title">为什么我反对纯算法面试题</a></li><li data-position="5" data-poid="in-6994" data-post-type="none"><small class="wp_rp_publish_date">2012年04月11日</small> <a href="http://coolshell.cn/articles/6994.html" class="wp_rp_title">我们需要专职的QA吗？</a></li><li data-position="6" data-poid="in-7126" data-post-type="none"><small class="wp_rp_publish_date">2012年04月19日</small> <a href="http://coolshell.cn/articles/7126.html" class="wp_rp_title">这到底是谁之错？</a></li><li data-position="7" data-poid="in-8088" data-post-type="none"><small class="wp_rp_publish_date">2012年08月16日</small> <a href="http://coolshell.cn/articles/8088.html" class="wp_rp_title">对技术的态度</a></li></ul></div></div>
+</div><div class="fixed"></div>	<!-- related posts END -->
+
+	<script type="text/javascript" src="./从Code Review 谈如何做技术_files/comment.js"></script>
+
+
+
+<div id="comments">
+
+<div id="cmtswitcher">
+			<a id="commenttab" class="curtab" href="javascript:void(0);" onclick="MGJS.switchTab(&#39;thecomments,commentnavi&#39;, &#39;thetrackbacks&#39;, &#39;commenttab&#39;, &#39;curtab&#39;, &#39;trackbacktab&#39;, &#39;tab&#39;);">评论 (146)</a>
+		<a id="trackbacktab" class="tab" href="javascript:void(0);" onclick="MGJS.switchTab(&#39;thetrackbacks&#39;, &#39;thecomments,commentnavi&#39;, &#39;trackbacktab&#39;, &#39;curtab&#39;, &#39;commenttab&#39;, &#39;tab&#39;);">Trackbacks (11)</a>
+				<span class="addcomment"><a href="http://coolshell.cn/articles/11432.html#respond">发表评论</a></span>
+				<span class="addtrackback"><a href="http://coolshell.cn/articles/11432.html/trackback">Trackback</a></span>
+		<div class="fixed"></div>
+</div>
+
+<div id="commentlist">
+	<!-- comments START -->
+	<ol id="thecomments">
+		<li class="comment regularcomment" id="comment-1441439">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/eac9046d4d3fcb13fb55ae0f85c53575" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<a id="commentauthor-1441439" class="url" href="http://www.tektea.com/" rel="external nofollow">
+				
+				茶话汇 – IT运维那些事儿
+									</a>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年4月20日22:01					 | <a href="http://coolshell.cn/articles/11432.html#comment-1441439">#1</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1441439&#39;, &#39;comment-1441439&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1441439&#39;, &#39;comment-1441439&#39;, &#39;commentbody-1441439&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1441439">
+					<p>Code review是开发过程中的基本环节，但这个最多在迭代期间能坚持，但所有的环节在交付压力面前都是会妥协的。。。说白了，review最后就变成了走过场而已。</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1441935">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/c7bf3a58d0870709b86997d37b474d5e" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1441935">
+				
+				zyj
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年4月21日12:13					 | <a href="http://coolshell.cn/articles/11432.html#comment-1441935">#2</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1441935&#39;, &#39;comment-1441935&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1441935&#39;, &#39;comment-1441935&#39;, &#39;commentbody-1441935&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1441935">
+					<p>感触最深的是整合阿里云api那段，工作中的得到一个感触是完成功能并不是要把所有事情都自己做完，而是想明白如何做完做好。把属于其他团队的问题反馈回去，而不是自己不停的做补丁，帮别人遮盖错误</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1442038">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/a727e1c23283a3bbf913154c56831f6a" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1442038">
+				
+				inch
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年4月21日15:04					 | <a href="http://coolshell.cn/articles/11432.html#comment-1442038">#3</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1442038&#39;, &#39;comment-1442038&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1442038&#39;, &#39;comment-1442038&#39;, &#39;commentbody-1442038&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1442038">
+					<p>你也是在吐槽，土鳖就是要为了这些东西奔波，土豪才不管你在说啥。什么是code不需要明白!生活很逍遥</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1442524">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/6e6f838fe6f7e1cc18bf990f0ecbd35e" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1442524">
+				
+				zixian
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年4月21日23:21					 | <a href="http://coolshell.cn/articles/11432.html#comment-1442524">#4</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1442524&#39;, &#39;comment-1442524&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1442524&#39;, &#39;comment-1442524&#39;, &#39;commentbody-1442524&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1442524">
+					<p>我觉得code review不仅仅是团队间，而且应该是在个人，代码是要推敲的，当然让别人review也是使得自己快速成长的一条捷径。那些无视code review的人，我只能说，道不同不相为谋。<br>
+当然我觉得楼主后来关注的焦点其实不是code review，而是设计评审的事情了，我倒觉得可以另起一篇文章来单独探讨。<br>
+最后我觉得，任何公司，事实胜于雄辩，只要坚持自己的原则，如果能够通过产品证明是对的，那我觉得自然会让那些jjww的人闭嘴。楼主大可不必同他们一般见识，唯一需要提防的是他们的言行可能会扭曲下一代对于相关问题的看法</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1443131">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/c98cfe6af7148ec09de465803e23b2e6" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1443131">
+				
+				vivi
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年4月22日17:55					 | <a href="http://coolshell.cn/articles/11432.html#comment-1443131">#5</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1443131&#39;, &#39;comment-1443131&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1443131&#39;, &#39;comment-1443131&#39;, &#39;commentbody-1443131&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1443131">
+					<p>120个赞</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1443283">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/fb65badd5d67758491d30874de7c96bb" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1443283">
+				
+				foollz
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年4月22日22:36					 | <a href="http://coolshell.cn/articles/11432.html#comment-1443283">#6</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1443283&#39;, &#39;comment-1443283&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1443283&#39;, &#39;comment-1443283&#39;, &#39;commentbody-1443283&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1443283">
+					<p>禁不住赞！</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1444893">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/7e6ee54b7530811ab792b5a265afd20c" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1444893">
+				
+				Birdonekk
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年4月24日09:53					 | <a href="http://coolshell.cn/articles/11432.html#comment-1444893">#7</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1444893&#39;, &#39;comment-1444893&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1444893&#39;, &#39;comment-1444893&#39;, &#39;commentbody-1444893&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1444893">
+					<p>运维一线码农，句句说到心坎儿上。对代码负责，就是对自己负责。</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1445121">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/dc32b21cbd4e9cd53b9da332b2f8677c" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1445121">
+				
+				一然然
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年4月24日16:03					 | <a href="http://coolshell.cn/articles/11432.html#comment-1445121">#8</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1445121&#39;, &#39;comment-1445121&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1445121&#39;, &#39;comment-1445121&#39;, &#39;commentbody-1445121&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1445121">
+					<p>首先声明，我是特别支持code review，也一直这么执行，只是在执行过程中，多少感觉很无力。我来说说这骨感的现实：<br>
+1、时间成本：<br>
+但凡做个开发的人都知道，需求的变化，人员变化，配置变化，都可能影响整个软件开发的周期，各个阶段的时间都有可能被压缩，需求分析不能少，coding不能少，联调不能少，测试不能少，那最看不出任何踪迹和效益的code review显然最容易被忽略，很明显，如果把几十万行代码都看完，或许能发现问题或许发现不了问题（跟能力有关），结果不可预知，却消耗的研发工时，当项目经理不够强势和足够说服力的情况下，老板很容易砍掉这部分工时。<br>
+2、能力成本：<br>
+团队里，一般情况，会有不同级别的程序员，高中低，项目经理review高级，高级review中级的，中级review低级的，如果作为一种考核制度制定下来，查出多少有问题的code，做一些惩罚，皆大欢喜。现实情况下，高级程序员一个两个，中级或者初级一大堆，项目经理很忙，高级稀少，剩下的中级和初级，在没培训和大量自我学习，又能期待他们能检查出多少代码的问题？</p>
+<p>3、执行效果：<br>
+一个有效的code review必须是有法可依，有据可查，一个研发团队，针对不同语言编写的软件、不同类型的项目、是否依赖其他的系统，设计不同的code review标准，code review作为一种规则和需求，需要持续更新维护，试问，这样的制度随着时间推移，人员更替，人员培训成本，如果不作为一种KPI考核标准，会有多少团队能坚持下来而且执行有效？</p>
+<p>4、适用范围：<br>
+code review是不是所有的项目都要做，作为个人能力和基本职业要求，当然没问题，我列举几种场景，你看看那个更有优先级来做code review？<br>
+1）、计算机专业研究生毕业设计<br>
+2）、企业POC演示软件<br>
+3）、日访问量百亿的网站<br>
+4）、日交易量千万商务交易平台<br>
+显然各个场景对代码的质量要求不一样，决策者对产品的品质要求也不一样，谁都能看出来那些产品更应该做code review。</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1445470">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/29634bfa78f69a7bbbde5dcc13c6dbc2" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<a id="commentauthor-1445470" class="url" href="http://www.shiyanjun.cn/" rel="external nofollow">
+				
+				Shirdrn
+									</a>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年4月24日22:45					 | <a href="http://coolshell.cn/articles/11432.html#comment-1445470">#9</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1445470&#39;, &#39;comment-1445470&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1445470&#39;, &#39;comment-1445470&#39;, &#39;commentbody-1445470&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1445470">
+					<p>在什么样的大环境下，就应该做什么样的事情，脱离了这样一个上下文，也只能是向往一下，说说而已。不过要经常地审视自我，铭记自己本不该忘记的东西就可以了。</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1447480">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/182c601f9a99b257773201ca3e060dc3" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1447480">
+				
+				steven
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年4月27日13:02					 | <a href="http://coolshell.cn/articles/11432.html#comment-1447480">#10</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1447480&#39;, &#39;comment-1447480&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1447480&#39;, &#39;comment-1447480&#39;, &#39;commentbody-1447480&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1447480">
+					<p>守护心中那一片净土？</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1447766">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/dad69d9ad2ed0d0d4ff95a4a9ef403eb" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1447766">
+				
+				oldmeng
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年4月27日22:23					 | <a href="http://coolshell.cn/articles/11432.html#comment-1447766">#11</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1447766&#39;, &#39;comment-1447766&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1447766&#39;, &#39;comment-1447766&#39;, &#39;commentbody-1447766&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1447766">
+					<p>外和内的区别：<br>
+外：决定一个事很快，办这个事要求细致到无法言语<br>
+内：决定一个事很慢，办这个事要求时间短到无法理解！</p>
+<p>从程序员作出来的，谁不是这么出来的？<br>
+你经历过，就不要站在岸上指指点点了，在水里的什么心情？<br>
+有能力就为大环境的改善出点力吧！</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1447771">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/dad69d9ad2ed0d0d4ff95a4a9ef403eb" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1447771">
+				
+				oldmeng
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年4月27日22:32					 | <a href="http://coolshell.cn/articles/11432.html#comment-1447771">#12</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1447771&#39;, &#39;comment-1447771&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1447771&#39;, &#39;comment-1447771&#39;, &#39;commentbody-1447771&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1447771">
+					<p>同意8楼，作为个人能力的提升没问题，也是对自己负责，当然是在“空闲时间”，别挤占上班时间，不允许的。<br>
+牲口？你和这时代一样，越来越浮躁了。<br>
+出国吧，比较适合你…</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1449297">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/dc95cf45193a70fffd70ef3ccca6f332" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1449297">
+				
+				jangwoohyuk
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年4月29日13:06					 | <a href="http://coolshell.cn/articles/11432.html#comment-1449297">#13</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1449297&#39;, &#39;comment-1449297&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1449297&#39;, &#39;comment-1449297&#39;, &#39;commentbody-1449297&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1449297">
+					<p>我非常赞成你的观点，在上次我们团队说接下来我们团队建设和学习新的方向和知识时，我就推荐了CR，可是另外一个同学就觉得枯燥，没用等等；可是我觉得他对CR认识的好短浅。很囧。。。</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1453563">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/1bd487a5fabedf0fdcc534c26530bf16" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1453563">
+				
+				zhangyafeikimi
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年5月5日09:50					 | <a href="http://coolshell.cn/articles/11432.html#comment-1453563">#14</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1453563&#39;, &#39;comment-1453563&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1453563&#39;, &#39;comment-1453563&#39;, &#39;commentbody-1453563&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1453563">
+					<p>“当你忙得跟牲口一样，你应该停下来，问一下自己，自己成为牲口的原因，是不是就是因为自己做事时候像就牲口一样思考？” 赞</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1453593">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/dc6cf2e27adfc07241d7c534feb73375" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<a id="commentauthor-1453593" class="url" href="http://everet.org/" rel="external nofollow">
+				
+				Stupid ET
+									</a>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年5月5日10:14					 | <a href="http://coolshell.cn/articles/11432.html#comment-1453593">#15</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1453593&#39;, &#39;comment-1453593&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1453593&#39;, &#39;comment-1453593&#39;, &#39;commentbody-1453593&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1453593">
+					<p>非常赞同~</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1453605">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/7320a186d326c60aceb19d51bb4f2628" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1453605">
+				
+				shady
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年5月5日10:33					 | <a href="http://coolshell.cn/articles/11432.html#comment-1453605">#16</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1453605&#39;, &#39;comment-1453605&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1453605&#39;, &#39;comment-1453605&#39;, &#39;commentbody-1453605&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1453605">
+					<p>Code Review的确很重要，是一个不断否定自己和不断重新认识自己的过程，我本人的很多收获都是来自Code Review。</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1453740">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/1ebeb61775c027271f9e795d89860e0d" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1453740">
+				
+				QJXKID
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年5月5日16:07					 | <a href="http://coolshell.cn/articles/11432.html#comment-1453740">#17</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1453740&#39;, &#39;comment-1453740&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1453740&#39;, &#39;comment-1453740&#39;, &#39;commentbody-1453740&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1453740">
+					<p>太赞了，我今天又多了一个偶像。。。</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1455027">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/c338157dd3ea1e386c2e0a0edf53a41a" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1455027">
+				
+				invalid
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年5月7日12:06					 | <a href="http://coolshell.cn/articles/11432.html#comment-1455027">#18</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1455027&#39;, &#39;comment-1455027&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1455027&#39;, &#39;comment-1455027&#39;, &#39;commentbody-1455027&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1455027">
+					<p>当年偶找的第一份工作，那个奇葩公司连设计都不做……</p>
+<p>但我仍然坚持先出文档后编码。因为再明显不过了，多花几天时间做设计，在把一切都想通、安排就绪之前不编码，原本几个月都做不完的东西，往往只要几天就能搞定，而且很容易就能0 bug。</p>
+<p>后来，这个项目做到了“客户提的任何合理需求，都能在一天之内完成”。</p>
+<p>等我离开之后，他们5年都没找到能接下这个项目维护任务的人，居然又打电话来了。只是我那时的薪水，已经不是他们出得起的了。</p>
+<p>——————————————————————</p>
+<p>国人的一大劣根性，就是轻视技术。这种轻视已经渗透到了骨子里，以至于很多搞技术的人本身就轻视技术。</p>
+<p>正是这种轻视导致各种不思进取的奇葩。他们拿“能够不动脑子、直接堆砌代码实现需求”当作终极追求。</p>
+<p>你说“稍微做点设计，就能以小得多得多的代价完成”？呵呵……你能保证总能这样吗？你敢保证没有“万一”？</p>
+<p>更甚者，我见过这样的同事：他说，“晚上/星期天加班……最起码，万一捅了漏子……能证明你的态度；如果不加班，出了问题你可无话可说”。</p>
+<p>——我的看法是：<br>
+——首先，我知道自己能拿什么钱，不能拿什么钱；<br>
+——其次，拿什么钱，我就做什么事，超过能力范围我不接；<br>
+——第三，有把握接我就有把握做好，做不好说明我太高估自己，说明我不能胜任这个职位，那么肯定早走早安心，省得闹得两边都不好看；<br>
+——最后，可能的风险我会事先列出来、并尽力控制。但如果真规避不了，那就说明这种风险是必须承担的成本之一，只能请公司体谅。如果不肯体谅，那我也觉得这种公司没有呆下去的价值。<br>
+——至于加班……不好意思，加班说明我对工作量估计不足，属于能力问题。不去追求工程质量、反而用加班来假装“敬业”，才是态度问题。</p>
+<p>————————————————————</p>
+<p>另一家公司。每次做计划都喜欢追求“一星期”，时间越紧越好；然后每次都做成几个月甚至半年、一年。</p>
+<p>最后，他们程序的质量……只能demo forever</p>
+<p>当他们说什么“一星期就好”时，我的回答是“我从学习GTK到用它写出一个钻石迷城只用了三天；但那是因为经理给了一星期的时间供我学习GTK。如果只给我三天就想要钻石迷城，那么很可能一星期后，连GTK是什么我都说不清”。</p>
+<p>————————————————————————————————</p>
+<p>正常情况下，在软件开发这件事上，公司的利益其实和个人的利益是完全一致的： 致力于做精品、致力于写出更高质量的代码，对公司价值、员工价值，都是一种提升。</p>
+<p>而且，如我之前提到的，高质量代码带来的，常常是10倍以上的高效率，而不是相反。</p>
+<p>如果两者目标出现了偏差，那么就说明要么是员工不上进，要么是公司不懂技术。</p>
+<p><a href="http://www.mengstupiditis.com/2011/06/do-right-thing-wait-to-get-fired.html" rel="nofollow">http://www.mengstupiditis.com/2011/06/do-right-thing-wait-to-get-fired.html</a></p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1456456">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/ae6b8fbd4fe2b162c72090612369604b" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1456456">
+				
+				xocoder
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年5月9日12:36					 | <a href="http://coolshell.cn/articles/11432.html#comment-1456456">#19</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1456456&#39;, &#39;comment-1456456&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1456456&#39;, &#39;comment-1456456&#39;, &#39;commentbody-1456456&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1456456">
+					<p>我从两年多以前开始接触code review，当时本觉得没用，后来才发现其重要性，如楼主所说，如果没有code review的习惯，简直不敢想象。</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1457469">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/06e06ec457d0996f521798636e5e9c8d" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1457469">
+				
+				小7
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年5月10日11:12					 | <a href="http://coolshell.cn/articles/11432.html#comment-1457469">#20</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1457469&#39;, &#39;comment-1457469&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1457469&#39;, &#39;comment-1457469&#39;, &#39;commentbody-1457469&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1457469">
+					<p>这篇文章看下来很畅快，基本是全同意。少有的看楼上文章没有质疑的。这篇写的非常好。</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1457860">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/28fafceb9c7a421ae45e7068bbd7d3fa" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1457860">
+				
+				neverend
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年5月10日21:14					 | <a href="http://coolshell.cn/articles/11432.html#comment-1457860">#21</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1457860&#39;, &#39;comment-1457860&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1457860&#39;, &#39;comment-1457860&#39;, &#39;commentbody-1457860&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1457860">
+					<p>写的太好了，我就是文章中说的忙的像牲口一样的苦逼开发。顶一下这句话, “我知道你们会因为骨感的现实而妥协，但是我希望你们就算在现实中妥协了也要在内心中坚持尽可能高的标准”。</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1460140">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/6ddc48890b90f801cd377e4f8902b78f" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1460140">
+				
+				廷之
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年5月13日07:01					 | <a href="http://coolshell.cn/articles/11432.html#comment-1460140">#22</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1460140&#39;, &#39;comment-1460140&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1460140&#39;, &#39;comment-1460140&#39;, &#39;commentbody-1460140&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1460140">
+					<p>“我心里非常不认同这样的观点，我觉得我是程序员，我是工程师，就像医生一样，不是把病人医好就好了，还要对病人的长期健康负责。”  以前,我带我家闺女到武汉的同济医院去看病,发现那些返聘的,年龄70+的医生的号,总挂不到,她们看病总是开最简单的药,一般不给小孩打针. 当时我就觉得我们程序员其实和医生有诸多相似之处,医生是越老越知吃香,而程序员是30岁现象.值得我们思考.</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1460563">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/5c0c0dad51fccad9dfcbca95031c8285" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1460563">
+				
+				孤独者
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年5月13日17:51					 | <a href="http://coolshell.cn/articles/11432.html#comment-1460563">#23</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1460563&#39;, &#39;comment-1460563&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1460563&#39;, &#39;comment-1460563&#39;, &#39;commentbody-1460563&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1460563">
+					<p>在百度，可能是面上的，也可能是我只待过的两个team是这种情况：<br>
+1、甭说review了，一直乱，从未治理；<br>
+2、百度的高大上，并不代表每个深处其中的个体在个人能力和代码水平上同样高大上；<br>
+3、作为team中服务治理和code review的推动者，逐渐感觉到各种疲惫，各种对自身价值的怀疑。。。</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1461630">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/fac1451210a92fdd57bfbc37aff82a10" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1461630">
+				
+				jameswxx
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年5月15日09:29					 | <a href="http://coolshell.cn/articles/11432.html#comment-1461630">#24</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1461630&#39;, &#39;comment-1461630&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1461630&#39;, &#39;comment-1461630&#39;, &#39;commentbody-1461630&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1461630">
+					<p>非常赞同耗子的看法，我一直认为，反对做codereview的工程师一定不是对自己有高标准的人。阿里很多业务线的代码烂得一塌糊涂，没时间做codereview和没必要做codereview根本不是一回事，好多人没认真看完耗子的唠叨就开骂。</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1461780">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/16f3771dddc807d7eef8789c067d8baf" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1461780">
+				
+				勇
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年5月15日14:09					 | <a href="http://coolshell.cn/articles/11432.html#comment-1461780">#25</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1461780&#39;, &#39;comment-1461780&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1461780&#39;, &#39;comment-1461780&#39;, &#39;commentbody-1461780&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1461780">
+					<p>CodeReview无疑是很重要的，而且我觉得不想做的人都是自私的人：“反正这个烂滩子以后会交给别人的”<br>
+我们总是在抱怨前人留下的代码太烂，同时自己又在不遗余力地生产这样的代码。</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1462465">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/ae8d80fdefff7d9844e0a331bdcc1bec" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<a id="commentauthor-1462465" class="url" href="http://pbucpub.com/" rel="external nofollow">
+				
+				admin
+									</a>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年5月16日13:08					 | <a href="http://coolshell.cn/articles/11432.html#comment-1462465">#26</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1462465&#39;, &#39;comment-1462465&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1462465&#39;, &#39;comment-1462465&#39;, &#39;commentbody-1462465&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1462465">
+					<p>忽悠，接着忽悠！！！</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1464703">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/cf7f081b79f9f8dc57206463e6646889" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1464703">
+				
+				alimuya
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年5月19日14:02					 | <a href="http://coolshell.cn/articles/11432.html#comment-1464703">#27</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1464703&#39;, &#39;comment-1464703&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1464703&#39;, &#39;comment-1464703&#39;, &#39;commentbody-1464703&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1464703">
+					<p>你的怨气太重了,老兄. coding重要,codingReview也重要,但是都不如一颗平和心重要. 本来就没有一个”绝对”的事情, 不同的项目,不同的高度,做不同的要求. 欧美人是很职业的,他们的基因就是如此,但是很难套用在我们的文化背景下. 己所甚欲,难施于人.</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1467003">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/871e984c1de33f97f422dca6704df628" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1467003">
+				
+				jellyfish
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年5月22日16:45					 | <a href="http://coolshell.cn/articles/11432.html#comment-1467003">#28</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1467003&#39;, &#39;comment-1467003&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1467003&#39;, &#39;comment-1467003&#39;, &#39;commentbody-1467003&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1467003">
+					<p>听命于人，或听从内心；<br>
+不必赞同，更不必攻击；<br>
+互联网精神本就是一场革命，新的世界必然革掉腐朽；<br>
+众生本就平等，互联网创造自我管理的新格局。</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1468381">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/629c44b4ae68943748a5cbb92c93b755" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1468381">
+				
+				愚
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年5月24日11:12					 | <a href="http://coolshell.cn/articles/11432.html#comment-1468381">#29</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1468381&#39;, &#39;comment-1468381&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1468381&#39;, &#39;comment-1468381&#39;, &#39;commentbody-1468381&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1468381">
+					<p>在我们的项目遇到的问题是<br>
+需求不透明，每个人都独立负责一个业务，design没有一起review, 开发业没有peer coding，在code review的时候，因为参与review的其他人不了解需求，所以只能看出来一些类似coding style，NPE, 最多就是这代码是否线程安全。</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1471766">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/b38ae6e712d2c81e88cdc48b55e6a12d" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<a id="commentauthor-1471766" class="url" href="http://stackvoid.com/" rel="external nofollow">
+				
+				stackvoid
+									</a>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年5月29日09:32					 | <a href="http://coolshell.cn/articles/11432.html#comment-1471766">#30</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1471766&#39;, &#39;comment-1471766&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1471766&#39;, &#39;comment-1471766&#39;, &#39;commentbody-1471766&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1471766">
+					<p>不能同意的更多！</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1483036">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/6116206f29f0bbf1929840fef8ecd6d5" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1483036">
+				
+				dongjun
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年6月17日22:07					 | <a href="http://coolshell.cn/articles/11432.html#comment-1483036">#31</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1483036&#39;, &#39;comment-1483036&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1483036&#39;, &#39;comment-1483036&#39;, &#39;commentbody-1483036&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1483036">
+					<p>说的好。</p>
+<p>不过时间不够的问题，lz分析的简单化了，毕竟不是所有的需求都能够象你这样来简化的。</p>
+<p>另，赞一下这个：<br>
+2）产品经理也要管理和教育的。你要告诉你的产品经理：“你是一个好的产品经理，因为你不但对用户把握得很好，也会对软件工艺把握得很好。你不但会开出外在的功能性需求，也同样会开出内在的让软件系统更完善的非功能性需求。你不是在迁就用户，而是引导用户。你不会无限制地加功能，而是把握产品灵魂控制并简化功能。你会为自己要做的和不做东西的感到同样的自豪。”你要告诉你的产品经理：“做一个半成品不如做好半年产品”</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1484777">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/43f1ae10e10a8488c30d4ee19700df4c" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1484777">
+				
+				cxntsh
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年6月21日10:23					 | <a href="http://coolshell.cn/articles/11432.html#comment-1484777">#32</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1484777&#39;, &#39;comment-1484777&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1484777&#39;, &#39;comment-1484777&#39;, &#39;commentbody-1484777&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1484777">
+					<p>这才是真正的IT人。。。。。。</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1484815">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/5659e37c133656b671dab10cd9b057f2" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1484815">
+				
+				Suarez
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年6月21日12:26					 | <a href="http://coolshell.cn/articles/11432.html#comment-1484815">#33</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1484815&#39;, &#39;comment-1484815&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1484815&#39;, &#39;comment-1484815&#39;, &#39;commentbody-1484815&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1484815">
+					<p><a href="http://coolshell.cn/articles/11432.html#comment-1421915" rel="nofollow">@Ken </a><br>
+比较赞同你提出的疑问，<br>
+1、聚石塔的案例就是在阿里云已经有功能的前提下缩减需求的，但是大部分业务可能没有这样的优势，这个案例其实想表达的意思是让工程师去拒绝需求，但是在快速迭代的电商公司的业务开发里，这个很难做到，作者并没有告诉应该怎样做。<br>
+2、Code review当然是有意义的，但是更多觉得是“鸡肋”，因为很多bug不是凭肉眼能看出来的，review的更多的是编程习惯（异常的捕获处理等）和代码风格，而代码质量还是得依赖工程师的素质、单元测试、功能测试、性能测试等；<br>
+PS：觉得作者面对质疑的态度并不友好，你是Coolshell的站长也是微博大V，是公众人物，应该能很好地面对和回答质疑的。。。我们不反对Code review的好处，但是为了说它的好处而举的例子并没有说服力。</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1485655">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/2344af37e0e4d9b3fcece8c249878cd1" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1485655">
+				
+				王冬冬冬不烦恼
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年6月23日20:28					 | <a href="http://coolshell.cn/articles/11432.html#comment-1485655">#34</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1485655&#39;, &#39;comment-1485655&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1485655&#39;, &#39;comment-1485655&#39;, &#39;commentbody-1485655&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1485655">
+					<p>就是在说我们当前的现状。。。受教了。。。</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1488326">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/eb684a128837367a661dafdd2dca25f9" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1488326">
+				
+				xcy7703
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年6月29日22:27					 | <a href="http://coolshell.cn/articles/11432.html#comment-1488326">#35</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1488326&#39;, &#39;comment-1488326&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1488326&#39;, &#39;comment-1488326&#39;, &#39;commentbody-1488326&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1488326">
+					<p>收益匪浅 codereview的必要性毋庸置疑！</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1490123">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/e68c9fa3a16006d1c9982b235bd45628" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1490123">
+				
+				anan
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年7月3日11:47					 | <a href="http://coolshell.cn/articles/11432.html#comment-1490123">#36</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1490123&#39;, &#39;comment-1490123&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1490123&#39;, &#39;comment-1490123&#39;, &#39;commentbody-1490123&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1490123">
+					<p>耗子哥带着amazon的文化去阿里遇到了很大冲击！</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1490218">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/ea6837e0c77e1bf9103e960e7382cb40" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1490218">
+				
+				a_lee
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年7月3日16:56					 | <a href="http://coolshell.cn/articles/11432.html#comment-1490218">#37</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1490218&#39;, &#39;comment-1490218&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1490218&#39;, &#39;comment-1490218&#39;, &#39;commentbody-1490218&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1490218">
+					<p>谢谢耗叔的唠叨</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1494735">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/85b5fa780e6dc9e90b0398ba310512b8" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<a id="commentauthor-1494735" class="url" href="http://www.3gcnbeta.com/" rel="external nofollow">
+				
+				北漂IT民工
+									</a>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年7月13日09:33					 | <a href="http://coolshell.cn/articles/11432.html#comment-1494735">#38</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1494735&#39;, &#39;comment-1494735&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1494735&#39;, &#39;comment-1494735&#39;, &#39;commentbody-1494735&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1494735">
+					<p>好与能，是两回事。<br>
+因为觉得好而强迫别人接受就是另一回事了。<br>
+Code Review的好处大家都接受，但是好不代表就能做到。<br>
+人人都觉得长的漂亮，长的帅好。但是你能做到吗？<br>
+做事应该遵从实际，教条会害死人。<br>
+理论的研究与实际的情况是要做严格的区分的。<br>
+否则就只有科学家，没有工程师了。<br>
+工程师应该更加务实。<br>
+过份追求Elegant就是浪费生命。<br>
+我支持那些反对你的人。</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1494887">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/554698a55794478d886008673c6b8c67" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<a id="commentauthor-1494887" class="url" href="http://stbioinf.com/" rel="external nofollow">
+				
+				YellowTree
+									</a>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年7月13日19:44					 | <a href="http://coolshell.cn/articles/11432.html#comment-1494887">#39</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1494887&#39;, &#39;comment-1494887&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1494887&#39;, &#39;comment-1494887&#39;, &#39;commentbody-1494887&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1494887">
+					<p>能学到横多东西！</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1499131">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/693764eca6cc4aa7272770ce84a938a4" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<a id="commentauthor-1499131" class="url" href="http://www.vito16.com/" rel="external nofollow">
+				
+				Vito
+									</a>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年7月22日19:05					 | <a href="http://coolshell.cn/articles/11432.html#comment-1499131">#40</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1499131&#39;, &#39;comment-1499131&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1499131&#39;, &#39;comment-1499131&#39;, &#39;commentbody-1499131&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1499131">
+					<p>其实我觉得Code review真的还是有必要的，作为一个健壮的系统，以前的项目就是因为没有Code review，真的看着有些代码想吐</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1499350">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/63d1e9d50a1936b6ef4b0784ece92d79" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1499350">
+				
+				enjolras
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年7月23日09:37					 | <a href="http://coolshell.cn/articles/11432.html#comment-1499350">#41</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1499350&#39;, &#39;comment-1499350&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1499350&#39;, &#39;comment-1499350&#39;, &#39;commentbody-1499350&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1499350">
+					<p>再读了一遍，很有收获。<br>
+不管大环境如何，得对自己负责。</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1504581">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/af102b5492f93d1a4d365a70870867d4" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1504581">
+				
+				beitiandijun
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年7月31日09:09					 | <a href="http://coolshell.cn/articles/11432.html#comment-1504581">#42</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1504581&#39;, &#39;comment-1504581&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1504581&#39;, &#39;comment-1504581&#39;, &#39;commentbody-1504581&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1504581">
+					<p>code review，痛并快乐着</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1509398">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/3c1deb1619043d3ea62f4dc5d46a7be4" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<a id="commentauthor-1509398" class="url" href="http://yynote.com/" rel="external nofollow">
+				
+				yynote.com
+									</a>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年8月8日14:17					 | <a href="http://coolshell.cn/articles/11432.html#comment-1509398">#43</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1509398&#39;, &#39;comment-1509398&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1509398&#39;, &#39;comment-1509398&#39;, &#39;commentbody-1509398&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1509398">
+					<p>很赞同，就我个人经验而言， 没有做好code review的项目 后期查bug时将花费相当大的时间，同时给人一种软件及其不稳定，说不定啥时候就有挂了的感觉。。。而做好了code review的项目，后期查bug都是很轻松的，同时，每解决一个bug就有一种软件变得更稳定的感觉。。。所以，还是做好code review吧。。。 希望刚入行的同学们，严要求自己。几年后，你会发现你受益很多的。。。</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	<li class="comment regularcomment" id="comment-1511877">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="./从Code Review 谈如何做技术_files/d427f753c2b3830b88c2500e90aebd60" class="avatar avatar-32 photo" height="32" width="32">			</div>
+			<div class="name">
+									<span id="commentauthor-1511877">
+				
+				listener
+									</span>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				2014年8月13日11:52					 | <a href="http://coolshell.cn/articles/11432.html#comment-1511877">#44</a>
+			</div>
+			<div class="act">
+				<a href="javascript:void(0);" onclick="MGJS_CMT.reply(&#39;commentauthor-1511877&#39;, &#39;comment-1511877&#39;, &#39;comment&#39;);">回复</a> | 
+				<a href="javascript:void(0);" onclick="MGJS_CMT.quote(&#39;commentauthor-1511877&#39;, &#39;comment-1511877&#39;, &#39;commentbody-1511877&#39;, &#39;comment&#39;);">引用</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-1511877">
+					<p>无法表述，只能十万个支持</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+
+</li><!-- #comment-## -->
+	</ol>
+	<!-- comments END -->
+
+		<div id="commentnavi">
+			<span class="pages">评论分页</span>
+			<div id="commentpager">
+				<a class="prev page-numbers" href="http://coolshell.cn/articles/11432.html/comment-page-2#comments">« 上一页</a>
+<a class="page-numbers" href="http://coolshell.cn/articles/11432.html/comment-page-1#comments">1</a>
+<a class="page-numbers" href="http://coolshell.cn/articles/11432.html/comment-page-2#comments">2</a>
+<span class="page-numbers current">3</span>				<span id="cp_post_id">11432</span>
+			</div>
+			<div class="fixed"></div>
+		</div>
+
+	<!-- trackbacks START -->
+			<ol id="thetrackbacks">
+												<li class="trackback">
+						<div class="date">
+							2014年4月13日08:01							 | <a href="http://coolshell.cn/articles/11432.html#comment-1421917">#1</a>
+						</div>
+						<div class="act">
+													</div>
+						<div class="fixed"></div>
+						<div class="title">
+							<a href="http://wzzblog.sinaapp.com/static/4665.html">
+								从Code Review 谈如何做技术 | | Evolution UnitEvolution Unit							</a>
+						</div>
+					</li>
+									<li class="trackback">
+						<div class="date">
+							2014年4月13日15:50							 | <a href="http://coolshell.cn/articles/11432.html#comment-1422242">#2</a>
+						</div>
+						<div class="act">
+													</div>
+						<div class="fixed"></div>
+						<div class="title">
+							<a href="http://www.atscore.net/?p=75">
+								@ SCORE » 从code review想到的							</a>
+						</div>
+					</li>
+									<li class="trackback">
+						<div class="date">
+							2014年4月14日13:35							 | <a href="http://coolshell.cn/articles/11432.html#comment-1423153">#3</a>
+						</div>
+						<div class="act">
+													</div>
+						<div class="fixed"></div>
+						<div class="title">
+							<a href="http://blog.slinuxer.com/2014/04/openssl-heartbleed">
+								openssl heartbleed | slinuxer							</a>
+						</div>
+					</li>
+									<li class="trackback">
+						<div class="date">
+							2014年4月14日15:03							 | <a href="http://coolshell.cn/articles/11432.html#comment-1423213">#4</a>
+						</div>
+						<div class="act">
+													</div>
+						<div class="fixed"></div>
+						<div class="title">
+							<a href="http://www.pearltrees.com/gandofyan/pearl110670598">
+								Gandof Yan (gandofyan) | Pearltrees							</a>
+						</div>
+					</li>
+									<li class="trackback">
+						<div class="date">
+							2014年4月16日00:34							 | <a href="http://coolshell.cn/articles/11432.html#comment-1424201">#5</a>
+						</div>
+						<div class="act">
+													</div>
+						<div class="fixed"></div>
+						<div class="title">
+							<a href="http://www.chriszh.com/?p=669">
+								关于Code Review, 从coolshell的一篇文章所想到的. | chriszh							</a>
+						</div>
+					</li>
+									<li class="trackback">
+						<div class="date">
+							2014年5月3日03:09							 | <a href="http://coolshell.cn/articles/11432.html#comment-1452355">#6</a>
+						</div>
+						<div class="act">
+													</div>
+						<div class="fixed"></div>
+						<div class="title">
+							<a href="http://liuwenlong.cn/archives/41">
+								(转)做个环保主义的程序员 – 生活就是死亡,每天我都将直面死亡.							</a>
+						</div>
+					</li>
+									<li class="trackback">
+						<div class="date">
+							2014年5月6日22:53							 | <a href="http://coolshell.cn/articles/11432.html#comment-1454716">#7</a>
+						</div>
+						<div class="act">
+													</div>
+						<div class="fixed"></div>
+						<div class="title">
+							<a href="http://www.momobest.net/2014/05/06/%e5%85%b3%e4%ba%8ecode-review/">
+								关于Code Review | Andy-攻城狮的荣耀							</a>
+						</div>
+					</li>
+									<li class="trackback">
+						<div class="date">
+							2014年6月9日09:11							 | <a href="http://coolshell.cn/articles/11432.html#comment-1478115">#8</a>
+						</div>
+						<div class="act">
+													</div>
+						<div class="fixed"></div>
+						<div class="title">
+							<a href="http://coolshell.cn/articles/11656.html">
+								开发团队的效率 | 酷 壳 – CoolShell.cn							</a>
+						</div>
+					</li>
+									<li class="trackback">
+						<div class="date">
+							2014年6月9日21:17							 | <a href="http://coolshell.cn/articles/11432.html#comment-1478481">#9</a>
+						</div>
+						<div class="act">
+													</div>
+						<div class="fixed"></div>
+						<div class="title">
+							<a href="http://www.xdhcn.com/?p=990">
+								开发团队的效率 | 星达红							</a>
+						</div>
+					</li>
+									<li class="trackback">
+						<div class="date">
+							2014年6月26日21:17							 | <a href="http://coolshell.cn/articles/11432.html#comment-1487073">#10</a>
+						</div>
+						<div class="act">
+													</div>
+						<div class="fixed"></div>
+						<div class="title">
+							<a href="http://zblog.i-ver.com/archives/457">
+								从 Code Review 谈如何做技术 | i-Ver 爱玩儿							</a>
+						</div>
+					</li>
+									<li class="trackback">
+						<div class="date">
+							2014年7月4日23:04							 | <a href="http://coolshell.cn/articles/11432.html#comment-1490822">#11</a>
+						</div>
+						<div class="act">
+													</div>
+						<div class="fixed"></div>
+						<div class="title">
+							<a href="http://skynetdoc.com/?p=54">
+								开发日志: 服务器最近的一些问题和以后的事 | skynetdoc							</a>
+						</div>
+					</li>
+				
+					</ol>
+		<div class="fixed"></div>
+	<!-- trackbacks END -->
+</div>
+
+</div>
+
+	<form action="http://coolshell.cn/wp-comments-post.php" method="post" id="commentform">
+	<div id="respond">
+
+					
+			<div id="author_info">
+				<div class="row">
+					<input type="text" name="author" id="author" class="textfield" value="" size="24" tabindex="1">
+					<label for="author" class="small">昵称 (必填)</label>
+				</div>
+				<div class="row">
+					<input type="text" name="email" id="email" class="textfield" value="" size="24" tabindex="2">
+					<label for="email" class="small">电子邮箱 (我们会为您保密) (必填)</label>
+				</div>
+				<div class="row">
+					<input type="text" name="url" id="url" class="textfield" value="" size="24" tabindex="3">
+					<label for="url" class="small">网址</label>
+				</div>
+			</div>
+
+			
+		
+		<!-- comment input -->
+		<div class="row">
+			<textarea name="comment" id="comment" tabindex="4" rows="8" cols="50"></textarea>
+		</div>
+
+		<!-- comment submit and rss -->
+		<div id="submitbox">
+			<a class="feed" href="http://coolshell.cn/comments/feed">订阅评论</a>
+			<div class="submitbutton">
+				<input name="submit" type="submit" id="submit" class="button" tabindex="5" value="提交评论">
+			</div>
+						<input type="hidden" name="comment_post_ID" value="11432">
+			<div class="fixed"></div>
+		</div>
+
+	</div>
+	<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="b6601881e9"></p><p style="display: none;"></p>	<input type="hidden" id="ak_js" name="ak_js" value="1409033195343"></form>
+
+	
+
+	<div id="postnavi">
+		<span class="prev"><a href="http://coolshell.cn/articles/11454.html" rel="next">从LongAdder看更高效的无锁实现</a></span>
+		<span class="next"><a href="http://coolshell.cn/articles/11377.html" rel="prev">C语言结构体里的成员数组和指针</a></span>
+		<div class="fixed"></div>
+	</div>
+
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-7486123-1']);
+_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+	</div>
+	<!-- main END -->
+
+	
+<!-- sidebar START -->
+<div id="sidebar">
+
+<!-- sidebar north START -->
+<div id="northsidebar" class="sidebar">
+
+	<!-- feeds -->
+	<div class="widget widget_feeds">
+		<div class="content">
+			<div id="subscribe"><a rel="external nofollow" id="feedrss" title="订阅这个博客的文章" href="http://coolshell.cn/feed">订阅</a><ul id="feed_readers" style="visibility: hidden; display: block;"><li id="google_reader"><a rel="external nofollow" class="reader" title="订阅到 Google" href="http://fusion.google.com/add?feedurl=http://coolshell.cn/feed"><span> Google</span></a></li><li id="youdao_reader"><a rel="external nofollow" class="reader" title="订阅到有道" href="http://reader.youdao.com/#url=http://coolshell.cn/feed"><span>有道</span></a></li><li id="xianguo_reader"><a rel="external nofollow" class="reader" title="订阅到鲜果" href="http://www.xianguo.com/subscribe.php?url=http://coolshell.cn/feed"><span>鲜果</span></a></li><li id="zhuaxia_reader"><a rel="external nofollow" class="reader" title="订阅到抓虾" href="http://www.zhuaxia.com/add_channel.php?url=http://coolshell.cn/feed"><span>抓虾</span></a></li><li id="yahoo_reader"><a rel="external nofollow" class="reader" title="订阅到 My Yahoo!" href="http://add.my.yahoo.com/rss?url=http://coolshell.cn/feed"><span> My Yahoo!</span></a></li><li id="newsgator_reader"><a rel="external nofollow" class="reader" title="订阅到 newsgator" href="http://www.newsgator.com/ngs/subscriber/subfext.aspx?url=http://coolshell.cn/feed"><span> newsgator</span></a></li><li id="bloglines_reader"><a rel="external nofollow" class="reader" title="订阅到 Bloglines" href="http://www.bloglines.com/sub/http://coolshell.cn/feed"><span> Bloglines</span></a></li><li id="inezha_reader"><a rel="external nofollow" class="reader" title="订阅到哪吒" href="http://inezha.com/add?url=http://coolshell.cn/feed"><span>哪吒</span></a></li><li id="qq_reader"><a class="reader" title="订阅到QQ Mail" onclick="window.open(this.href);return false;" rel="external nofollow" href="http://mail.qq.com/cgi-bin/feed?u=http://coolshell.cn/feed"><span>
+			QQ Mail            </span></a></li><li id="douban_reader"><a class="reader" title="订阅到Douban" onclick="window.open(this.href);return false;" rel="external nofollow" href="http://9.douban.com/reader/subscribe?url=http://coolshell.cn/feed"><span>
+			Douban            </span></a></li><li id="rojo_reader"><a class="reader" title="订阅到Rojo" onclick="window.open(this.href);return false;" rel="external nofollow" href="http://www.rojo.com/add-subscription?resource=http://coolshell.cn/feed"><span>
+            Rojo            </span></a></li><li id="pageflakes_reader"><a class="reader last" title="订阅到Pageflakes" onclick="window.open(this.href);return false;" rel="external nofollow" href="http://www.pageflakes.com/subscribe.aspx?url=http://coolshell.cn/feed"><span>
+            Pageflakes            </span></a></li></ul></div>
+							<a id="followme" title="Follow me!" href="http://twitter.com/haoel/">Twitter</a>
+						<div class="fixed"></div>
+		</div>
+	</div>
+
+	<!-- showcase -->
+			<div class="widget">
+							<h3>本站公告</h3>
+						<div class="content">
+				<p align="center" style="background-color: #777;padding: 5px;color: white;font-weight: bold;border: solid 1px black;text-shadow: 0px 0px 3px black;">访问 <a href="http://coolshell.cn/404/" target="_blank" style="color: #FFE249;">酷壳404页面</a> 寻找遗失儿童！</p>
+
+<p>酷壳建议大家多使用RSS访问阅读（本站已经是全文输出，推荐使用cloud.feedly.com 或 digg.com）。有相关事宜欢迎电邮：haoel(at)hotmail.com。最后，感谢大家对酷壳的支持和体谅！</p>
+
+<p align="center"><b>感谢 <a href="http://42qu.com/" title="42区 找到给你答案的人" target="_blank">42qu.com</a> 为本站提供 <a href="http://vps.42qu.com/" target="_blank" title="42区虚拟主机，卖给创业的你">VPS</a> </b></p>
+
+<!--<div style="background-color: #DA2D03;color: white;text-align: center;padding: 5px;border: solid 1px black;text-shadow: 0px 0px 3px black;"><b>感谢 <a href=http://42qu.com/ title="42区 找到给你答案的人" target=_blank style="color: #E9F300;">42qu.com</a> 为本站提供 <a href="http://vps.42qu.com/" target=_blank style="color: #E9F300;" title="42区虚拟主机，卖给创业的你">VPS</a> </b></div>-->			</div>
+		</div>
+	
+		<div id="recent-posts-2" class="widget widget_recent_entries">		<h3>最新文章</h3>		<ul>
+					<li>
+				<a href="http://coolshell.cn/articles/11847.html">谜题的答案和活动的心得体会</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11832.html">【活动】解迷题送礼物</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11656.html">开发团队的效率</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11609.html">TCP 的那些事儿（下）</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11564.html">TCP 的那些事儿（上）</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11629.html">「我只是认真」聊聊工匠情怀</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11541.html">面向GC的Java编程</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11466.html">C语言的整型溢出问题</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11454.html">从LongAdder看更高效的无锁实现</a>
+						</li>
+					<li>
+				<a href="./从Code Review 谈如何做技术_files/从Code Review 谈如何做技术.html">从Code Review 谈如何做技术</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11377.html">C语言结构体里的成员数组和指针</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11312.html">无插件Vim编程技巧</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11265.html">Python修饰器的函数式编程</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11235.html">一个浮点数跨平台产生的问题</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11175.html">Java中的CopyOnWrite容器</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11170.html">如何用最有创造力的方式输出42</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11112.html">由苹果的低级Bug想到的</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11094.html">可视化编程</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/11021.html">从“黑掉Github”学Web安全开发</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/10975.html">一个“蝇量级” C 语言协程库</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/10910.html">分布式系统的事务处理</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/10822.html">函数式编程</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/10804.html">X-Y Problem</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/10739.html">Lua简明教程</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/10688.html">编程能力与编程年龄</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/10652.html">程序的本质复杂性和元语言抽象</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/10590.html">二维码的生成细节和原理</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/10427.html">伙伴分配器的一个极简实现</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/10476.html">C++11的Lambda使用一例：华容道求解</a>
+						</li>
+					<li>
+				<a href="http://coolshell.cn/articles/10478.html">C++面试中string类的一种正确写法</a>
+						</li>
+				</ul>
+		</div><div id="views-4" class="widget widget_views"><h3>全站热门</h3><ul>
+<li><a href="http://coolshell.cn/articles/4990.html" title="程序员技术练级攻略 - 462,771 人阅读">程序员技术练级攻略</a></li><li><a href="http://coolshell.cn/articles/5426.html" title="简明 Vim 练级攻略 - 375,445 人阅读">简明 Vim 练级攻略</a></li><li><a href="http://coolshell.cn/articles/7186.html" title="做个环保主义的程序员 - 177,985 人阅读">做个环保主义的程序员</a></li><li><a href="http://coolshell.cn/articles/4102.html" title="如何学好C语言 - 163,406 人阅读">如何学好C语言</a></li><li><a href="http://coolshell.cn/articles/914.html" title="6个变态的C语言Hello World程序 - 137,644 人阅读">6个变态的C语言Hello World程序</a></li><li><a href="http://coolshell.cn/articles/8883.html" title="应该知道的Linux技巧 - 132,243 人阅读">应该知道的Linux技巧</a></li><li><a href="http://coolshell.cn/articles/2250.html" title="“21天教你学会C++” - 129,974 人阅读">“21天教你学会C++”</a></li><li><a href="http://coolshell.cn/articles/6470.html" title="由12306.cn谈谈网站性能技术 - 126,798 人阅读">由12306.cn谈谈网站性能技术</a></li><li><a href="http://coolshell.cn/articles/9308.html" title="“作环保的程序员，从不用百度开始” - 118,512 人阅读">“作环保的程序员，从不用百度开始”</a></li><li><a href="http://coolshell.cn/articles/1870.html" title="我是怎么招聘程序员的 - 112,679 人阅读">我是怎么招聘程序员的</a></li><li><a href="http://coolshell.cn/articles/10688.html" title="编程能力与编程年龄 - 109,296 人阅读">编程能力与编程年龄</a></li><li><a href="http://coolshell.cn/articles/7829.html" title="28个Unix/Linux的命令行神器 - 107,978 人阅读">28个Unix/Linux的命令行神器</a></li><li><a href="http://coolshell.cn/articles/3549.html" title="Android将允许纯C/C++开发应用 - 105,316 人阅读">Android将允许纯C/C++开发应用</a></li><li><a href="http://coolshell.cn/articles/6043.html" title="Web开发中需要了解的东西 - 101,339 人阅读">Web开发中需要了解的东西</a></li><li><a href="http://coolshell.cn/articles/9070.html" title="AWK 简明教程 - 96,309 人阅读">AWK 简明教程</a></li><li><a href="http://coolshell.cn/articles/2287.html" title="C++ 程序员自信心曲线图 - 94,192 人阅读">C++ 程序员自信心曲线图</a></li><li><a href="http://coolshell.cn/articles/4119.html" title="如何学好C++语言 - 88,395 人阅读">如何学好C++语言</a></li><li><a href="http://coolshell.cn/articles/1391.html" title="编程真难啊 - 88,018 人阅读">编程真难啊</a></li><li><a href="http://coolshell.cn/articles/355.html" title="20本最好的Linux免费书籍 - 87,772 人阅读">20本最好的Linux免费书籍</a></li><li><a href="http://coolshell.cn/articles/3008.html" title="Windows编程革命简史 - 83,395 人阅读">Windows编程革命简史</a></li><li><a href="http://coolshell.cn/articles/5701.html" title="SteveY对Amazon和Google平台的吐槽 - 83,233 人阅读">SteveY对Amazon和Google平台的吐槽</a></li><li><a href="http://coolshell.cn/articles/4758.html" title="如何写出无法维护的代码 - 83,020 人阅读">如何写出无法维护的代码</a></li><li><a href="http://coolshell.cn/articles/5761.html" title="深入理解C语言 - 81,930 人阅读">深入理解C语言</a></li><li><a href="http://coolshell.cn/articles/7490.html" title="性能调优攻略 - 79,818 人阅读">性能调优攻略</a></li><li><a href="http://coolshell.cn/articles/2058.html" title="各种流行的编程风格 - 78,324 人阅读">各种流行的编程风格</a></li><li><a href="http://coolshell.cn/articles/8790.html" title="程序算法与人生选择 - 78,055 人阅读">程序算法与人生选择</a></li><li><a href="http://coolshell.cn/articles/10217.html" title="加班与效率 - 76,936 人阅读">加班与效率</a></li><li><a href="http://coolshell.cn/articles/4429.html" title="面试题：火车运煤问题 - 76,259 人阅读">面试题：火车运煤问题</a></li><li><a href="http://coolshell.cn/articles/1695.html" title="别的程序员是怎么读你的简历的 - 75,237 人阅读">别的程序员是怎么读你的简历的</a></li><li><a href="http://coolshell.cn/articles/945.html" title="C语言的谜题 - 75,130 人阅读">C语言的谜题</a></li></ul>
+</div><div id="text-400151743" class="widget widget_text"><h3>新浪微博</h3>			<div class="textwidget"><iframe width="100%" height="120" class="share_self" frameborder="0" scrolling="no" src="./从Code Review 谈如何做技术_files/index.html"></iframe></div>
+		</div><div id="tag_cloud-2" class="widget widget_tag_cloud"><h3>标签</h3><div class="tagcloud"><a href="http://coolshell.cn/tag/agile" class="tag-link-17" title="15个话题" style="font-size: 11.8888888889pt;">agile</a>
+<a href="http://coolshell.cn/tag/ajax" class="tag-link-34" title="11个话题" style="font-size: 10.3333333333pt;">AJAX</a>
+<a href="http://coolshell.cn/tag/algorithm" class="tag-link-76" title="24个话题" style="font-size: 14.4814814815pt;">Algorithm</a>
+<a href="http://coolshell.cn/tag/android" class="tag-link-145" title="8个话题" style="font-size: 8.64814814815pt;">Android</a>
+<a href="http://coolshell.cn/tag/bash" class="tag-link-190" title="8个话题" style="font-size: 8.64814814815pt;">Bash</a>
+<a href="http://coolshell.cn/tag/c" class="tag-link-59" title="84个话题" style="font-size: 21.3518518519pt;">C++</a>
+<a href="http://coolshell.cn/tag/coding" class="tag-link-135" title="25个话题" style="font-size: 14.6111111111pt;">Coding</a>
+<a href="http://coolshell.cn/tag/css" class="tag-link-96" title="21个话题" style="font-size: 13.7037037037pt;">CSS</a>
+<a href="http://coolshell.cn/tag/database" class="tag-link-109" title="7个话题" style="font-size: 8pt;">Database</a>
+<a href="http://coolshell.cn/tag/design" class="tag-link-71" title="18个话题" style="font-size: 12.9259259259pt;">Design</a>
+<a href="http://coolshell.cn/tag/design-pattern" class="tag-link-25" title="8个话题" style="font-size: 8.64814814815pt;">design pattern</a>
+<a href="http://coolshell.cn/tag/ebook" class="tag-link-101" title="15个话题" style="font-size: 11.8888888889pt;">ebook</a>
+<a href="http://coolshell.cn/tag/flash" class="tag-link-98" title="7个话题" style="font-size: 8pt;">Flash</a>
+<a href="http://coolshell.cn/tag/game" class="tag-link-125" title="9个话题" style="font-size: 9.2962962963pt;">Game</a>
+<a href="http://coolshell.cn/tag/go" class="tag-link-238" title="9个话题" style="font-size: 9.2962962963pt;">Go</a>
+<a href="http://coolshell.cn/tag/google" class="tag-link-32" title="31个话题" style="font-size: 15.9074074074pt;">Google</a>
+<a href="http://coolshell.cn/tag/html" class="tag-link-38" title="32个话题" style="font-size: 16.037037037pt;">HTML</a>
+<a href="http://coolshell.cn/tag/ie" class="tag-link-175" title="10个话题" style="font-size: 9.81481481481pt;">IE</a>
+<a href="http://coolshell.cn/tag/java" class="tag-link-13" title="48个话题" style="font-size: 18.2407407407pt;">Java</a>
+<a href="http://coolshell.cn/tag/javascript" class="tag-link-114" title="51个话题" style="font-size: 18.6296296296pt;">Javascript</a>
+<a href="http://coolshell.cn/tag/jquery" class="tag-link-191" title="11个话题" style="font-size: 10.3333333333pt;">jQuery</a>
+<a href="http://coolshell.cn/tag/linux" class="tag-link-37" title="59个话题" style="font-size: 19.4074074074pt;">Linux</a>
+<a href="http://coolshell.cn/tag/mysql" class="tag-link-106" title="7个话题" style="font-size: 8pt;">MySQL</a>
+<a href="http://coolshell.cn/tag/oop" class="tag-link-245" title="8个话题" style="font-size: 8.64814814815pt;">OOP</a>
+<a href="http://coolshell.cn/tag/password" class="tag-link-319" title="8个话题" style="font-size: 8.64814814815pt;">password</a>
+<a href="http://coolshell.cn/tag/performance" class="tag-link-120" title="15个话题" style="font-size: 11.8888888889pt;">Performance</a>
+<a href="http://coolshell.cn/tag/php" class="tag-link-35" title="25个话题" style="font-size: 14.6111111111pt;">PHP</a>
+<a href="http://coolshell.cn/tag/programmer" class="tag-link-70" title="92个话题" style="font-size: 21.8703703704pt;">Programmer</a>
+<a href="http://coolshell.cn/tag/programming-language" class="tag-link-115" title="12个话题" style="font-size: 10.7222222222pt;">programming language</a>
+<a href="http://coolshell.cn/tag/puzzle" class="tag-link-514" title="11个话题" style="font-size: 10.3333333333pt;">Puzzle</a>
+<a href="http://coolshell.cn/tag/pythondev" class="tag-link-33" title="29个话题" style="font-size: 15.5185185185pt;">Python</a>
+<a href="http://coolshell.cn/tag/ruby" class="tag-link-69" title="10个话题" style="font-size: 9.81481481481pt;">Ruby</a>
+<a href="http://coolshell.cn/tag/sql" class="tag-link-131" title="10个话题" style="font-size: 9.81481481481pt;">SQL</a>
+<a href="http://coolshell.cn/tag/tdd" class="tag-link-485" title="8个话题" style="font-size: 8.64814814815pt;">TDD</a>
+<a href="http://coolshell.cn/tag/ui" class="tag-link-47" title="12个话题" style="font-size: 10.7222222222pt;">UI</a>
+<a href="http://coolshell.cn/tag/unix" class="tag-link-21" title="32个话题" style="font-size: 16.037037037pt;">Unix</a>
+<a href="http://coolshell.cn/tag/vim" class="tag-link-50" title="19个话题" style="font-size: 13.1851851852pt;">vim</a>
+<a href="http://coolshell.cn/tag/web" class="tag-link-30" title="36个话题" style="font-size: 16.6851851852pt;">Web</a>
+<a href="http://coolshell.cn/tag/windows" class="tag-link-49" title="17个话题" style="font-size: 12.6666666667pt;">Windows</a>
+<a href="http://coolshell.cn/tag/xml" class="tag-link-104" title="8个话题" style="font-size: 8.64814814815pt;">XML</a>
+<a href="http://coolshell.cn/tag/%e5%8f%a3%e4%bb%a4" class="tag-link-320" title="7个话题" style="font-size: 8pt;">口令</a>
+<a href="http://coolshell.cn/tag/%e5%ae%89%e5%85%a8" class="tag-link-318" title="18个话题" style="font-size: 12.9259259259pt;">安全</a>
+<a href="http://coolshell.cn/tag/%e7%a8%8b%e5%ba%8f%e5%91%98" class="tag-link-58" title="94个话题" style="font-size: 22pt;">程序员</a>
+<a href="http://coolshell.cn/tag/%e7%ae%97%e6%b3%95" class="tag-link-77" title="9个话题" style="font-size: 9.2962962963pt;">算法</a>
+<a href="http://coolshell.cn/tag/interview" class="tag-link-164" title="15个话题" style="font-size: 11.8888888889pt;">面试</a></div>
+</div></div>
+<!-- sidebar north END -->
+
+<div id="centersidebar">
+
+	<!-- sidebar east START -->
+	<div id="eastsidebar" class="sidebar">
+	<div id="categories-367921423" class="widget widget_categories"><h3>分类目录</h3>		<ul>
+	<li class="cat-item cat-item-189"><a href="http://coolshell.cn/category/proglanguage/dotnet" title="查看.NET编程下的所有文章">.NET编程</a> (3)
+</li>
+	<li class="cat-item cat-item-8"><a href="http://coolshell.cn/category/proglanguage/ajaxdev" title="查看Ajax开发下的所有文章">Ajax开发</a> (9)
+</li>
+	<li class="cat-item cat-item-5"><a href="http://coolshell.cn/category/proglanguage/cplusplus" title="查看C/C++语言下的所有文章">C/C++语言</a> (63)
+</li>
+	<li class="cat-item cat-item-186"><a href="http://coolshell.cn/category/proglanguage/erlang" title="查看Erlang下的所有文章">Erlang</a> (1)
+</li>
+	<li class="cat-item cat-item-4"><a href="http://coolshell.cn/category/proglanguage/javadev" title="查看Java语言下的所有文章">Java语言</a> (32)
+</li>
+	<li class="cat-item cat-item-11"><a href="http://coolshell.cn/category/proglanguage/phpdev" title="查看PHP脚本下的所有文章">PHP脚本</a> (11)
+</li>
+	<li class="cat-item cat-item-33"><a href="http://coolshell.cn/category/proglanguage/pythondev" title="查看Python下的所有文章">Python</a> (23)
+</li>
+	<li class="cat-item cat-item-100"><a href="http://coolshell.cn/category/proglanguage/rubydev" title="查看Ruby下的所有文章">Ruby</a> (5)
+</li>
+	<li class="cat-item cat-item-20"><a href="http://coolshell.cn/category/operatingsystem/unixlinux" title="查看Unix/Linux下的所有文章">Unix/Linux</a> (66)
+</li>
+	<li class="cat-item cat-item-7"><a href="http://coolshell.cn/category/proglanguage/webdev" title="查看Web开发下的所有文章">Web开发</a> (100)
+</li>
+	<li class="cat-item cat-item-19"><a href="http://coolshell.cn/category/operatingsystem/mswindows" title="查看Windows下的所有文章">Windows</a> (12)
+</li>
+	<li class="cat-item cat-item-195"><a href="http://coolshell.cn/category/itnews" title="查看业界新闻下的所有文章">业界新闻</a> (26)
+</li>
+	<li class="cat-item cat-item-509"><a href="http://coolshell.cn/category/%e4%bc%81%e4%b8%9a%e5%ba%94%e7%94%a8" title="查看企业应用下的所有文章">企业应用</a> (2)
+</li>
+	<li class="cat-item cat-item-9"><a href="http://coolshell.cn/category/technews" title="查看技术新闻下的所有文章">技术新闻</a> (32)
+</li>
+	<li class="cat-item cat-item-550"><a href="http://coolshell.cn/category/%e6%8a%80%e6%9c%af%e7%ae%a1%e7%90%86" title="查看技术管理下的所有文章">技术管理</a> (12)
+</li>
+	<li class="cat-item cat-item-12"><a href="http://coolshell.cn/category/techarticle" title="查看技术读物下的所有文章">技术读物</a> (114)
+</li>
+	<li class="cat-item cat-item-18"><a href="http://coolshell.cn/category/operatingsystem" title="查看操作系统下的所有文章">操作系统</a> (43)
+</li>
+	<li class="cat-item cat-item-105"><a href="http://coolshell.cn/category/datebase" title="查看数据库下的所有文章">数据库</a> (10)
+</li>
+	<li class="cat-item cat-item-10"><a href="http://coolshell.cn/category/misc" title="查看杂项资源下的所有文章">杂项资源</a> (260)
+</li>
+	<li class="cat-item cat-item-15"><a href="http://coolshell.cn/category/process" title="查看流程方法下的所有文章">流程方法</a> (46)
+</li>
+	<li class="cat-item cat-item-23"><a href="http://coolshell.cn/category/progdesign" title="查看程序设计下的所有文章">程序设计</a> (80)
+</li>
+	<li class="cat-item cat-item-602"><a href="http://coolshell.cn/category/%e7%b3%bb%e7%bb%9f%e6%9e%b6%e6%9e%84" title="查看系统架构下的所有文章">系统架构</a> (8)
+</li>
+	<li class="cat-item cat-item-1"><a href="http://coolshell.cn/category/tools" title="查看编程工具下的所有文章">编程工具</a> (64)
+</li>
+	<li class="cat-item cat-item-3"><a href="http://coolshell.cn/category/proglanguage" title="查看编程语言下的所有文章">编程语言</a> (168)
+</li>
+	<li class="cat-item cat-item-6"><a href="http://coolshell.cn/category/netsecurity" title="查看网络安全下的所有文章">网络安全</a> (25)
+</li>
+	<li class="cat-item cat-item-39"><a href="http://coolshell.cn/category/career" title="查看职场生涯下的所有文章">职场生涯</a> (33)
+</li>
+	<li class="cat-item cat-item-271"><a href="http://coolshell.cn/category/funny" title="查看趣味问题下的所有文章">趣味问题</a> (18)
+</li>
+	<li class="cat-item cat-item-52"><a href="http://coolshell.cn/category/story" title="查看轶事趣闻下的所有文章">轶事趣闻</a> (146)
+</li>
+		</ul>
+</div>	</div>
+	<!-- sidebar east END -->
+
+	<!-- sidebar west START -->
+	<div id="westsidebar" class="sidebar">
+	<div id="archives-2" class="widget widget_archive"><h3>归档</h3>		<ul>
+	<li><a href="http://coolshell.cn/articles/date/2014/08">2014年八月</a>&nbsp;(2)</li>
+	<li><a href="http://coolshell.cn/articles/date/2014/06">2014年六月</a>&nbsp;(1)</li>
+	<li><a href="http://coolshell.cn/articles/date/2014/05">2014年五月</a>&nbsp;(4)</li>
+	<li><a href="http://coolshell.cn/articles/date/2014/04">2014年四月</a>&nbsp;(4)</li>
+	<li><a href="http://coolshell.cn/articles/date/2014/03">2014年三月</a>&nbsp;(5)</li>
+	<li><a href="http://coolshell.cn/articles/date/2014/02">2014年二月</a>&nbsp;(3)</li>
+	<li><a href="http://coolshell.cn/articles/date/2014/01">2014年一月</a>&nbsp;(2)</li>
+	<li><a href="http://coolshell.cn/articles/date/2013/12">2013年十二月</a>&nbsp;(3)</li>
+	<li><a href="http://coolshell.cn/articles/date/2013/11">2013年十一月</a>&nbsp;(1)</li>
+	<li><a href="http://coolshell.cn/articles/date/2013/10">2013年十月</a>&nbsp;(6)</li>
+	<li><a href="http://coolshell.cn/articles/date/2013/08">2013年八月</a>&nbsp;(1)</li>
+	<li><a href="http://coolshell.cn/articles/date/2013/07">2013年七月</a>&nbsp;(8)</li>
+	<li><a href="http://coolshell.cn/articles/date/2013/06">2013年六月</a>&nbsp;(2)</li>
+	<li><a href="http://coolshell.cn/articles/date/2013/05">2013年五月</a>&nbsp;(3)</li>
+	<li><a href="http://coolshell.cn/articles/date/2013/04">2013年四月</a>&nbsp;(3)</li>
+	<li><a href="http://coolshell.cn/articles/date/2013/03">2013年三月</a>&nbsp;(3)</li>
+	<li><a href="http://coolshell.cn/articles/date/2013/02">2013年二月</a>&nbsp;(5)</li>
+	<li><a href="http://coolshell.cn/articles/date/2013/01">2013年一月</a>&nbsp;(1)</li>
+	<li><a href="http://coolshell.cn/articles/date/2012/12">2012年十二月</a>&nbsp;(4)</li>
+	<li><a href="http://coolshell.cn/articles/date/2012/11">2012年十一月</a>&nbsp;(5)</li>
+	<li><a href="http://coolshell.cn/articles/date/2012/10">2012年十月</a>&nbsp;(3)</li>
+	<li><a href="http://coolshell.cn/articles/date/2012/09">2012年九月</a>&nbsp;(4)</li>
+	<li><a href="http://coolshell.cn/articles/date/2012/08">2012年八月</a>&nbsp;(8)</li>
+	<li><a href="http://coolshell.cn/articles/date/2012/07">2012年七月</a>&nbsp;(4)</li>
+	<li><a href="http://coolshell.cn/articles/date/2012/06">2012年六月</a>&nbsp;(7)</li>
+	<li><a href="http://coolshell.cn/articles/date/2012/05">2012年五月</a>&nbsp;(6)</li>
+	<li><a href="http://coolshell.cn/articles/date/2012/04">2012年四月</a>&nbsp;(6)</li>
+	<li><a href="http://coolshell.cn/articles/date/2012/03">2012年三月</a>&nbsp;(6)</li>
+	<li><a href="http://coolshell.cn/articles/date/2012/02">2012年二月</a>&nbsp;(3)</li>
+	<li><a href="http://coolshell.cn/articles/date/2012/01">2012年一月</a>&nbsp;(6)</li>
+	<li><a href="http://coolshell.cn/articles/date/2011/12">2011年十二月</a>&nbsp;(5)</li>
+	<li><a href="http://coolshell.cn/articles/date/2011/11">2011年十一月</a>&nbsp;(9)</li>
+	<li><a href="http://coolshell.cn/articles/date/2011/10">2011年十月</a>&nbsp;(6)</li>
+	<li><a href="http://coolshell.cn/articles/date/2011/09">2011年九月</a>&nbsp;(5)</li>
+	<li><a href="http://coolshell.cn/articles/date/2011/08">2011年八月</a>&nbsp;(14)</li>
+	<li><a href="http://coolshell.cn/articles/date/2011/07">2011年七月</a>&nbsp;(6)</li>
+	<li><a href="http://coolshell.cn/articles/date/2011/06">2011年六月</a>&nbsp;(12)</li>
+	<li><a href="http://coolshell.cn/articles/date/2011/05">2011年五月</a>&nbsp;(5)</li>
+	<li><a href="http://coolshell.cn/articles/date/2011/04">2011年四月</a>&nbsp;(18)</li>
+	<li><a href="http://coolshell.cn/articles/date/2011/03">2011年三月</a>&nbsp;(16)</li>
+	<li><a href="http://coolshell.cn/articles/date/2011/02">2011年二月</a>&nbsp;(16)</li>
+	<li><a href="http://coolshell.cn/articles/date/2011/01">2011年一月</a>&nbsp;(18)</li>
+	<li><a href="http://coolshell.cn/articles/date/2010/12">2010年十二月</a>&nbsp;(11)</li>
+	<li><a href="http://coolshell.cn/articles/date/2010/11">2010年十一月</a>&nbsp;(11)</li>
+	<li><a href="http://coolshell.cn/articles/date/2010/10">2010年十月</a>&nbsp;(19)</li>
+	<li><a href="http://coolshell.cn/articles/date/2010/09">2010年九月</a>&nbsp;(15)</li>
+	<li><a href="http://coolshell.cn/articles/date/2010/08">2010年八月</a>&nbsp;(10)</li>
+	<li><a href="http://coolshell.cn/articles/date/2010/07">2010年七月</a>&nbsp;(20)</li>
+	<li><a href="http://coolshell.cn/articles/date/2010/06">2010年六月</a>&nbsp;(9)</li>
+	<li><a href="http://coolshell.cn/articles/date/2010/05">2010年五月</a>&nbsp;(13)</li>
+	<li><a href="http://coolshell.cn/articles/date/2010/04">2010年四月</a>&nbsp;(12)</li>
+	<li><a href="http://coolshell.cn/articles/date/2010/03">2010年三月</a>&nbsp;(11)</li>
+	<li><a href="http://coolshell.cn/articles/date/2010/02">2010年二月</a>&nbsp;(7)</li>
+	<li><a href="http://coolshell.cn/articles/date/2010/01">2010年一月</a>&nbsp;(9)</li>
+	<li><a href="http://coolshell.cn/articles/date/2009/12">2009年十二月</a>&nbsp;(22)</li>
+	<li><a href="http://coolshell.cn/articles/date/2009/11">2009年十一月</a>&nbsp;(27)</li>
+	<li><a href="http://coolshell.cn/articles/date/2009/10">2009年十月</a>&nbsp;(17)</li>
+	<li><a href="http://coolshell.cn/articles/date/2009/09">2009年九月</a>&nbsp;(14)</li>
+	<li><a href="http://coolshell.cn/articles/date/2009/08">2009年八月</a>&nbsp;(21)</li>
+	<li><a href="http://coolshell.cn/articles/date/2009/07">2009年七月</a>&nbsp;(18)</li>
+	<li><a href="http://coolshell.cn/articles/date/2009/06">2009年六月</a>&nbsp;(19)</li>
+	<li><a href="http://coolshell.cn/articles/date/2009/05">2009年五月</a>&nbsp;(27)</li>
+	<li><a href="http://coolshell.cn/articles/date/2009/04">2009年四月</a>&nbsp;(53)</li>
+	<li><a href="http://coolshell.cn/articles/date/2009/03">2009年三月</a>&nbsp;(43)</li>
+		</ul>
+</div>	</div>
+	<!-- sidebar west END -->
+	<div class="fixed"></div>
+</div>
+
+<!-- sidebar south START -->
+<div id="southsidebar" class="sidebar">
+<div id="get-recent-comments" class="widget widget_get_recent_comments"><h3>最新评论</h3><div id="get_recent_comments_wrap"><ul>	<li><a href="http://coolshell.cn/articles/11432.html#comment-1511877" title="从Code Review 谈如何做技术, 2014年04月12日">listener</a>: 无法表述，只能十万个支持</li>
+	<li><a href="http://coolshell.cn/articles/5132.html#comment-1511872" title="疯狂的 Web 应用开源项目, 2011年08月11日">Cheap USA Coat Outlet</a>: with congeler en compote p pommes,Beats By Dre UK beats by dre.Mais not, je ne vous artificial...</li>
+	<li><a href="http://coolshell.cn/articles/5132.html#comment-1511871" title="疯狂的 Web 应用开源项目, 2011年08月11日">Where to Buy Cheap Coats</a>: studenten tu delft winnen navigatiecompetitie achieved ‘moodapp’Styles avons...</li>
+	<li><a href="http://coolshell.cn/articles/5132.html#comment-1511860" title="疯狂的 Web 应用开源项目, 2011年08月11日">Discount Timberland down jacket</a>: It is usually crucial to bear in mind only two other elements time and cash. To...</li>
+	<li><a href="http://coolshell.cn/articles/4758.html#comment-1511810" title="如何写出无法维护的代码, 2011年06月03日">xidianlz</a>: 假如老板说，嗯，小伙子做得不错，下一个版本我们决定还是你来开 发。岂不是得哭了</li>
+	<li><a href="http://coolshell.cn/articles/11847.html#comment-1511686" title="谜题的答案和活动的心得体会, 2014年08月06日">hlx98007</a>: indentation有问题…将就着吧</li>
+	<li><a href="http://coolshell.cn/articles/11847.html#comment-1511683" title="谜题的答案和活动的心得体会, 2014年08月06日">hlx98007</a>:  sl : 用python抓取第五关的variables，不知道这样写对 不对 import urllib2 content = “2014″ while (content != “”): content =...</li>
+	<li><a href="http://coolshell.cn/articles/8239.html#comment-1511576" title="无锁队列的实现, 2012年09月07日">xuecheng.qian</a>: EnQueue(x) //进队列 { //准备新加入的结点数据 q = new record(); q-&gt;value = x; q-&gt;next = NULL; do { p = tail;...</li>
+	<li><a href="http://coolshell.cn/articles/11847.html#comment-1511427" title="谜题的答案和活动的心得体会, 2014年08月06日">wc</a>: 来晚了~ google: site:fun.coolshell.cn 能得一份奖品吗？呵呵~ 这算开挂了吧？C</li>
+	<li><a href="http://coolshell.cn/articles/1870.html#comment-1511319" title="我是怎么招聘程序员的, 2009年12月02日">makefile</a>: 问技术细节是需要的，很多程序员都会粉饰自己的简历，哪怕只用1 天的东西也会煞有介事的写上，我熟悉xxx. 如果对于常用的用法都不知道，那怎么能说会呢，比如说很熟...</li>
+	<li><a href="http://coolshell.cn/articles/3008.html#comment-1511154" title="Windows编程革命简史, 2010年09月27日">Jean&nbsp;G-Star&nbsp;Hombre</a>: They’re constantly at sea. Victoria, equipment such as wheelchairs and walkers,6 per cent.2...</li>
+	<li><a href="http://coolshell.cn/articles/3008.html#comment-1511149" title="Windows编程革命简史, 2010年09月27日">Nike&nbsp;Zoom&nbsp;Structure&nbsp;16</a>: First published: 16/08/2012Doctors may recommend surgical procedures, their best mark since...</li>
+	<li><a href="http://coolshell.cn/articles/11170.html#comment-1511139" title="如何用最有创造力的方式输出42, 2014年03月06日">just</a>: 我也想说这个越界了 @kevin </li>
+	<li><a href="http://coolshell.cn/articles/4429.html#comment-1510926" title="面试题：火车运煤问题, 2011年04月11日">冬瓜</a>: function trans(dist, coal, left_dist){ /* dist 每段运送(中途卸载)的距离 coal 每段需要运的煤数量 left_dist 每段与市场终点的距离 return...</li>
+	<li><a href="http://coolshell.cn/articles/4429.html#comment-1510922" title="面试题：火车运煤问题, 2011年04月11日">冬瓜</a>: @冬瓜 发上去代码就变了…</li>
+</ul></div></div><div id="text-2" class="widget widget_text"><h3>友情链接</h3>			<div class="textwidget"><ul class="blogroll">
+<li><a href="http://blog.csdn.net/haoel" target="_blank" onclick="pageTracker._trackPageview(&#39;/outgoing/blog.csdn.net/haoel?referer=http://coolshell.cn&#39;);">陈皓的博客</a></li>
+
+<li><a href="http://ifeve.com/" target="_blank" title="促进并发编程的研究和推广" onclick="pageTracker._trackPageview(&#39;/outgoing/ifeve.com/?referer=http://coolshell.cn&#39;);">并发编程</a></li>
+
+
+<li><a href="http://www.raychase.net/" target="_blank" title="一个啰嗦的程序员" onclick="pageTracker._trackPageview(&#39;/outgoing/www.raychase.net/?referer=http://coolshell.cn&#39;);">四火的唠叨</a></li>
+
+
+
+<li><a href="http://www.hellogcc.org/" target="_blank" title="致力于讨论和学习GNU Toolchain方面的工作组" onclick="pageTracker._trackPageview(&#39;/outgoing/www.hellogcc.org//?referer=http://coolshell.cn/&#39;);">HelloGcc Working Group</a></li>
+
+<li><a href="http://http//blog.lvscar.info/" target="_blank" title="Just for Fun" onclick="pageTracker._trackPageview(&#39;/outgoing/http://blog.lvscar.info/?referer=http://coolshell.cn/&#39;);">吕毅的Blog</a></li>
+
+<li><a href="http://www.cnblogs.com/weidagang2046/" target="_blank" title="Just for Fun" onclick="pageTracker._trackPageview(&#39;/outgoing/http://www.cnblogs.com/weidagang2046/?referer=http://coolshell.cn/&#39;);">Todd Wei的Blog</a></li>
+
+<li><a href="http://www.cppfans.org/" target="_blank" title="记录我们点滴学习工作生活" onclick="pageTracker._trackPageview(&#39;/outgoing/http://www.cppfans.org/?referer=http://coolshell.cn/&#39;);">C++爱好者博客</a></li>
+
+<li><a href="http://www.mhtml5.com/" target="_blank" title="致力于HTML5在中国的发展与应用" onclick="pageTracker._trackPageview(&#39;/outgoing/http://www.mhtml5.com/?referer=http://coolshell.cn/&#39;);">HTML5研究小组</a></li>
+
+
+<li><a href="http://zhuwenhao.com/" target="_blank" title="朱文昊的中文博客－－专注技术，向往自由" onclick="pageTracker._trackPageview(&#39;/outgoing/http://zhuwenhao.com/?referer=http://coolshell.cn/&#39;);">朱文昊Albert Zhu</a></li>
+
+
+<li><a href="http://www.cguage.com/" target="_blank" title="某VC++软件开发爱好者" onclick="pageTracker._trackPageview(&#39;/outgoing/http://www.cguage.com/?referer=http://coolshell.cn/&#39;);">C瓜哥的博客</a></li>
+
+
+<li><a href="http://www.kaiyuanba.cn/" target="_blank" title="汇聚各种开源项目的中英文混合介绍并分类排列，致力于软件项目的开源事业" onclick="pageTracker._trackPageview(&#39;/outgoing/http://www.kaiyuanba.cn/?referer=http://coolshell.cn/&#39;);">开源吧</a></li>
+
+
+
+<li><a href="http://helloacm.com/" target="_blank" title="Smart Ideas, Smart Algorithms" onclick="pageTracker._trackPageview(&#39;/outgoing/http://HelloACM.com/?referer=http://coolshell.cn/&#39;);">ACMer</a></li>
+
+<li><a href="http://chenpeng.info/" target="_blank" title="优秀的开源软件让生活更简单" onclick="pageTracker._trackPageview(&#39;/outgoing/http://chenpeng.info/?referer=http://coolshell.cn/&#39;);">陈鹏个人博客</a></li>
+
+<li><a href="http://www.coderli.com/" target="_blank" title="一个普通的coder，coding为了生活，coding因为消遣:-) Just a coder" onclick="pageTracker._trackPageview(&#39;/outgoing/http://www.coderli.com/?referer=http://coolshell.cn/&#39;);">OneCoder</a></li>
+
+<li><a href="http://www.crazyshell.org/" target="_blank" title="专注于底层基础, TCP/IP, 存储, (高性能.高可用.分布式.高并发系统) 研究" onclick="pageTracker._trackPageview(&#39;/outgoing/http://www.crazyshell.org/?referer=http://coolshell.cn/&#39;);">狂Shell – Happy Hacking</a></li>
+
+<li><a href="http://www.tektea.com/" target="_blank" title="关注IT技术 | 分享 | 交流 | 记录" onclick="pageTracker._trackPageview(&#39;/outgoing/http://www.tektea.com/?referer=http://coolshell.cn/&#39;);">TekTea's Blog </a></li>
+
+<li><a href="http://shellblog.sinaapp.com/" target="_blank" title="我有一颗百度的心。" onclick="pageTracker._trackPageview(&#39;/outgoing/http://blog.tektea.comshellblog.sinaapp.com/?referer=http://coolshell.cn/&#39;);">夕水溪下 </a></li>
+</ul></div>
+		</div><div id="meta-3" class="widget widget_meta"><h3>功能</h3>			<ul>
+			<li><a href="http://coolshell.cn/wp-login.php?action=register">注册</a></li>			<li><a href="http://coolshell.cn/wp-login.php">登录</a></li>
+			<li><a href="http://coolshell.cn/feed" title="使用RSS 2.0订阅本站点内容">文章<abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://coolshell.cn/comments/feed" title="使用RSS订阅本站点的所有文章的近期评论">评论<abbr title="Really Simple Syndication">RSS</abbr></a></li>
+<li><a href="https://cn.wordpress.org/" title="基于WordPress，一个优美、先进的个人信息发布平台。">WordPress.org</a></li>			</ul>
+</div><div id="text-400151742" class="widget widget_text">			<div class="textwidget"><script src="./从Code Review 谈如何做技术_files/stat.php" language="JavaScript" charset="gb2312"></script><script src="./从Code Review 谈如何做技术_files/core.php" charset="utf-8" type="text/javascript"></script><a href="http://www.cnzz.com/stat/website.php?web_id=1785679" target="_blank" title="站长统计"><img border="0" hspace="0" vspace="0" src="./从Code Review 谈如何做技术_files/pic1.gif"></a>
+
+
+
+</div>
+		</div></div>
+<!-- sidebar south END -->
+
+</div>
+<!-- sidebar END -->
+	<div class="fixed"></div>
+</div>
+<!-- content END -->
+
+<!-- footer START -->
+<div id="footer">
+	<a id="gotop" href="http://coolshell.cn/articles/11432.html#" onclick="MGJS.goTop();return false;">回到顶部</a>
+	<a id="powered" href="http://wordpress.org/">WordPress</a>
+	<div id="copyright">
+		版权所有 © 2009-2014 酷 壳 – CoolShell.cn	</div>
+	<div id="themeinfo">
+		主题由 <a href="http://www.neoease.com/">NeoEase</a> 提供, 通过 <a href="http://validator.w3.org/check?uri=referer">XHTML 1.1</a> 和 <a href="http://jigsaw.w3.org/css-validator/check/referer?profile=css3">CSS 3</a> 验证.	</div>
+</div>
+<!-- footer END -->
+
+</div>
+<!-- container END -->
+</div>
+<!-- wrap END -->
+
+<script class="javascript" src="./从Code Review 谈如何做技术_files/shCore.js"></script>
+<script class="javascript" src="./从Code Review 谈如何做技术_files/shBrushCSharp.js"></script>
+<script class="javascript" src="./从Code Review 谈如何做技术_files/shBrushPhp.js"></script>
+<script class="javascript" src="./从Code Review 谈如何做技术_files/shBrushJScript.js"></script>
+<script class="javascript" src="./从Code Review 谈如何做技术_files/shBrushJava.js"></script>
+<script class="javascript" src="./从Code Review 谈如何做技术_files/shBrushVb.js"></script>
+<script class="javascript" src="./从Code Review 谈如何做技术_files/shBrushSql.js"></script>
+<script class="javascript" src="./从Code Review 谈如何做技术_files/shBrushXml.js"></script>
+<script class="javascript" src="./从Code Review 谈如何做技术_files/shBrushDelphi.js"></script>
+<script class="javascript" src="./从Code Review 谈如何做技术_files/shBrushPython.js"></script>
+<script class="javascript" src="./从Code Review 谈如何做技术_files/shBrushRuby.js"></script>
+<script class="javascript" src="./从Code Review 谈如何做技术_files/shBrushCss.js"></script>
+<script class="javascript" src="./从Code Review 谈如何做技术_files/shBrushCpp.js"></script>
+<script class="javascript">
+dp.SyntaxHighlighter.ClipboardSwf = 'http://coolshell.cn//wp-content/plugins/google-syntax-highlighter/Scripts/clipboard.swf';
+dp.SyntaxHighlighter.HighlightAll('code');
+</script>
+	<!-- Start of StatCounter Code -->
+	<script type="text/javascript">
+	<!-- 
+		var sc_project=8326668; 
+		var sc_security="cccb27f2"; 
+		var sc_invisible=1;
+	//-->
+	</script>
+	<script type="text/javascript" src="./从Code Review 谈如何做技术_files/counter_xhtml.js"></script>
+<noscript>&lt;div class="statcounter"&gt;&lt;a title="web analytics" href="http://statcounter.com/"&gt;&lt;img class="statcounter" src="http://c.statcounter.com/8326668/0/cccb27f2/1/" alt="web analytics" /&gt;&lt;/a&gt;&lt;/div&gt;</noscript>	
+	<!-- End of StatCounter Code -->
+<!-- Powered by WPtouch: 3.4.4 --><script type="text/javascript" src="./从Code Review 谈如何做技术_files/form.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var ratingsL10n = {"plugin_url":"http:\/\/coolshell.cn\/wp-content\/plugins\/wp-postratings","ajax_url":"http:\/\/coolshell.cn\/wp-admin\/admin-ajax.php","text_wait":"Please rate only 1 post at a time.","image":"stars_crystal","image_ext":"gif","max":"5","show_loading":"1","show_fading":"1","custom":"0"};
+var ratings_mouseover_image=new Image();ratings_mouseover_image.src=ratingsL10n.plugin_url+"/images/"+ratingsL10n.image+"/rating_over."+ratingsL10n.image_ext;;
+/* ]]> */
+</script>
+<script type="text/javascript" src="./从Code Review 谈如何做技术_files/postratings-js.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var viewsCacheL10n = {"admin_ajax_url":"http:\/\/coolshell.cn\/wp-admin\/admin-ajax.php","post_id":"11432"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./从Code Review 谈如何做技术_files/postviews-cache.js"></script>
+<script src="./从Code Review 谈如何做技术_files/stat.php" language="JavaScript" charset="gb2312"></script><script src="./从Code Review 谈如何做技术_files/core.php" charset="utf-8" type="text/javascript"></script><a href="http://www.cnzz.com/stat/website.php?web_id=1785679" target="_blank" title="站长统计"><img border="0" hspace="0" vspace="0" src="./从Code Review 谈如何做技术_files/pic1.gif"></a>
+
+
+
+
+
+
+<script src="./从Code Review 谈如何做技术_files/jquery.min.js"></script>
+<script src="./从Code Review 谈如何做技术_files/jquery.bpopup-0.8.0.min.js"></script>
+
+<script type="text/javascript">
+;(function($) {
+    $(function() {
+        var url=document.referrer;
+        if ( url && url.search("http://")>-1) {
+            var refurl =  url.match(/:\/\/(.[^/]+)/)[1];
+            if(refurl.indexOf("baidu.com")>-1){
+                $('#nobaidu_dlg').bPopup();
+            }
+        }
+    });
+
+})(jQuery);
+</script>
+
+
+
+<div id="nobaidu_dlg" style="background-color:#fff; border-radius:15px;color:#000;display:none;padding:20px;min-width:450px;min-height:180px;">
+    <!--<span class="bClose" style="cursor:pointer; position:absolute; right:10px;top:5px;">x<span/>-->
+    <img src="./从Code Review 谈如何做技术_files/nobaidu.jpg" align="left">
+     <p style="margin-left:200px;margin-top: 20px; line-height: 30px;">
+     检测到你还在使用百度这个搜索引擎，<br>
+     作为一个程序员，这是一种自暴自弃！<br>
+     <br>
+     </p>
+     <p align="center" style="margin-top:20px;">
+     <b><a href="http://coolshell.cn/articles/7186.html">做环保的程序员，从不用百度开始！</a></b>
+     </p>
+</div>
+
+
+<!-- Dynamic page generated in 0.593 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2014-08-13 11:53:58 -->
+
+<!-- Compression = gzip --></body></html>

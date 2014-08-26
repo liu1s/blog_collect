@@ -3,18 +3,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN"><head profile="http://gmpg.org/xfn/11"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>  浅谈MySQL索引背后的数据结构及算法 | 量子恒道官方博客</title>
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/style.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/style.css">
 	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://blog.linezing.com/?feed=rss2">
 	<link rel="pingback" href="http://blog.linezing.com/xmlrpc.php">
 			<link rel="alternate" type="application/rss+xml" title="量子恒道官方博客 » 浅谈MySQL索引背后的数据结构及算法评论Feed" href="http://blog.linezing.com/?feed=rss2&p=798">
-<script type="text/javascript" async="" src="http://b2c.linezing.com/stat/tj.js"></script><script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/comment-reply.min.js"></script>
+<script type="text/javascript" async="" src="http://b2c.linezing.com/stat/tj.js"></script><script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/comment-reply.min.js"></script>
 <link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://blog.linezing.com/xmlrpc.php?rsd">
 <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://blog.linezing.com/wp-includes/wlwmanifest.xml"> 
 <link rel="prev" title="HBase Java客户端编程" href="http://blog.linezing.com/?p=713">
 <link rel="next" title="[量子后端分享会]GTD" href="http://blog.linezing.com/?p=821">
 <meta name="generator" content="WordPress 3.6.1">
 <link rel="canonical" href="http://blog.linezing.com/?p=798">
-<link rel="stylesheet" type="text/css" href="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shCore.css"><link rel="stylesheet" type="text/css" href="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shThemeDefault.css"><meta id="syntaxhighlighteranchor" name="syntaxhighlighter-version" content="3.1.3">
+<link rel="stylesheet" type="text/css" href="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shCore.css"><link rel="stylesheet" type="text/css" href="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shThemeDefault.css"><meta id="syntaxhighlighteranchor" name="syntaxhighlighter-version" content="3.1.3">
 </head>
 <body>
 <div id="wrapper">
@@ -58,7 +58,7 @@
 <p><a href="http://blog.linezing.com/?p=798#nav-3-2">InnoDB索引实现</a></p>
 <p><a href="http://blog.linezing.com/?p=798#nav-4">索引使用策略及优化</a></p>
 <p><a href="http://blog.linezing.com/?p=798#nav-4-1">示例数据库</a></p>
-<p><a href="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客.html">最左前缀原理与相关优化</a></p>
+<p><a href="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客.html">最左前缀原理与相关优化</a></p>
 <p><a href="http://blog.linezing.com/?p=798#nav-4-3">索引选择性与前缀索引</a></p>
 <p><a href="http://blog.linezing.com/?p=798#nav-4-4">InnoDB的主键选择与插入优化</a></p>
 <p><a href="http://blog.linezing.com/?p=798#nav-5">后记</a></p>
@@ -73,7 +73,7 @@
 <p>可以从表“my_table”中获得“col2”为“77”的数据记录。</p>
 <p>我们都希望查询数据的速度能尽可能的快，因此数据库系统的设计者会从查询算法的角度进行优化。最基本的查询算法当然是<a href="http://en.wikipedia.org/wiki/Linear_search" target="_blank">顺序查找</a>（linear search），遍历“my_table”然后逐行匹配“col2”的值是否是“77”，这种复杂度为O(n)的算法在数据量很大时显然是糟糕的，好在计算机科学的发展提供了很多更优秀的查找算法，例如<a href="http://en.wikipedia.org/wiki/Binary_search_algorithm" target="_blank">二分查找</a>（binary search）、<a href="http://en.wikipedia.org/wiki/Binary_search_tree" target="_blank">二叉树查找</a>（binary tree search）等。如果稍微分析一下会发现，每种查找算法都只能应用于特定的数据结构之上，例如二分查找要求被检索数据有序，而二叉树查找只能应用于<a href="http://en.wikipedia.org/wiki/Binary_search_tree" target="_blank">二叉查找树</a>上，但是数据本身的组织结构不可能完全满足各种数据结构（例如，理论上不可能同时将两列都按顺序进行组织），所以，<strong>在数据之外，数据库系统还维护着满足特定查找算法的数据结构，这些数据结构以某种方式引用（指向）数据，这样就可以在这些数据结构上实现高级查找算法。这种数据结构，就是索引</strong>。</p>
 <p>看一个例子：</p>
-<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border-width: 0px" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/20110706005808162.png" border="0" alt="image" width="588" height="297"></p>
+<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border-width: 0px" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/20110706005808162.png" border="0" alt="image" width="588" height="297"></p>
 <p><strong>图1</strong></p>
 <p>图1展示了一种可能的索引方式。左边是数据表，一共有两列七条记录，最左边的是数据记录的物理地址（注意逻辑上相邻的记录在磁盘上也并不是一定物理相邻的）。为了加快Col2的查找，可以维护一个右边所示的二叉查找树，每个节点分别包含索引键值和一个指向对应数据记录物理地址的指针，这样就可以运用二叉查找在O(log<sub>2</sub>n)的复杂度内获取到相应数据。</p>
 <p>虽然这是一个货真价实的索引，但是实际的数据库系统几乎没有使用二叉查找树或其进化品种<a href="http://en.wikipedia.org/wiki/Red-black_tree" target="_blank">红黑树</a>（red-black tree）实现的，原因会在下文介绍。</p>
@@ -96,7 +96,7 @@
 <li>如果某个指针在节点node的左右相邻key分别是key<sub>i</sub>和key<sub>i+1</sub>且不为null，则其指向节点的所有key小于v(key<sub>i+1</sub>)且大于v(key<sub>i</sub>)。</li>
 </ol>
 <p>图2是一个d=2的B-Tree示意图。</p>
-<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border-width: 0px" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/201107060058097555.png" border="0" alt="image" width="458" height="115"></p>
+<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border-width: 0px" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/201107060058097555.png" border="0" alt="image" width="458" height="115"></p>
 <p><strong>图2</strong></p>
 <p>由于B-Tree的特性，在B-Tree中按key检索数据的算法非常直观：首先从根节点进行二分查找，如果找到则返回对应节点的data，否则对相应区间的指针指向的节点递归进行查找，直到找到节点或找到null指针，前者查找成功，后者查找失败。B-Tree上查找算法的伪代码如下：</p>
 <div class="cnblogs_Highlighter">
@@ -125,13 +125,13 @@ data = BTree_Search(root, my_key);</pre>
 <li>内节点不存储data，只存储key；叶子节点不存储指针。</li>
 </ol>
 <p>图3是一个简单的B+Tree示意。</p>
-<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border-width: 0px" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/20110706005810487.png" border="0" alt="image" width="543" height="191"></p>
+<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border-width: 0px" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/20110706005810487.png" border="0" alt="image" width="543" height="191"></p>
 <p><strong>图3</strong></p>
 <p>由于并不是所有节点都具有相同的域，因此B+Tree中叶节点和内节点一般大小不同。这点与B-Tree不同，虽然B-Tree中不同节点存放的key和指针可能数量不一致，但是每个节点的域和上限是一致的，所以在实现中B-Tree往往对每个节点申请同等大小的空间。</p>
 <p>一般来说，B+Tree比B-Tree更适合实现外存储索引结构，具体原因与外存储器原理及计算机存取原理有关，将在下面讨论。</p>
 <h3>带有顺序访问指针的B+Tree</h3>
 <p>一般在数据库系统或文件系统中使用的B+Tree结构都在经典B+Tree的基础上进行了优化，增加了顺序访问指针。</p>
-<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border-width: 0px" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/201107061549262400.png" border="0" alt="image" width="543" height="191"></p>
+<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border-width: 0px" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/201107061549262400.png" border="0" alt="image" width="543" height="191"></p>
 <p><strong>图4</strong></p>
 <p>如图4所示，在B+Tree的每个叶子节点增加一个指向相邻叶子节点的指针，就形成了带有顺序访问指针的B+Tree。做这个优化的目的是为了提高区间访问的性能，例如图4中如果要查询key为从18到49的所有数据记录，当找到18后，只需顺着节点和指针顺序遍历就可以一次性访问到所有数据节点，极大提到了区间查询效率。</p>
 <p>这一节对B-Tree和B+Tree进行了一个简单的介绍，下一节结合存储器存取原理介绍为什么目前B+Tree是数据库系统实现索引的首选数据结构。</p>
@@ -140,7 +140,7 @@ data = BTree_Search(root, my_key);</pre>
 <p>一般来说，索引本身也很大，不可能全部存储在内存中，因此索引往往以索引文件的形式存储的磁盘上。这样的话，索引查找过程中就要产生磁盘I/O消耗，相对于内存存取，I/O存取的消耗要高几个数量级，所以评价一个数据结构作为索引的优劣最重要的指标就是在查找过程中磁盘I/O操作次数的渐进复杂度。换句话说，索引的结构组织要尽量减少查找过程中磁盘I/O的存取次数。下面先介绍内存和磁盘存取原理，然后再结合这些原理分析B-/+Tree作为索引的效率。</p>
 <h3>主存存取原理</h3>
 <p>目前计算机使用的主存基本都是随机读写存储器（RAM），现代RAM的结构和存取原理比较复杂，这里本文抛却具体差别，抽象出一个十分简单的存取模型来说明RAM的工作原理。</p>
-<p><a href="http://images.cnblogs.com/cnblogs_com/leoo2sk/201107/201107111112524101.png"><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border: 0px" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/201107111113062648.png" border="0" alt="image" width="382" height="229"></a></p>
+<p><a href="http://images.cnblogs.com/cnblogs_com/leoo2sk/201107/201107111112524101.png"><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border: 0px" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/201107111113062648.png" border="0" alt="image" width="382" height="229"></a></p>
 <p><strong>图5</strong></p>
 <p>从抽象角度看，主存是一系列的存储单元组成的矩阵，每个存储单元存储固定大小的数据。每个存储单元有唯一的地址，现代主存的编址规则比较复杂，这里将其简化成一个二维地址：通过一个行地址和一个列地址可以唯一定位到一个存储单元。图5展示了一个4 x 4的主存模型。</p>
 <p>主存的存取过程如下：</p>
@@ -150,11 +150,11 @@ data = BTree_Search(root, my_key);</pre>
 <h3>磁盘存取原理</h3>
 <p>上文说过，索引一般以文件形式存储在磁盘上，索引检索需要磁盘I/O操作。与主存不同，磁盘I/O存在机械运动耗费，因此磁盘I/O的时间消耗是巨大的。</p>
 <p>图6是磁盘的整体结构示意图。</p>
-<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border: 0px" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/201107111113521316.png" border="0" alt="image" width="267" height="172"></p>
+<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border: 0px" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/201107111113521316.png" border="0" alt="image" width="267" height="172"></p>
 <p><strong>图6</strong></p>
 <p>一个磁盘由大小相同且同轴的圆形盘片组成，磁盘可以转动（各个磁盘必须同步转动）。在磁盘的一侧有磁头支架，磁头支架固定了一组磁头，每个磁头负责存取一个磁盘的内容。磁头不能转动，但是可以沿磁盘半径方向运动（实际是斜切向运动），每个磁头同一时刻也必须是同轴的，即从正上方向下看，所有磁头任何时候都是重叠的（不过目前已经有多磁头独立技术，可不受此限制）。</p>
 <p>图7是磁盘结构的示意图。</p>
-<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border-width: 0px" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/201107061549283564.png" border="0" alt="image" width="269" height="246"></p>
+<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border-width: 0px" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/201107061549283564.png" border="0" alt="image" width="269" height="246"></p>
 <p><strong>图7</strong></p>
 <p>盘片被划分成一系列同心环，圆心是盘片中心，每个同心环叫做一个磁道，所有半径相同的磁道组成一个柱面。磁道被沿半径线划分成一个个小的段，每个段叫做一个扇区，每个扇区是磁盘的最小存储单元。为了简单起见，我们下面假设磁盘只有一个盘片和一个磁头。</p>
 <p>当需要从磁盘读取数据时，系统会将数据逻辑地址传给磁盘，磁盘的控制电路按照寻址逻辑将逻辑地址翻译成物理地址，即确定要读的数据在哪个磁道，哪个扇区。为了读取这个扇区的数据，需要将磁头放到这个扇区上方，为了实现这一点，磁头需要移动对准相应磁道，这个过程叫做寻道，所耗费时间叫做寻道时间，然后磁盘旋转将目标扇区旋转到磁头下，这个过程耗费的时间叫做旋转时间。</p>
@@ -181,21 +181,21 @@ data = BTree_Search(root, my_key);</pre>
 <p>在MySQL中，索引属于存储引擎级别的概念，不同存储引擎对索引的实现方式是不同的，本文主要讨论MyISAM和InnoDB两个存储引擎的索引实现方式。</p>
 <h2>MyISAM索引实现</h2>
 <p>MyISAM引擎使用B+Tree作为索引结构，叶节点的data域存放的是数据记录的地址。下图是MyISAM索引的原理图：</p>
-<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border-width: 0px" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/201107062333213114.png" border="0" alt="image" width="664" height="534"></p>
+<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border-width: 0px" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/201107062333213114.png" border="0" alt="image" width="664" height="534"></p>
 <p><strong>图8</strong></p>
 <p>这里设表一共有三列，假设我们以Col1为主键，则图8是一个MyISAM表的主索引（Primary key）示意。可以看出MyISAM的索引文件仅仅保存数据记录的地址。<strong>在MyISAM中，主索引和辅助索引（Secondary key）在结构上没有任何区别，只是主索引要求key是唯一的，而辅助索引的key可以重复。</strong>如果我们在Col2上建立一个辅助索引，则此索引的结构如下图所示：</p>
-<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border-width: 0px" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/201107062333248673.png" border="0" alt="image" width="664" height="534"></p>
+<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border-width: 0px" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/201107062333248673.png" border="0" alt="image" width="664" height="534"></p>
 <p><strong>图9</strong></p>
 <p>同样也是一颗B+Tree，data域保存数据记录的地址。因此，<strong>MyISAM中索引检索的算法为首先按照B+Tree搜索算法搜索索引，如果指定的Key存在，则取出其data域的值，然后以data域的值为地址，读取相应数据记录。</strong></p>
 <p>MyISAM的索引方式也叫做“非聚集”的，之所以这么称呼是为了与InnoDB的聚集索引区分。</p>
 <h2>InnoDB索引实现</h2>
 <p>虽然InnoDB也使用B+Tree作为索引结构，但具体实现方式却与MyISAM截然不同。</p>
 <p><strong>第一个重大区别是InnoDB的数据文件本身就是索引文件。</strong>从上文知道，MyISAM索引文件和数据文件是分离的，索引文件仅保存数据记录的地址。而在InnoDB中，表数据文件本身就是按B+Tree组织的一个索引结构，这棵树的叶节点data域保存了完整的数据记录。这个索引的key是数据表的主键，因此InnoDB表数据文件本身就是主索引。</p>
-<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border-width: 0px" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/201107062333257669.png" border="0" alt="image" width="543" height="241"></p>
+<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border-width: 0px" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/201107062333257669.png" border="0" alt="image" width="543" height="241"></p>
 <p><strong>图10</strong></p>
 <p>图10是InnoDB主索引（同时也是数据文件）的示意图，可以看到叶节点包含了完整的数据记录。这种索引叫做聚集索引。因为InnoDB的数据文件本身要按主键聚集，所以InnoDB要求表必须有主键（MyISAM可以没有），如果没有显式指定，则MySQL系统会自动选择一个可以唯一标识数据记录的列作为主键，如果不存在这种列，则MySQL自动为InnoDB表生成一个隐含字段作为主键，这个字段长度为6个字节，类型为长整形。</p>
 <p><strong>第二个与MyISAM索引的不同是InnoDB的辅助索引data域存储相应记录主键的值而不是地址。</strong>换句话说，InnoDB的所有辅助索引都引用主键作为data域。例如，图11为定义在Col3上的一个辅助索引：</p>
-<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border-width: 0px" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/201107102337044781.png" border="0" alt="image" width="543" height="222"></p>
+<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border-width: 0px" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/201107102337044781.png" border="0" alt="image" width="543" height="222"></p>
 <p><strong>图11</strong></p>
 <p>这里以英文字符的ASCII码作为比较准则。<strong>聚集索引这种实现方式使得按主键的搜索十分高效，但是辅助索引搜索需要检索两遍索引：首先检索辅助索引获得主键，然后用主键到主索引中检索获得记录。</strong></p>
 <p>了解不同存储引擎的索引实现方式对于正确使用和优化索引都非常有帮助，例如知道了InnoDB的索引实现后，就很容易明白为什么不建议使用过长的字段作为主键，因为所有辅助索引都引用主索引，过长的主索引会令辅助索引变得过大。再例如，用非单调的字段作为主键在InnoDB中不是个好主意，因为InnoDB数据文件本身是一颗B+Tree，非单调的主键会造成在插入新记录时数据文件为了维持B+Tree的特性而频繁的分裂调整，十分低效，而使用自增字段作为主键则是一个很好的选择。</p>
@@ -204,7 +204,7 @@ data = BTree_Search(root, my_key);</pre>
 <p>MySQL的优化主要分为结构优化（Scheme optimization）和查询优化（Query optimization）。本章讨论的高性能索引策略主要属于结构优化范畴。本章的内容完全基于上文的理论基础，实际上一旦理解了索引背后的机制，那么选择高性能的策略就变成了纯粹的推理，并且可以理解这些策略背后的逻辑。</p>
 <h2>示例数据库</h2>
 <p>为了讨论索引策略，需要一个数据量不算小的数据库作为示例。本文选用MySQL官方文档中提供的示例数据库之一：employees。这个数据库关系复杂度适中，且数据量较大。下图是这个数据库的E-R关系图（引用自MySQL官方手册）：</p>
-<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border-width: 0px" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/201107071935378489.png" border="0" alt="image" width="833" height="655"></p>
+<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border-width: 0px" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/201107071935378489.png" border="0" alt="image" width="833" height="655"></p>
 <p><strong>图12</strong></p>
 <p>MySQL官方文档中关于此数据库的页面为<a title="http://dev.mysql.com/doc/employee/en/employee.html" href="http://dev.mysql.com/doc/employee/en/employee.html">http://dev.mysql.com/doc/employee/en/employee.html</a>。里面详细介绍了此数据库，并提供了下载地址和导入方法，如果有兴趣导入此数据库到自己的MySQL可以参考文中内容。</p>
 <h2>最左前缀原理与相关优化</h2>
@@ -459,11 +459,11 @@ ADD INDEX `first_name_last_name4` (first_name, last_name(4));</pre>
 <p>经常看到有帖子或博客讨论主键选择问题，有人建议使用业务无关的自增主键，有人觉得没有必要，完全可以使用如学号或身份证号这种唯一字段作为主键。不论支持哪种论点，大多数论据都是业务层面的。如果从数据库索引优化角度看，使用InnoDB引擎而不使用自增主键绝对是一个糟糕的主意。</p>
 <p>上文讨论过InnoDB的索引实现，InnoDB使用聚集索引，数据记录本身被存于主索引（一颗B+Tree）的叶子节点上。这就要求同一个叶子节点内（大小为一个内存页或磁盘页）的各条数据记录按主键顺序存放，因此每当有一条新的记录插入时，MySQL会根据其主键将其插入适当的节点和位置，如果页面达到装载因子（InnoDB默认为15/16），则开辟一个新的页（节点）。</p>
 <p>如果表使用自增主键，那么每次插入新的记录，记录就会顺序添加到当前索引节点的后续位置，当一页写满，就会自动开辟一个新的页。如下图所示：</p>
-<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border-width: 0px" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/201107102337059665.png" border="0" alt="image" width="437" height="175"></p>
+<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border-width: 0px" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/201107102337059665.png" border="0" alt="image" width="437" height="175"></p>
 <p><strong>图13</strong></p>
 <p>这样就会形成一个紧凑的索引结构，近似顺序填满。由于每次插入时也不需要移动已有数据，因此效率很高，也不会增加很多开销在维护索引上。</p>
 <p>如果使用非自增主键（如果身份证号或学号等），由于每次插入主键的值近似于随机，因此每次新纪录都要被插到现有索引页得中间某个位置：</p>
-<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border-width: 0px" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/201107102337098712.png" border="0" alt="image" width="229" height="175"></p>
+<p><img style="padding-left: 0px;padding-right: 0px;float: none;margin-left: auto;margin-right: auto;padding-top: 0px;border-width: 0px" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/201107102337098712.png" border="0" alt="image" width="229" height="175"></p>
 <p><strong>图14</strong></p>
 <p>此时MySQL不得不为了将新记录插到合适位置而移动数据，甚至目标页面可能已经被回写到磁盘上而从缓存中清掉，此时又要从磁盘上读回来，这增加了很多开销，同时频繁的移动、分页操作造成了大量的碎片，得到了不够紧凑的索引结构，后续不得不通过OPTIMIZE TABLE来重建表并优化填充页面。</p>
 <p>因此，只要可以，请尽量在InnoDB上采用自增字段做主键。</p>
@@ -490,7 +490,7 @@ ADD INDEX `first_name_last_name4` (first_name, last_name(4));</pre>
 					<li class="comment even thread-even depth-1" id="li-comment-639">
 	<div id="comment-639">
 		<div class="comment-author vcard">
-			<img alt="" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/0b33034f8c214eec4c1e57400d2f5351" class="avatar avatar-40 photo" height="40" width="40">						<cite class="fn"><a href="http://www.netreb.com/" rel="external nofollow" class="url">热步</a></cite>
+			<img alt="" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/0b33034f8c214eec4c1e57400d2f5351" class="avatar avatar-40 photo" height="40" width="40">						<cite class="fn"><a href="http://www.netreb.com/" rel="external nofollow" class="url">热步</a></cite>
 			<span class="comment-meta commentmetadata"><a href="http://blog.linezing.com/?p=798#comment-639">2011 年 7 月 26 日下午 9:59</a></span>
 			
 		</div>
@@ -502,7 +502,7 @@ ADD INDEX `first_name_last_name4` (first_name, last_name(4));</pre>
 <li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-640">
 	<div id="comment-640">
 		<div class="comment-author vcard">
-			<img alt="" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/c14bfe2df0b9d969aab1a0d7d63239d8" class="avatar avatar-40 photo" height="40" width="40">						<cite class="fn"><a href="http://www.dmold.com/" rel="external nofollow" class="url">DMOLD模具设计</a></cite>
+			<img alt="" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/c14bfe2df0b9d969aab1a0d7d63239d8" class="avatar avatar-40 photo" height="40" width="40">						<cite class="fn"><a href="http://www.dmold.com/" rel="external nofollow" class="url">DMOLD模具设计</a></cite>
 			<span class="comment-meta commentmetadata"><a href="http://blog.linezing.com/?p=798#comment-640">2011 年 7 月 27 日下午 5:24</a></span>
 			
 		</div>
@@ -514,11 +514,11 @@ ADD INDEX `first_name_last_name4` (first_name, last_name(4));</pre>
 <li class="comment even thread-even depth-1" id="li-comment-643">
 	<div id="comment-643">
 		<div class="comment-author vcard">
-			<img alt="" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/81a1fc44eb28cffeb76021d88d8d00af" class="avatar avatar-40 photo" height="40" width="40">						<cite class="fn"><a href="http://sjolzy.cn/" rel="external nofollow" class="url">sjolzy</a></cite>
+			<img alt="" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/81a1fc44eb28cffeb76021d88d8d00af" class="avatar avatar-40 photo" height="40" width="40">						<cite class="fn"><a href="http://sjolzy.cn/" rel="external nofollow" class="url">sjolzy</a></cite>
 			<span class="comment-meta commentmetadata"><a href="http://blog.linezing.com/?p=798#comment-643">2011 年 9 月 5 日上午 11:29</a></span>
 			
 		</div>
-				<p>很有帮助！谢谢啦！救了我的急 <img src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/icon_biggrin.gif" alt=":D" class="wp-smiley"> </p>
+				<p>很有帮助！谢谢啦！救了我的急 <img src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/icon_biggrin.gif" alt=":D" class="wp-smiley"> </p>
 		<div class="reply">
 			<a class="comment-reply-link" href="http://blog.linezing.com/?p=798&replytocom=643#respond" onclick="return addComment.moveForm(&quot;comment-643&quot;, &quot;643&quot;, &quot;respond&quot;, &quot;798&quot;)">回复</a>		</div>
 	</div>
@@ -526,7 +526,7 @@ ADD INDEX `first_name_last_name4` (first_name, last_name(4));</pre>
 <li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-644">
 	<div id="comment-644">
 		<div class="comment-author vcard">
-			<img alt="" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/25005d109914a61be3739439073fd17f" class="avatar avatar-40 photo" height="40" width="40">						<cite class="fn">啥都想明白</cite>
+			<img alt="" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/25005d109914a61be3739439073fd17f" class="avatar avatar-40 photo" height="40" width="40">						<cite class="fn">啥都想明白</cite>
 			<span class="comment-meta commentmetadata"><a href="http://blog.linezing.com/?p=798#comment-644">2011 年 9 月 6 日下午 4:25</a></span>
 			
 		</div>
@@ -538,7 +538,7 @@ ADD INDEX `first_name_last_name4` (first_name, last_name(4));</pre>
 <li class="comment even thread-even depth-1" id="li-comment-645">
 	<div id="comment-645">
 		<div class="comment-author vcard">
-			<img alt="" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/4e3acac214aaa8ad5ee7305e50b479c8" class="avatar avatar-40 photo" height="40" width="40">						<cite class="fn"><a href="http://ormqekherzek.com/" rel="external nofollow" class="url">dmeqxjrnbjd</a></cite>
+			<img alt="" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/4e3acac214aaa8ad5ee7305e50b479c8" class="avatar avatar-40 photo" height="40" width="40">						<cite class="fn"><a href="http://ormqekherzek.com/" rel="external nofollow" class="url">dmeqxjrnbjd</a></cite>
 			<span class="comment-meta commentmetadata"><a href="http://blog.linezing.com/?p=798#comment-645">2011 年 9 月 12 日下午 2:00</a></span>
 			
 		</div>
@@ -550,7 +550,7 @@ ADD INDEX `first_name_last_name4` (first_name, last_name(4));</pre>
 <li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-646">
 	<div id="comment-646">
 		<div class="comment-author vcard">
-			<img alt="" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/5cd33abaee7435af30036f05280706fd" class="avatar avatar-40 photo" height="40" width="40">						<cite class="fn">阿甘</cite>
+			<img alt="" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/5cd33abaee7435af30036f05280706fd" class="avatar avatar-40 photo" height="40" width="40">						<cite class="fn">阿甘</cite>
 			<span class="comment-meta commentmetadata"><a href="http://blog.linezing.com/?p=798#comment-646">2011 年 9 月 24 日上午 12:56</a></span>
 			
 		</div>
@@ -562,7 +562,7 @@ ADD INDEX `first_name_last_name4` (first_name, last_name(4));</pre>
 <li class="comment even thread-even depth-1" id="li-comment-651">
 	<div id="comment-651">
 		<div class="comment-author vcard">
-			<img alt="" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/8c14fa5022a1dadef824290db51e8415" class="avatar avatar-40 photo" height="40" width="40">						<cite class="fn"><a href="http://nbwaver.com/" rel="external nofollow" class="url">lamp爱好者</a></cite>
+			<img alt="" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/8c14fa5022a1dadef824290db51e8415" class="avatar avatar-40 photo" height="40" width="40">						<cite class="fn"><a href="http://nbwaver.com/" rel="external nofollow" class="url">lamp爱好者</a></cite>
 			<span class="comment-meta commentmetadata"><a href="http://blog.linezing.com/?p=798#comment-651">2011 年 11 月 16 日下午 10:19</a></span>
 			
 		</div>
@@ -574,7 +574,7 @@ ADD INDEX `first_name_last_name4` (first_name, last_name(4));</pre>
 <li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-654">
 	<div id="comment-654">
 		<div class="comment-author vcard">
-			<img alt="" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/54e0c476874e081e72f29935b382788f" class="avatar avatar-40 photo" height="40" width="40">						<cite class="fn">LittleYang</cite>
+			<img alt="" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/54e0c476874e081e72f29935b382788f" class="avatar avatar-40 photo" height="40" width="40">						<cite class="fn">LittleYang</cite>
 			<span class="comment-meta commentmetadata"><a href="http://blog.linezing.com/?p=798#comment-654">2011 年 12 月 29 日上午 10:36</a></span>
 			
 		</div>
@@ -586,7 +586,7 @@ ADD INDEX `first_name_last_name4` (first_name, last_name(4));</pre>
 <li class="comment even thread-even depth-1" id="li-comment-676">
 	<div id="comment-676">
 		<div class="comment-author vcard">
-			<img alt="" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/b897e8fa703aedf4793defab8b696f4c" class="avatar avatar-40 photo" height="40" width="40">						<cite class="fn">石建同学</cite>
+			<img alt="" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/b897e8fa703aedf4793defab8b696f4c" class="avatar avatar-40 photo" height="40" width="40">						<cite class="fn">石建同学</cite>
 			<span class="comment-meta commentmetadata"><a href="http://blog.linezing.com/?p=798#comment-676">2012 年 2 月 15 日下午 11:30</a></span>
 			
 		</div>
@@ -598,7 +598,7 @@ ADD INDEX `first_name_last_name4` (first_name, last_name(4));</pre>
 <li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-678">
 	<div id="comment-678">
 		<div class="comment-author vcard">
-			<img alt="" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/88ec4d48606cdc624f2b7e086291b4a9" class="avatar avatar-40 photo" height="40" width="40">						<cite class="fn"><a href="http://topseolinks.com/" rel="external nofollow" class="url">SEO India</a></cite>
+			<img alt="" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/88ec4d48606cdc624f2b7e086291b4a9" class="avatar avatar-40 photo" height="40" width="40">						<cite class="fn"><a href="http://topseolinks.com/" rel="external nofollow" class="url">SEO India</a></cite>
 			<span class="comment-meta commentmetadata"><a href="http://blog.linezing.com/?p=798#comment-678">2012 年 2 月 18 日下午 7:21</a></span>
 			
 		</div>
@@ -656,28 +656,28 @@ ADD INDEX `first_name_last_name4` (first_name, last_name(4));</pre>
     }
 /* ]]> */
 </script>
-<a href="javascript:grin(':?:')"><img src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/icon_question.gif" alt=""></a>
-<a href="javascript:grin(':razz:')"><img src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/icon_razz.gif" alt=""></a>
-<a href="javascript:grin(':sad:')"><img src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/icon_sad.gif" alt=""></a>
-<a href="javascript:grin(':evil:')"><img src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/icon_evil.gif" alt=""></a>
-<a href="javascript:grin(':!:')"><img src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/icon_exclaim.gif" alt=""></a>
-<a href="javascript:grin(':smile:')"><img src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/icon_smile.gif" alt=""></a>
-<a href="javascript:grin(':oops:')"><img src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/icon_redface.gif" alt=""></a>
-<a href="javascript:grin(':grin:')"><img src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/icon_biggrin.gif" alt=""></a>
-<a href="javascript:grin(':eek:')"><img src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/icon_surprised.gif" alt=""></a>
-<a href="javascript:grin(':shock:')"><img src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/icon_eek.gif" alt=""></a>
-<a href="javascript:grin(':???:')"><img src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/icon_confused.gif" alt=""></a>
-<a href="javascript:grin(':cool:')"><img src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/icon_cool.gif" alt=""></a>
-<a href="javascript:grin(':lol:')"><img src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/icon_lol.gif" alt=""></a>
-<a href="javascript:grin(':mad:')"><img src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/icon_mad.gif" alt=""></a>
-<a href="javascript:grin(':twisted:')"><img src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/icon_twisted.gif" alt=""></a>
-<a href="javascript:grin(':roll:')"><img src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/icon_rolleyes.gif" alt=""></a>
-<a href="javascript:grin(':wink:')"><img src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/icon_wink.gif" alt=""></a>
-<a href="javascript:grin(':idea:')"><img src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/icon_idea.gif" alt=""></a>
-<a href="javascript:grin(':arrow:')"><img src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/icon_arrow.gif" alt=""></a>
-<a href="javascript:grin(':neutral:')"><img src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/icon_neutral.gif" alt=""></a>
-<a href="javascript:grin(':cry:')"><img src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/icon_cry.gif" alt=""></a>
-<a href="javascript:grin(':mrgreen:')"><img src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/icon_mrgreen.gif" alt=""></a>
+<a href="javascript:grin(':?:')"><img src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/icon_question.gif" alt=""></a>
+<a href="javascript:grin(':razz:')"><img src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/icon_razz.gif" alt=""></a>
+<a href="javascript:grin(':sad:')"><img src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/icon_sad.gif" alt=""></a>
+<a href="javascript:grin(':evil:')"><img src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/icon_evil.gif" alt=""></a>
+<a href="javascript:grin(':!:')"><img src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/icon_exclaim.gif" alt=""></a>
+<a href="javascript:grin(':smile:')"><img src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/icon_smile.gif" alt=""></a>
+<a href="javascript:grin(':oops:')"><img src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/icon_redface.gif" alt=""></a>
+<a href="javascript:grin(':grin:')"><img src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/icon_biggrin.gif" alt=""></a>
+<a href="javascript:grin(':eek:')"><img src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/icon_surprised.gif" alt=""></a>
+<a href="javascript:grin(':shock:')"><img src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/icon_eek.gif" alt=""></a>
+<a href="javascript:grin(':???:')"><img src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/icon_confused.gif" alt=""></a>
+<a href="javascript:grin(':cool:')"><img src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/icon_cool.gif" alt=""></a>
+<a href="javascript:grin(':lol:')"><img src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/icon_lol.gif" alt=""></a>
+<a href="javascript:grin(':mad:')"><img src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/icon_mad.gif" alt=""></a>
+<a href="javascript:grin(':twisted:')"><img src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/icon_twisted.gif" alt=""></a>
+<a href="javascript:grin(':roll:')"><img src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/icon_rolleyes.gif" alt=""></a>
+<a href="javascript:grin(':wink:')"><img src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/icon_wink.gif" alt=""></a>
+<a href="javascript:grin(':idea:')"><img src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/icon_idea.gif" alt=""></a>
+<a href="javascript:grin(':arrow:')"><img src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/icon_arrow.gif" alt=""></a>
+<a href="javascript:grin(':neutral:')"><img src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/icon_neutral.gif" alt=""></a>
+<a href="javascript:grin(':cry:')"><img src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/icon_cry.gif" alt=""></a>
+<a href="javascript:grin(':mrgreen:')"><img src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/icon_mrgreen.gif" alt=""></a>
 <br>						<p><textarea name="comment" id="comment" cols="100%" rows="6" tabindex="4" onkeydown="if(event.ctrlKey&amp;&amp;event.keyCode==13){document.getElementById(&#39;submit&#39;).click();return false};"></textarea></p>
 						<p><input name="submit" type="submit" id="submit" tabindex="5" value="Submit"> [ Ctrl + Enter ] <input type="hidden" name="comment_post_ID" value="798" id="comment_post_ID">
 <input type="hidden" name="comment_parent" id="comment_parent" value="0">
@@ -800,36 +800,36 @@ ADD INDEX `first_name_last_name4` (first_name, last_name(4));</pre>
 		<span id="back-to-top">Δ <a href="http://blog.linezing.com/?p=798#wrapper" rel="nofollow" title="Back to top">Top</a></span>
 	</div><!--footer-->
 </div><!--wrapper-->
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shCore.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushAS3.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushBash.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushColdFusion.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushClojure.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushCpp.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushCSharp.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushCss.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushDelphi.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushDiff.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushErlang.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushFSharp.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushGroovy.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushJava.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushJavaFX.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushJScript.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushLatex.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushMatlabKey.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushObjC.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushPerl.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushPhp.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushPlain.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushPowerShell.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushPython.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushR.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushRuby.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushScala.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushSql.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushVb.js"></script>
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/shBrushXml.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shCore.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushAS3.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushBash.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushColdFusion.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushClojure.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushCpp.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushCSharp.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushCss.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushDelphi.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushDiff.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushErlang.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushFSharp.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushGroovy.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushJava.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushJavaFX.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushJScript.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushLatex.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushMatlabKey.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushObjC.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushPerl.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushPhp.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushPlain.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushPowerShell.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushPython.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushR.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushRuby.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushScala.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushSql.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushVb.js"></script>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/shBrushXml.js"></script>
 <script type="text/javascript">
 	(function(){
 		var corecss = document.createElement('link');
@@ -867,7 +867,7 @@ ADD INDEX `first_name_last_name4` (first_name, last_name(4));</pre>
 </script>
 
 <!-- 量子恒道网站统计 BEGIN -->
-<script type="text/javascript" src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/tongji.js"></script><img src="./浅谈MySQL索引背后的数据结构及算法   量子恒道官方博客_files/tongji.do" border="0" width="1" height="1"><noscript>&lt;a href="http://www.linezing.com"&gt;&lt;img src="http://img.tongji.linezing.com/2769727/tongji.gif"/&gt;&lt;/a&gt;</noscript>
+<script type="text/javascript" src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/tongji.js"></script><img src="浅谈MySQL索引背后的数据结构及算法%20%20%20量子恒道官方博客_files/tongji.do" border="0" width="1" height="1"><noscript>&lt;a href="http://www.linezing.com"&gt;&lt;img src="http://img.tongji.linezing.com/2769727/tongji.gif"/&gt;&lt;/a&gt;</noscript>
 <!-- 量子恒道网站统计 END -->
 
 <script type="text/javascript">
