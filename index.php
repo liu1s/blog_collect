@@ -6,7 +6,6 @@
  */
 header("Content-type:text/html;charset=utf-8");
 
-
 $blogList = require(__DIR__ . '/auto_classify/tmp_html_list.php');
 
 foreach ($htmlList as $blog) {

@@ -6,7 +6,6 @@
  * @author 疯牛 liu1s0404@outlook.com
  * @package: blog_collect
  */
-
 $rootPath = dirname(__DIR__); //上层目录
 $blogDirPath = $rootPath . '/blog_source';
 
@@ -34,12 +33,11 @@ while ($path = $dir->read()) {
     }
 
     array_push($tmpHtmlArray, $path);
-
-    //todo 需要考虑是否放在别的位置会更好 修改权限
-    //$result = chown(preg_replace('/\.html$/', '_files' , $blogDirPath . '/' . $path), $nginxUser);
-    //var_dump($result);
 }
 $dir->close();
+
+//修改source目录下文件的执行权限
+include_once 'change_owner.php';
 
 //临时把html元素已数组形式存在于文件中
 $htmlContent = '<?php' . PHP_EOL;

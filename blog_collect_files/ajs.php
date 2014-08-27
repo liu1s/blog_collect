@@ -1,3 +1,0 @@
-var OX_7168ad15 = '';
-OX_7168ad15 += "<"+"a href=\'//gg.51cto.com/www/delivery/ck.php?oaparams=2__bannerid=494__zoneid=254__cb=1f3ecd6f00__oadest=http%3A%2F%2Fserver.51cto.com%2Fexp%2FIT30min%2F022%2F\' target=\'_blank\'><"+"font color=\'blue\'>听云终结移动应用性能黑洞<"+"/font><"+"/a><"+"div id=\'beacon_1f3ecd6f00\' style=\'position: absolute; left: 0px; top: 0px; visibility: hidden;\'><"+"img src=\'//gg1.51cto.com/www/delivery/lg.php?bannerid=494&amp;campaignid=117&amp;zoneid=254&amp;loc=1&amp;referer=http%3A%2F%2Fdeveloper.51cto.com%2Fart%2F201408%2F447346.htm&amp;cb=1f3ecd6f00\' width=\'0\' height=\'0\' alt=\'\' style=\'width: 0px; height: 0px;\' /><"+"/div>\n";
-document.write(OX_7168ad15);

@@ -1,1 +1,0 @@
-/*document.write('<a href="http://wot.51cto.com/2014/train.html" target="_blank" style="text-decoration: none;color:red">WOT2014：用户标签系统与用户数据化运营培训专场</a>');*/
