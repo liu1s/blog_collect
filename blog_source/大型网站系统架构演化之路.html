@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<!-- saved from url=(0115)http://mp.weixin.qq.com/s?__biz=MzAxNjAzMTQyMA==&mid=202064206&idx=1&sn=d0086c4bf61cfe1a99bf0521ed66535a&scene=0#rd -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+<script type="text/javascript">
+    var sampling = Math.random() < 0.001;
+    var page_begintime = (+new Date());
+    (sampling) && ((new Image()).src = "http://isdspeed.qq.com/cgi-bin/r.cgi?flag1=7839&flag2=7&flag3=8&15=1000&r=" + Math.random());
+</script>
+
+        
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<script type="text/javascript">
+    var uin = "";
+    var key = "";
+    var pass_ticket = "";
+</script>
+        <title>大型网站系统架构演化之路</title>
+        
+<link rel="stylesheet" type="text/css" href="./大型网站系统架构演化之路_files/page_mp_article227d64.css">
+<!--[if lt IE 9]>
+<link rel="stylesheet" type="text/css" href="http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/style/page/page_mp_article_pc227bf3.css"/>
+<![endif]-->
+<style>
+        </style>
+<script type="text/javascript">
+    document.domain = "qq.com";
+</script>
+
+    <script src="./大型网站系统架构演化之路_files/report_and_source224ef3.js" type="text/javascript" async="" crossorigin="true"></script><script src="./大型网站系统架构演化之路_files/index2286ea.js" type="text/javascript" async="" crossorigin="true"></script></head>
+    <body id="activity-detail" class="zh_CN ">
+        
+    <script type="text/javascript">
+        var write_sceen_time = (+new Date());
+        (sampling) && ((new Image()).src = "http://isdspeed.qq.com/cgi-bin/r.cgi?flag1=7839&flag2=7&flag3=8&16=1000&r=" + Math.random());
+    </script>
+    
+    <div id="js_cmt_more" class="discuss_container access" style="display:none;">
+        <div class="discuss_container_inner">
+            <h2 class="rich_media_title" id="activity-name">大型网站系统架构演化之路</h2>
+
+            <div class="discuss_list_wrp">
+                <div class="line_tips_wrp">
+                    <span class="line_tips">精选评论<span class="error_tips" id="js_cmt_nofans3" style="display:none">关注该公众号可参与评论</span></span>
+                </div>
+                <p class="discuss_access_tips" id="js_cmt_addbtn3" style="display:none"><a href="http://mp.weixin.qq.com/s?__biz=MzAxNjAzMTQyMA==&mid=202064206&idx=1&sn=d0086c4bf61cfe1a99bf0521ed66535a&scene=0#comment">写评论<img class="icon_edit" src="./大型网站系统架构演化之路_files/icon_edit227bf3.png" alt=""></a></p>
+                <ul class="discuss_list" id="js_cmt_morelist"></ul>
+            </div>
+
+            <div class="loadmore" id="js_cmt_more_loading">
+                <div class="tips_wrp">
+                    <img src="./大型网站系统架构演化之路_files/icon_loading_white1ef6d4.gif" class="loading_icon icon_loading_white" alt="">
+                    <span class="tips">加载中</span>
+                </div>
+            </div>
+
+            <div class="loadmore with_line" id="js_cmt_more_end" style="display:none">
+                <div class="tips_wrp"><span class="tips">以上评论由公众帐号筛选后显示</span></div>
+            </div>
+
+        </div>
+    </div>
+    
+    <div id="js_cmt_mine" class="discuss_container editing access" style="display:none;">
+        <div class="discuss_container_inner">
+            <h2 class="rich_media_title" id="activity-name">大型网站系统架构演化之路</h2>
+            <div class="frm_textarea_box_wrp">
+                <span class="frm_textarea_box">
+                    <textarea id="js_cmt_input" class="frm_textarea" placeholder="评论将由公众帐号筛选后显示，对所有人可见。"></textarea>
+                </span>
+            </div>
+            <div class="discuss_btn_wrp"><a id="js_cmt_submit" class="btn btn_inline btn_primary btn_discuss btn_disabled" href="javascript:;">提交</a></div>
+            <div class="discuss_list_wrp" style="display:none">
+                <div class="line_tips_wrp">
+                    <span class="line_tips">我的评论</span>
+                </div>
+                <ul class="discuss_list" id="js_cmt_mylist"></ul>
+            </div>
+            <div class="wx_poptips" id="js_cmt_toast" style="display:none;">
+                <img alt="" class="icon_toast" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGoAAABqCAYAAABUIcSXAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3NpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoyMTUxMzkxZS1jYWVhLTRmZTMtYTY2NS0xNTRkNDJiOGQyMWIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MTA3QzM2RTg3N0UwMTFFNEIzQURGMTQzNzQzMDAxQTUiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MTA3QzM2RTc3N0UwMTFFNEIzQURGMTQzNzQzMDAxQTUiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChNYWNpbnRvc2gpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NWMyOGVjZTMtNzllZS00ODlhLWIxZTYtYzNmM2RjNzg2YjI2IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjIxNTEzOTFlLWNhZWEtNGZlMy1hNjY1LTE1NGQ0MmI4ZDIxYiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pmvxj1gAAAVrSURBVHja7J15rF1TFMbXk74q1ZKHGlMkJVIhIgg1FH+YEpEQJCKmGBpThRoSs5jVVNrSQUvEEENIhGiiNf9BiERICCFIRbUiDa2qvudbOetF3Tzv7XWGffa55/uS7593977n3vO7e5+199p7v56BgQGh0tcmvAUERREUQVEERREUQVEERREUQVEERREUQVEERREUQVEERREUQVEERVAUQVEERVAUQbVYk+HdvZVG8b5F0xj4RvhouB+eCy8KrdzDJc1RtAX8ILxvx98V1GyCSkN98Cx4z/95/Wn4fj6j6tUEeN4wkFSnw1MJqj5NhBfAuwaUHREUg4lqNMmePVsHll/HFhVfe1t3FwpJI8DXCCquDrCWNN4B6Tb4M3Z98aTPmTvh0YHl18PXw29yZiKejoPvcUD6E74yFBJbVDk6Bb7K8aP/Hb4c/tRzEYIqprPhSxzlf4Uvhb/0Xoig8qnHAJ3lqPMzfDH8XZ4LEpRf2sVdA5/sqPO9Qfop70UJyn+/boaPddT5yrq7VUUvTIVJI7q74MMddXR8NB1eXcYvhBpZm0s2w72/o86HFoKvLau/pYaXzjLMdUJ6y0LwtWV9CIIaXtvA8+G9HHV03u5q+K+yH47U0NoRngPv7KjzHDwTLj0bS1BDazfJJlcnOOostC6ysnCT+q80G/sIvFVgeW09D8FPVT0uoP7VfvAD8NjA8pqmuAN+OcYAjso0RbIZ8DGB5TVNcRO8JMaHY9SXSdfa3eeANJimWBLrA7JFiZwIXye+NMUV8CcxP2SRFjXefok7NRjSGZJlWUPvw2/wtNiQirSoXWyMsR28wR7AzzYM0oXw+Y7yK+CLJGeaoqjyrJSdZJD6Ov4+z5y6NJc0Az7NUecHydIUy+v60KNyQHoM3nKI1y7YCFiq0i7uBvgER52vDdKqWn9djhY1Dn4G3n6Ecqm2rF74dvgoR53S0hQxW9RJAZAGW5bSn58QJA27dQ7uIEedjywEX5NKVxCqsY6y+qA+LxFI4+yZ6oH0trWkNan80jygtIUsc5SflgAsDXgehfdx1KkkTRE76tN+Xue2jnTU0Ru1oIbvpt30bBtKhOp5yaaRkts0lic8V1i6dPcIRx2d/l8Y8XtNNEg7OOo8bl1kmmOKnDsO88CaYzejau0hWZqiL7C83oCH4SeTHvwV2BqqsHRVztSEYOmWF80NeXZT6Hd4KflResE9vCnBOlCyGfDNAstHTVPUDWoQ1t3iW+9WNizvlhfd4aerXd+ThqiMfNR6+9LvOOro5OY5JX2H4+F7HZD+kGzlamMgldWiirQsjcwWFbjmqZJteekJLK9pisvgL6RhKvuciZiwzrWWGapfrPy30kBVcSBIrw0aD3PU0XB6cehntq7rTMf7/2iQlktDVdXJLXlg6VjmiYBn6rWSTRCH6hvJ0hQrpcGq8oidsmHpTP8t8DGO9/vcWt9qabiqPgup1yKyQwvC2tSefZ73SSpNkUJ4PlLorlHZ+446nc8f3fIyywlJhwrTuwVSjBa1ccvSxN0hjjoK5xVrYZMd9V6XbFfgBukixTwGLg8sDam3dZR/wZ6L/dJlin1en8LS+bgpFbz3Ygvzu1J1HKxYNqxGpCmaCEo12rrBorD6LRp8UbpcdR5VWhTW35KlKd6QFqjuM2XzwlpnMxTvSkuUwuG/Xlg6NtPjbT6WFimF/VG6LEvXgn8QGDjMbBukVECFwhpoS+CQatfX2Q1q6H7wENHdrfCr0lKleEB9JyxNneus+VJpsVL9TwI6W65LovWIGl3KtVJaLv7LBwYTFEERFEVQFEERFEVQFEERFEVQFEERFEVQFEERFEVQFEERFFWq/hFgADUMN4RzT6/OAAAAAElFTkSuQmCC">
+                <p class="toast_content">已评论</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="js_article" class="rich_media">
+        
+        <div id="js_top_ad_area" class="top_banner"></div>
+                
+        <div class="rich_media_inner">
+            <h2 class="rich_media_title" id="activity-name">
+                大型网站系统架构演化之路 
+            </h2>
+            <div class="rich_media_meta_list">
+                <em id="post-date" class="rich_media_meta text">2014-12-29</em>
+
+                                <a class="rich_media_meta link nickname" href="javascript:void(0);" id="post-user">程序员日志</a>
+            </div>
+
+            <div id="page-content">
+                <div id="img-content">
+                    
+                                                            
+                                                            
+                    <div class="rich_media_content" id="js_content"><p><img data-s="300,640" data-src="http://mmbiz.qpic.cn/mmbiz/2iak9icUD6zoNicBVnSBZgW796W5u2HdZQ3mavYFE188umuVGzulTO4BTNZnXGyPLaD6ZqeEJBYDsyAoHsKXib0CXQ/0" data-ratio="0.07905138339920949" data-w="" class="" id="c1419848928425" src="./大型网站系统架构演化之路_files/640" style="width: auto !important; visibility: visible !important; height: auto !important;"></p><p><br></p><blockquote style="max-width: 100%; word-wrap: break-word; padding: 15px 25px; border-width: 0px 0px 0px 10px; border-left-color: rgb(0, 187, 236); white-space: normal; color: rgb(68, 68, 68); font-family: 微软雅黑; line-height: 24px; top: 0px; font-size: 14px; vertical-align: baseline; box-sizing: border-box !important; background-color: rgb(239, 239, 239);"><p><span style="font-size: 18px;"><strong><span style="color: rgb(84, 141, 212);">日志君导读：</span></strong></span><span style="font-size: 12px;">一个成熟的大型网站（如淘宝、京东等）的系统架构并不是开始设计就具备完整的高性能、高可用、安全等特性，它总是随着用户量的增加，业务功能的扩展逐渐演变完善的，在这个过程中，开发模式、技术架构、设计思想也发生了很大的变化，就连技术人员也从几个人发展到一个部门甚至一条产品线。</span></p><p><span style="font-size: 12px;"><br></span></p><p><span style="font-size: 12px;">所以成熟的系统架构是随业务扩展而完善出来的，并不是一蹴而就；不同业务特征的系统，会有各自的侧重点，例如淘宝，要解决海量的商品信息的搜索、下单、支付，例如腾讯，要解决数亿的用户实时消息传输，百度它要处理海量的搜索请求，他们都有各自的业务特性，系统架构也有所不同。</span></p><p><span style="font-size: 12px;"><br></span></p><p><span style="font-size: 12px;">尽管如此我们也可以从这些不同的网站背景下，找出其中共用的技术，这些技术和手段可以广泛运行在大型网站系统的架构中，下面就通过介绍大型网站系统的演化过程，来认识这些技术和手段。</span></p></blockquote><p><br></p><h2 style=""><span style="color: rgb(84, 141, 212);"><strong style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;">一、最开始的网站架构</strong></span></h2><p style="">最初的架构，应用程序、数据库、文件都部署在一台服务器上，如图：</p><p style=""><img data-s="300,640" data-src="http://mmbiz.qpic.cn/mmbiz/ANkP50k27wzQWMLbFxVpzWETbTWV0xybMFRMXDaynS2PyGkqaBK4EibIlqNHumEuOzaSI7IhWF55TGic9C5saekQ/0" data-ratio="0.7660044150110376" data-w="453" style="word-wrap: break-word !important; box-sizing: border-box !important; width: auto !important; visibility: visible !important; height: auto !important;" _width="auto" src="./大型网站系统架构演化之路_files/640(1)"></p><h2 style=""><span style="color: rgb(84, 141, 212);"><strong style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;"><br></strong></span></h2><h2 style=""><span style="color: rgb(84, 141, 212);"><strong style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;">二、应用、数据、文件分离</strong></span></h2><p style="">随着业务的扩展，一台服务器已经不能满足性能需求，故将应用程序、数据库、文件各自部署在独立的服务器上，并且根据服务器的用途配置不同的硬件，达到最佳的性能效果。</p><p style=""><img data-s="300,640" data-src="http://mmbiz.qpic.cn/mmbiz/ANkP50k27wzQWMLbFxVpzWETbTWV0xybwQBviaTuOiaae41aFoklslpxbV1sjlwcJ9sXxzaj4L4ibml7ZmXPp7caQ/0" data-ratio="0.6225296442687747" data-w="" style="word-wrap: break-word !important; box-sizing: border-box !important; width: auto !important; visibility: visible !important; height: auto !important;" _width="auto" src="./大型网站系统架构演化之路_files/640(2)"></p><h2 style=""><span style="color: rgb(84, 141, 212);"><strong style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;"><br></strong></span></h2><h2 style=""><span style="color: rgb(84, 141, 212);"><strong style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;">三、利用缓存改善网站性能</strong></span></h2><p style="">在硬件优化性能的同时，同时也通过软件进行性能优化，在大部分的网站系统中，都会利用缓存技术改善系统的性能，使用缓存主要源于热点数据的存在，大部分网站访问都遵循28原则（即80%的访问请求，最终落在20%的数据上），所以我们可以对热点数据进行缓存，减少这些数据的访问路径，提高用户体验。</p><p style=""><img data-s="300,640" data-src="http://mmbiz.qpic.cn/mmbiz/ANkP50k27wzQWMLbFxVpzWETbTWV0xybmO1Nax6ys8hwFAGDkzWLEq5qcwicWY7OoqjAaZFnujNtOu8MItmlib1A/0" data-ratio="1.017786561264822" data-w="" style="word-wrap: break-word !important; box-sizing: border-box !important; width: auto !important; visibility: visible !important; height: auto !important;" _width="auto" src="./大型网站系统架构演化之路_files/640(3)"></p><p style="">缓存实现常见的方式是本地缓存、分布式缓存。当然还有CDN、反向代理等，这个后面再讲。本地缓存，顾名思义是将数据缓存在应用服务器本地，可以存在内存中，也可以存在文件，OSCache就是常用的本地缓存组件。本地缓存的特点是速度快，但因为本地空间有限所以缓存数据量也有限。分布式缓存的特点是，可以缓存海量的数据，并且扩展非常容易，在门户类网站中常常被使用，速度按理没有本地缓存快，常用的分布式缓存是Membercache、Redis。</p><p style=""><br></p><h2 style=""><span style="color: rgb(84, 141, 212);"><strong style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;">四、使用集群改善应用服务器性能</strong></span></h2><p style="">应用服务器作为网站的入口，会承担大量的请求，我们往往通过应用服务器集群来分担请求数。应用服务器前面部署负载均衡服务器调度用户请求，根据分发策略将请求分发到多个应用服务器节点。</p><p style=""><img data-s="300,640" data-src="http://mmbiz.qpic.cn/mmbiz/ANkP50k27wzQWMLbFxVpzWETbTWV0xyboqR9pYzxUp2bngq4hANZHXexTKyxd0GFYMferM3bdr7Vvqua1hn6RA/0" data-ratio="0.650197628458498" data-w="" style="word-wrap: break-word !important; box-sizing: border-box !important; width: auto !important; visibility: visible !important; height: auto !important;" _width="auto" src="./大型网站系统架构演化之路_files/640(4)"></p><p style="">常用的负载均衡技术硬件的有F5，价格比较贵，软件的有LVS、Nginx、HAProxy。LVS是四层负载均衡，根据目标地址和端口选择内部服务器，Nginx和HAProxy是七层负载均衡，可以根据报文内容选择内部服务器，因此LVS分发路径优于Nginx和HAProxy，性能要高些，而Nginx和HAProxy则更具配置性，如可以用来做动静分离（根据请求报文特征，选择静态资源服务器还是应用服务器）。</p><p style=""><br></p><h2 style=""><span style="color: rgb(84, 141, 212);"><strong style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;">五、数据库读写分离和分库分表</strong></span></h2><p style="">随着用户量的增加，数据库成为最大的瓶颈，改善数据库性能常用的手段是进行读写分离以及分表，读写分离顾名思义就是将数据库分为读库和写库，通过主备功能实现数据同步。分库分表则分为水平切分和垂直切分，水平切换则是对一个数据库特大的表进行拆分，例如用户表。垂直切分则是根据业务不同来切换，如用户业务、商品业务相关的表放在不同的数据库中。</p><p style=""><img data-s="300,640" data-src="http://mmbiz.qpic.cn/mmbiz/ANkP50k27wzQWMLbFxVpzWETbTWV0xybqT2PcZE1qg87E9JUBSSFHElLzT5KWq7E9MGfuyAUC0ibLib1bjMKxP5g/0" data-ratio="0.6225296442687747" data-w="" style="word-wrap: break-word !important; box-sizing: border-box !important; width: auto !important; visibility: visible !important; height: auto !important;" _width="auto" src="./大型网站系统架构演化之路_files/640(5)"></p><h2 style=""><strong style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;"><br></strong></h2><h2 style=""><span style="color: rgb(84, 141, 212);"><strong style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;">六、使用CDN和反向代理提高网站性能</strong></span></h2><p style="">假如我们的服务器都部署在成都的机房，对于四川的用户来说访问是较快的，而对于北京的用户访问是较慢的，这是由于四川和北京分别属于电信和联通的不同发达地区，北京用户访问需要通过互联路由器经过较长的路径才能访问到成都的服务器，返回路径也一样，所以数据传输时间比较长。对于这种情况，常常使用CDN解决，CDN将数据内容缓存到运营商的机房，用户访问时先从最近的运营商获取数据，这样大大减少了网络访问的路径。比较专业的CDN运营商有蓝汛、网宿。</p><p style="">而反向代理，则是部署在网站的机房，当用户请求达到时首先访问反向代理服务器，反向代理服务器将缓存的数据返回给用户，如果没有没有缓存数据才会继续走应用服务器获取，也减少了获取数据的成本。反向代理有Squid，Nginx。</p><p style=""><img data-s="300,640" data-src="http://mmbiz.qpic.cn/mmbiz/ANkP50k27wzQWMLbFxVpzWETbTWV0xybvy6QrbGgNL0T0lRaXRCCGOEMAlBTXu2cJDA0Oot8VfLTohwLvtCM0g/0" data-ratio="0.83399209486166" data-w="" style="word-wrap: break-word !important; box-sizing: border-box !important; width: auto !important; visibility: visible !important; height: auto !important;" _width="auto" src="./大型网站系统架构演化之路_files/640(6)"></p><h2 style=""><span style="color: rgb(84, 141, 212);"><strong style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;"><br></strong></span></h2><h2 style=""><span style="color: rgb(84, 141, 212);"><strong style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;">七、使用分布式文件系统</strong></span></h2><p style="">用户一天天增加，业务量越来越大，产生的文件越来越多，单台的文件服务器已经不能满足需求。需要分布式的文件系统支撑。常用的分布式文件系统有NFS。</p><p style=""><img data-s="300,640" data-src="http://mmbiz.qpic.cn/mmbiz/ANkP50k27wzQWMLbFxVpzWETbTWV0xybt644Vib2bvEYiaT5otpWG90SBJx2EYGN3mU0BIOKhJ6zQgcZmEYzeECg/0" data-ratio="0.6976284584980237" data-w="" style="word-wrap: break-word !important; box-sizing: border-box !important; width: auto !important; visibility: visible !important; height: auto !important;" _width="auto" src="./大型网站系统架构演化之路_files/640(7)"></p><h2 style=""><strong style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;"><br></strong></h2><h2 style=""><span style="color: rgb(84, 141, 212);"><strong style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;">八、使用NoSql和搜索引擎</strong></span></h2><p style="">对于海量数据的查询，我们使用nosql数据库加上搜索引擎可以达到更好的性能。并不是所有的数据都要放在关系型数据中。常用的NOSQL有mongodb和redis，搜索引擎有lucene。</p><p style=""><img data-s="300,640" data-src="http://mmbiz.qpic.cn/mmbiz/ANkP50k27wzQWMLbFxVpzWETbTWV0xybcvYJsEMSRukjg8dliagcPkQIFgNwapkgdjIibhM9jDlPRXdbUZ98ibhxw/0" data-ratio="0.741106719367589" data-w="" style="word-wrap: break-word !important; box-sizing: border-box !important; width: auto !important; visibility: visible !important; height: auto !important;" _width="auto" src="./大型网站系统架构演化之路_files/640(8)"></p><h2 style=""><strong style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;"><br></strong></h2><h2 style=""><span style="color: rgb(84, 141, 212);"><strong style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;">九、将应用服务器进行业务拆分</strong></span></h2><p style="">随着业务进一步扩展，应用程序变得非常臃肿，这时我们需要将应用程序进行业务拆分，如百度分为新闻、网页、图片等业务。每个业务应用负责相对独立的业务运作。业务之间通过消息进行通信或者同享数据库来实现。</p><p style=""><img data-s="300,640" data-src="http://mmbiz.qpic.cn/mmbiz/ANkP50k27wzQWMLbFxVpzWETbTWV0xybKjeNj2hVwrf1T2OzwHhIiau9dv7toYlibiaAE1Wf7uIOxq5JYBtDUgq1g/0" data-ratio="0.741106719367589" data-w="" style="word-wrap: break-word !important; box-sizing: border-box !important; width: auto !important; visibility: visible !important; height: auto !important;" _width="auto" src="./大型网站系统架构演化之路_files/640(9)"></p><h2 style=""><strong style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;"><br></strong></h2><h2 style=""><span style="color: rgb(84, 141, 212);"><strong style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;">十、搭建分布式服务</strong></span></h2><p style="">这时我们发现各个业务应用都会使用到一些基本的业务服务，例如用户服务、订单服务、支付服务、安全服务，这些服务是支撑各业务应用的基本要素。我们将这些服务抽取出来利用分部式服务框架搭建分布式服务。淘宝的Dubbo是一个不错的选择。</p><p style=""><img data-s="300,640" data-src="http://mmbiz.qpic.cn/mmbiz/ANkP50k27wzQWMLbFxVpzWETbTWV0xybyGXuYsJvg2cBWqcqv4LaeYdxmOCgVSGgcWyZ7n7wfjpBB6zQSVEZjA/0" data-ratio="0.7905138339920948" data-w="" style="word-wrap: break-word !important; box-sizing: border-box !important; width: auto !important; visibility: visible !important; height: auto !important;" _width="auto" src="./大型网站系统架构演化之路_files/640(10)"></p><h2 style=""><strong style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;"><br></strong></h2><h2 style=""><span style="color: rgb(84, 141, 212);"><strong style="max-width: 100%; word-wrap: break-word !important; box-sizing: border-box !important;">小结</strong></span></h2><p style="">大型网站的架构是根据业务需求不断完善的，根据不同的业务特征会做特定的设计和考虑，本文只是讲述一个常规大型网站会涉及的一些技术和手段。</p><p><br></p><p><img data-s="300,640" data-src="http://mmsns.qpic.cn/mmsns/2iak9icUD6zoP41icZyhGAwp4miaTicLMMp9BhibdjwtWwwXxo0iaxef0kRmg/0" data-ratio="0.37549407114624506" data-w="" src="./大型网站系统架构演化之路_files/0" style="width: auto !important; visibility: visible !important; height: auto !important;"></p></div>
+
+                    <script type="text/javascript">
+                        var first_sceen__time = (+new Date());
+                    </script>
+                    
+                    <div class="rich_media_tool" id="js_toobar">
+
+                                                <div id="js_read_area" class="media_tool_meta link_primary meta_primary" style="display:none;">阅读 <span id="readNum"></span></div>
+
+                        <a style="display:none;" class="media_tool_meta meta_primary link_primary meta_praise" href="javascript:void(0);" id="like">
+                            <i class="icon_praise_gray"></i><span class="praise_num" id="likeNum"></span>
+                        </a>
+
+                        <a id="js_report_article" class="media_tool_meta link_primary meta_extra" href="javascript:void(0);">举报</a>
+                    </div>
+                </div>
+
+                
+                <div id="js_bottom_ad_area"></div>
+                
+                <div id="js_iframetest" style="display:none;"></div>
+
+                
+                               
+            </div>
+            <div id="js_pc_qr_code" class="qr_code_pc_outer" style="display: block;">
+                <div class="qr_code_pc_inner">
+                    <div class="qr_code_pc">
+                        <img id="js_pc_qr_code_img" class="qr_code_pc_img" src="./大型网站系统架构演化之路_files/qrcode">
+                        <p>微信扫一扫<br>获得更多内容</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        
+        <script>window.moon_map = {"a/gotoappdetail.js":"/mmbizwap/zh_CN/htmledition/js/a/gotoappdetail22772d.js","a/ios.js":"/mmbizwap/zh_CN/htmledition/js/a/ios224ef3.js","a/android.js":"/mmbizwap/zh_CN/htmledition/js/a/android22772d.js","a/profile.js":"/mmbizwap/zh_CN/htmledition/js/a/profile224ef3.js","biz_common/utils/url/parse.js":"/mmbizwap/zh_CN/htmledition/js/biz_common/utils/url/parse224ef3.js","biz_common/utils/report.js":"/mmbizwap/zh_CN/htmledition/js/biz_common/utils/report224ef3.js","biz_common/utils/cookie.js":"/mmbizwap/zh_CN/htmledition/js/biz_common/utils/cookie224ef3.js","appmsg/like.js":"/mmbizwap/zh_CN/htmledition/js/appmsg/like224ef3.js","appmsg/a.js":"/mmbizwap/zh_CN/htmledition/js/appmsg/a22772d.js","biz_common/tmpl.js":"/mmbizwap/zh_CN/htmledition/js/biz_common/tmpl224ef3.js","biz_common/dom/class.js":"/mmbizwap/zh_CN/htmledition/js/biz_common/dom/class224ef3.js","biz_wap/utils/ajax.js":"/mmbizwap/zh_CN/htmledition/js/biz_wap/utils/ajax22589f.js","biz_common/utils/string/html.js":"/mmbizwap/zh_CN/htmledition/js/biz_common/utils/string/html224ef3.js","biz_common/ui/imgonepx.js":"/mmbizwap/zh_CN/htmledition/js/biz_common/ui/imgonepx224ef3.js","biz_common/dom/attr.js":"/mmbizwap/zh_CN/htmledition/js/biz_common/dom/attr224ef3.js","appmsg/report.js":"/mmbizwap/zh_CN/htmledition/js/appmsg/report224ef3.js","appmsg/report_and_source.js":"/mmbizwap/zh_CN/htmledition/js/appmsg/report_and_source224ef3.js","appmsg/share.js":"/mmbizwap/zh_CN/htmledition/js/appmsg/share224ef3.js","appmsg/comment.js":"/mmbizwap/zh_CN/htmledition/js/appmsg/comment227d76.js","appmsg/page_pos.js":"/mmbizwap/zh_CN/htmledition/js/appmsg/page_pos224ef3.js","appmsg/cdn_speed_report.js":"/mmbizwap/zh_CN/htmledition/js/appmsg/cdn_speed_report224ef3.js","appmsg/iframe.js":"/mmbizwap/zh_CN/htmledition/js/appmsg/iframe224ef3.js","appmsg/review_image.js":"/mmbizwap/zh_CN/htmledition/js/appmsg/review_image224ef3.js","appmsg/outer_link.js":"/mmbizwap/zh_CN/htmledition/js/appmsg/outer_link224ef3.js","biz_wap/jsapi/core.js":"/mmbizwap/zh_CN/htmledition/js/biz_wap/jsapi/core22589f.js","biz_wap/utils/mmversion.js":"/mmbizwap/zh_CN/htmledition/js/biz_wap/utils/mmversion224ef3.js","biz_common/dom/event.js":"/mmbizwap/zh_CN/htmledition/js/biz_common/dom/event22772d.js","appmsg/async.js":"/mmbizwap/zh_CN/htmledition/js/appmsg/async22772d.js","biz_wap/ui/lazyload_img.js":"/mmbizwap/zh_CN/htmledition/js/biz_wap/ui/lazyload_img224ef3.js","biz_common/log/jserr.js":"/mmbizwap/zh_CN/htmledition/js/biz_common/log/jserr22589f.js","appmsg/index.js":"/mmbizwap/zh_CN/htmledition/js/appmsg/index2286ea.js"};window.moon_crossorigin = true;</script><script type="text/javascript" src="./大型网站系统架构演化之路_files/moon224ef3.js" crossorigin=""></script>
+    <script id="t_cmt" type="text/html">
+        <li class="discuss_item">
+            <span class="discuss_time"><#=time#></span>
+            <div class="user_info">
+                <strong class="nickname"><#=nick_name#></strong>
+                <img class="avatar" src="<#=logo_url#>">
+            </div>
+            <div class="discuss_message">
+                <span class="discuss_status"><#=status#></span>
+                <#=content#>
+            </div>
+        </li>
+    </script>
+
+  <script id="t_ad" type="text/html">
+    <div class="rich_media_extra" id="gdt_area">
+        <# if(pos_type==0){ #>
+        <div class="line_tips_wrp">
+            <span class="line_tips">推广</span>
+        </div>
+        <# } #>
+        <div class="js_ad_link extra_link" data-type="<#=type#>" data-url="<#=url#>" data-rl="<#=rl#>"  data-aid="<#=aid#>" data-pt="<#=pt#>" data-tid="<#=traceid#>" data-gid="<#=group_id#>" data-apurl="<#=apurl#>">
+            <# if(pt==1){ #>
+            <#=hint_txt#>
+            <img class="icon_arrow_gray" src="http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/images/icon/common/icon_arrow_gray1ef6d4.png">
+            <img class="icon_loading_white icon_after" style="display:none;" id="loading_<#=traceid#>" src="http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/images/icon/common/icon_loading_white1ef6d4.gif">
+            <# }else if(pt==2){ #>
+            <img class="appmsg_banner" src="<#=image_url#>">
+            <i class="promotion_tag"></i>
+            <# }else if(pt==7){ #>
+            
+            <div class="preview_group preview_card">
+                <div class="preview_group_inner card_inner">
+                    <div class="preview_group_info">
+                        <strong class="preview_group_title2"><#=hint_txt#></strong>
+                        <div class="preview_group_desc"><#=ad_desc#></div>
+                        <img src="<#=image_url#>" alt="" class="preview_card_avatar">
+                    </div>
+                </div>                        
+            </div>
+            <# }else if(pt==100){ #>
+            <div class="preview_group">
+                <div class="preview_group_inner">
+                    <div class="preview_group_info">
+                        <strong class="preview_group_title"><#=biz_info.nick_name#></strong>
+                        <div class="preview_group_desc"><#=hint_txt#></div>
+                        <# if(!!biz_info.head_img){ #>
+                        <img src="<#=biz_info.head_img#>" alt="" class="preview_group_avatar br_radius">
+                        <# }else{ #>
+                        <img class="preview_group_avatar br_radius" src="http://mmbiz.qpic.cn/mmbiz/a5icZrUmbV8p5jb6RZ8aYfjfS2AVle8URwBt8QIu6XbGewB9wiaWYWkPwq4R7pfdsFibuLkic16UcxDSNYtB8HnC1Q/0" alt="<#=biz_info.nick_name#>">
+                        <# } #>                                 
+                    </div>
+                    <div class="preview_group_opr">
+                        <a id="viewProfile" <# if(biz_info.is_subscribed == 0){ #>style="display:none"<# } #> class="btn btn_inline btn_primary js_ad_btn" href="javascript:void(0);">查看</a>
+                        <a id="addContact" data-url="<#=url#>" data-type="<#=type#>" data-tid="<#=traceid#>" data-rl="<#=rl#>" <# if(biz_info.is_subscribed ==1){ #>style="display:none"<# } #> class="btn btn_inline btn_primary js_ad_btn" href="javascript:void(0);">关注</a>
+                    </div>
+                </div>
+            </div>
+            <# }else if(pt==102){ #>
+            <div class="preview_group">
+                <div class="preview_group_inner">
+                    <div class="preview_group_info">
+                        <strong class="preview_group_title"><#=app_info.app_name#></strong>
+                        <div class="preview_group_desc"><#=hint_txt#></div>
+                        <img src="<#=app_info.icon_url#>" alt="" class="preview_group_avatar br_radius">
+                    </div>
+                    <div class="preview_group_opr">
+                        <a id="js_app_action" class="btn btn_inline btn_primary js_ad_btn" href="javascript:void(0);">下载</a>
+                    </div>
+                </div>
+            </div>
+            <# }else if(pt==101){ #>
+            <div class="preview_group preview_card">
+                <div class="preview_group_inner card_inner">                            
+                    <div class="preview_group_info append_btn">
+                        <strong class="preview_group_title"><#=app_info.app_name#></strong>
+                        <div class="preview_group_desc"><#=hint_txt#></div>
+                        <img src="<#=app_info.icon_url#>" alt="" class="preview_card_avatar">                               
+                    </div>
+                    <div class="preview_group_opr">
+                        <a href="javascript:void(0);" id="js_app_action" class="btn btn_inline btn_primary js_ad_btn">下载</a>
+                    </div>
+                </div>                        
+            </div>
+            <# }else if(pt==103||pt==104){ #>
+            <div class="preview_group obvious_app">
+                <div class="preview_group_inner">
+                    <div class="pic_app">
+                        <img src="<#=image_url#>" alt="">
+                    </div>
+                    <div class="info_app">
+                        <p class="name_app"><#=app_info.app_name#></p>
+                        <# if(pt==103){ #>
+                        <p class="profile_app"><span class="fun_exp"><#=app_info.category#></span><span class="compacity"><#=app_info.app_size#></span></p>
+                        <# } else if(pt==104){ #>
+                        <p class="profile_app"><span class="fun_exp"><#=app_info.app_size#></span><span class="compacity"><#=app_info.down_count#></span></p>
+                        <# } #>
+                        <div class="dm_app">
+                            <a href="javascript:void(0);" id="js_appdetail_action" class="btn_download js_ad_btn">下载</a>
+                            <p>来自<# if(pt==103){ #>Appstore<# }else{ #>应用宝<# } #></p>
+                        </div>
+                    </div>
+                </div>            
+            </div>
+            <# } #>
+        </div>
+    </div>
+  </script>
+  <script type="text/javascript">
+      var tid = "";
+      var aid = "";
+      var biz = "MzAxNjAzMTQyMA==";
+      var sn = "d0086c4bf61cfe1a99bf0521ed66535a";
+      var mid = "202064206" || "";
+      var idx = "1" || "" ;
+      var appuin = "MzAxNjAzMTQyMA==";
+
+      //下边这两个值为什么调转过来呢？是因为要跟推广页的字段保持一致。。坑爹
+      var source = "0";
+      var scene = 75;
+      
+      var itemidx = "";
+      var nickname = "程序员日志";
+      var ct = "1419849773";
+      var user_name = "gh_a688a07314d0";
+      var fakeid   = "NTM1MjE0MDU=";
+      var version   = "";
+      var is_limit_user   = "0";
+      var msg_title = "大型网站系统架构演化之路";
+      var msg_desc = "一个成熟的大型网站（如淘宝、京东等）的系统架构并不是开始设计就具备完整的高性能、高可用、安全等特性，它总是随着用户量的增加，业务功能的扩展逐渐演变完善的，在这个过程中，开发模式、技术架构、设计思想也发生了很大的变化。";
+      var msg_cdn_url = "http://mmbiz.qpic.cn/mmbiz/2iak9icUD6zoNicBVnSBZgW796W5u2HdZQ3nfDicfzlza8NRz9GaXpCsDsUIGdThPHt0x1Cg7YUhbxbJjsFHj77QBA/0";
+      var msg_link = "http://mp.weixin.qq.com/s?__biz=MzAxNjAzMTQyMA==&amp;mid=202064206&amp;idx=1&amp;sn=d0086c4bf61cfe1a99bf0521ed66535a#rd";
+      var user_uin = "0"*1;
+      var msg_source_url = '';
+      var networkType;
+      var appmsgid = '' || '202064206';
+      var comment_id = "0" * 1;
+      var comment_enabled = "" * 1;
+
+      var devicetype = "";
+
+      //辟谣需求
+      var is_rumor = ""*1;
+      var norumor = ""*1;
+      if (!!is_rumor&&!norumor){
+          if (!document.referrer || document.referrer.indexOf("mp.weixin.qq.com/mp/rumor") == -1){
+            location.href = location.protocol + "//mp.weixin.qq.com/mp/rumor?action=info&__biz=" + biz + "&mid=" + mid + "&idx=" + idx + "&sn=" + sn + "#wechat_redirect";
+          }
+      }
+      
+            window.appmsgticket = "0+oDxfBtwjsG3IX8E7GQavq9COKYU8e4+xY+Oo7VEYpf3MDb7RlUjTssvkfbz8DO";
+      seajs.use("appmsg/index.js");
+  </script>
+
+    
+
+
+</body></html>
