@@ -11,7 +11,7 @@ $rootUser = 'root';
 $nginxUser = 'www-data';
 
 if ($_SERVER['USER'] != $rootUser) {
-    die('not the roor file');
+    die('not the root user');
 }
 
 $result = system('chmod -R 745 ' . $blogDirPath);

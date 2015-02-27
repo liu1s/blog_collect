@@ -8,6 +8,7 @@
  */
 $rootPath = dirname(__DIR__); //上层目录
 $blogDirPath = $rootPath . '/blog_source';
+$autoClassifyPath = $rootPath . '/auto_classify';
 
 if (!is_dir($blogDirPath)) {
     die('the path' . $blogDirPath . 'is not a dir');
@@ -46,7 +47,7 @@ foreach ($tmpHtmlArray as $row) {
     $htmlContent .= sprintf('$htmlList[] = array("title"=>"%s","path"=>"%s");' . PHP_EOL, $row , $blogDirPath . '/' . $row);
 }
 $htmlContent .= 'return $htmlList;';
-$tmpHtmlListFile = 'tmp_html_list.php';
+$tmpHtmlListFile = $autoClassifyPath . '/tmp_html_list.php';
 if (!file_put_contents($tmpHtmlListFile, $htmlContent)) {
     die('generate the tmp html list file fail');
 }
